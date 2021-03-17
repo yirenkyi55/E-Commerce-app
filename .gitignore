@@ -1,0 +1,15 @@
+/.idea
+/.vscode
+/.vs
+appsettings.json
+*Dictionary_Data*.json
+*.db
+*.db-shm
+*.db-wal
+obj
+bin
+/Api/wwwroot
+/Api/Files/Logs
+Exe
+install.bat
+uninstall.bat
