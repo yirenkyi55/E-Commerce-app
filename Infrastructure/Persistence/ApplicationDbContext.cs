@@ -3,6 +3,7 @@ using System.Reflection;
 using Application.Common.Interfaces;
 using Domain;
 using Domain.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

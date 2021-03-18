@@ -18,7 +18,7 @@ namespace API.Extensions
                 options.Password.RequireUppercase = true;
             });
 
-            builder = new IdentityBuilder(builder.UserType, builder.Services);
+            builder = new IdentityBuilder(builder.UserType, typeof(IdentityRole), builder.Services);
             builder.AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             builder.AddSignInManager<SignInManager<User>>();
             builder.AddRoleValidator<RoleValidator<IdentityRole>>();
