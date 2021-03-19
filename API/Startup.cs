@@ -1,4 +1,6 @@
 using API.Extensions;
+using API.Helpers.Middlewares;
+using Application;
 using Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,19 +28,23 @@ namespace API
             services.AddVersioningServices();
             services.AddSwaggerServices();
 
-            services.AddIdentityServices(_configuration);
+
+            services.AddApplication(_configuration);
             services.AddInfrastructure(_configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
+            app.UseMiddleware<GlobalExceptionMiddleware>();
+
 
             app.UseSwaggerDocumentation(env, provider);
             // app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

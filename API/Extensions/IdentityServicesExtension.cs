@@ -1,12 +1,16 @@
+using System;
+using System.Text;
 using Domain.Identity;
 using Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace API.Extensions
 {
-    public static class IIdentityServicesExtension
+    public static class IdentityServicesExtension
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
         {
@@ -24,8 +28,29 @@ namespace API.Extensions
             builder.AddRoleValidator<RoleValidator<IdentityRole>>();
             builder.AddRoleManager<RoleManager<IdentityRole>>();
 
-            services.AddAuthentication();
+            //Configure authentication scheme
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Application:Key"]));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    //We want to validate the issuer for incoming jwt
+                    ValidateIssuerSigningKey = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    IssuerSigningKey = key,
+                    //ValidIssuer = configuration["Application:Issuer"],
+
+                    //We want to validate the expiry time for the token
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
             services.AddAuthorization();
+
+
 
             return services;
         }
