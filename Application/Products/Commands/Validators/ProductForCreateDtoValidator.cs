@@ -12,6 +12,7 @@ namespace Application.Products.Commands.Validators
             RuleFor(x => x.Photo).NotEmpty();
             RuleFor(x => x.ProductBrandId).NotEmpty();
             RuleFor(x => x.ProductTypeId).NotEmpty();
+            RuleFor(x => x.Price).NotEmpty();
         }
     }
 }
