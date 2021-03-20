@@ -8,6 +8,7 @@ namespace Application
 {
     public static class DependencyInjection
     {
+        public static IConfiguration StaticConfig { get; private set; }
         public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
@@ -15,6 +16,8 @@ namespace Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
+
+            StaticConfig = configuration;
 
             return services;
         }

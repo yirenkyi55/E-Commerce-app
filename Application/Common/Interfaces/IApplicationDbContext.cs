@@ -1,3 +1,5 @@
+using System.Threading;
+using System.Threading.Tasks;
 using Domain;
 using Domain.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,5 +15,7 @@ namespace Application.Common.Interfaces
         DbSet<ProductType> ProductTypes { get; set; }
 
         DbSet<ProductBrand> ProductBrands { get; set; }
+
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }
