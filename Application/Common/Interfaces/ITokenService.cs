@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Domain.Identity;
 
 namespace Application.Common.Interfaces
@@ -7,5 +8,8 @@ namespace Application.Common.Interfaces
         string GenerateAccessToken(User user);
 
         string GenerateRefreshToken();
+
+
+        ClaimsPrincipal GeneratePrincipalFromAnExpiredToken(string token);
     }
 }

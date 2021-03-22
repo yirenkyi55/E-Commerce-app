@@ -47,6 +47,38 @@ namespace Infrastructure.Services
             return tokenHandler.WriteToken(token);
         }
 
+        public ClaimsPrincipal GeneratePrincipalFromAnExpiredToken(string token)
+        {
+            //Generates a token Validation parameters
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateAudience = false,
+                ValidateIssuer = false,
+                // ValidIssuer = _configuration["Application:Issuer"],
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Application:Key"])),
+                ValidateLifetime = false //the token is already expired and we don't want to validate the lifetime
+            };
+
+            //Generates a token handler
+            var tokenHandler = new JwtSecurityTokenHandler();
+
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var securityToken);
+
+            //We check if the security token is of type JwtSecurityToken
+            //or the algorithm specified is the one used in creating the token
+            if (!(securityToken is JwtSecurityToken jwtSecurityToken) ||
+                !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha512,
+                    StringComparison.InvariantCultureIgnoreCase))
+            {
+                return null;
+            }
+
+            //We can now return the principal, using this principal,
+            //we can access the users info from the principal claims
+            return principal;
+        }
+
         public string GenerateRefreshToken()
         {
             var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
