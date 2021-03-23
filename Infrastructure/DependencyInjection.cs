@@ -19,6 +19,7 @@ namespace Infrastructure
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
+            services.AddScoped(typeof(IPaginationService<>), typeof(PaginationService<>));
             services.AddTransient<IIdentityService, IdentityService>();
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IRoleService, RoleService>();

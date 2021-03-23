@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.Common.Models;
 using Application.Products.Commands;
 using Application.Products.Dtos;
 using Application.Products.Queries;
@@ -11,9 +13,16 @@ namespace API.Controllers
     public class ProductsController : BaseController
     {
         [HttpGet]
-        public async Task<ActionResult<List<ProductForReturnDto>>> GetAllProducts()
+        public async Task<ActionResult<PaginationResult<ProductForReturnDto>>> GetAllProducts([FromQuery] ProductParams productParams)
         {
-            var result = await Mediator.Send(new GetAllProductQuery());
+            var result = await Mediator.Send(new GetAllProductQuery { Params = productParams });
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<ProductForReturnDto>>> GetProduct(Guid id)
+        {
+            var result = await Mediator.Send(new GetProductQuery { ProductId = id });
             return Ok(result);
         }
 
@@ -23,6 +32,20 @@ namespace API.Controllers
             var result = await Mediator.Send(new CreateProductCommand { Product = product });
 
             return Ok(result);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ProductForReturnDto>> UpdateProduct(Guid id, [FromForm] ProductForCreateDto productForCreate)
+        {
+            var result = await Mediator.Send(new UpdateProductCommand { ProductId = id, ProductForCreate = productForCreate });
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteProduct(Guid id)
+        {
+            var result = await Mediator.Send(new DeleteProductCommand { ProductId = id });
+            return NoContent();
         }
     }
 }
