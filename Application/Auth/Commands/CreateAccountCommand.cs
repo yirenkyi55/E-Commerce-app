@@ -12,10 +12,10 @@ using MediatR;
 
 namespace Application.Auth.Commands
 {
-    public class CreateAccountCommand : IRequest<(AuthUserForReturnDto, string)>
+    public class CreateAccountCommand : IRequest<(AuthUserForReturnDto, User)>
     {
         public AuthUserForCreateDto AuthUser { get; set; }
-        public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, (AuthUserForReturnDto, string)>
+        public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, (AuthUserForReturnDto, User)>
         {
             private readonly IIdentityService _identityService;
             private readonly IMapper _mapper;
@@ -30,7 +30,7 @@ namespace Application.Auth.Commands
                 _mapper = mapper;
                 _tokenService = tokenService;
             }
-            public async Task<(AuthUserForReturnDto, string)> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
+            public async Task<(AuthUserForReturnDto, User)> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
             {
                 if (await _identityService.FindUserByEmailAsync(request.AuthUser.Email) != null)
                 {
@@ -56,7 +56,7 @@ namespace Application.Auth.Commands
                 var userToReturn = _mapper.Map<AuthUserForReturnDto>(user);
                 userToReturn.AccessToken = _tokenService.GenerateAccessToken(user);
 
-                return (userToReturn, user.RefreshToken);
+                return (userToReturn, user);
             }
         }
     }

@@ -16,6 +16,13 @@ namespace Infrastructure.Services
         {
             _userManager = userManager;
         }
+
+        public async Task<Result> AddUserToRoleAsync(User user, string role)
+        {
+            var result = await _userManager.AddToRoleAsync(user, role);
+            return result.ToApplicationResult();
+        }
+
         public async Task<bool> CheckPasswordValidityAsync(User user, string password)
         {
             return await _userManager.CheckPasswordAsync(user, password);
@@ -66,6 +73,11 @@ namespace Infrastructure.Services
         public async Task<bool> HasConfirmedEmailAsync(User user)
         {
             return await _userManager.IsEmailConfirmedAsync(user);
+        }
+
+        public async Task<bool> IsInRoleAsync(User user, string role)
+        {
+            return await _userManager.IsInRoleAsync(user, role);
         }
 
         public async Task<Result> ResetPasswordAsync(User user, string passwordResetToken, string password)

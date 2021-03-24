@@ -30,5 +30,9 @@ namespace Application.Common.Interfaces
         Task<Result> ResetPasswordAsync(User user, string passwordResetToken, string password);
 
         Task<List<string>> GetRolesForUser(User user);
+
+        Task<Result> AddUserToRoleAsync(User user, string role);
+
+        Task<bool> IsInRoleAsync(User user, string role);
     }
 }

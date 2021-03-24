@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-
-namespace Application.Auth.Dtos
+namespace Application.Admins.Dtos
 {
-    public class AuthUserForReturnDto
+    public class AdminUserForReturnDto
     {
         public string Id { get; set; }
 
@@ -17,12 +15,5 @@ namespace Application.Auth.Dtos
         public string LastName { get; set; }
 
         public string Bio { get; set; }
-
-        public string Photo { get; set; }
-
-        public string AccessToken { get; set; }
-
-        public List<string> Roles { get; set; }
-
     }
 }
