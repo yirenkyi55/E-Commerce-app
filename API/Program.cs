@@ -1,5 +1,9 @@
+using System.Threading.Tasks;
+using Domain.Identity;
 using Infrastructure.Persistence;
+using Infrastructure.Persistence.Seed;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,7 +13,7 @@ namespace API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
 
@@ -22,7 +26,14 @@ namespace API
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    var userManager = services.GetRequiredService<UserManager<User>>();
+
+                    var hostEnvironment = services.GetRequiredService<IWebHostEnvironment>();
+
                     context.Database.Migrate();
+
+                    await SeedData.SeedAsync(context, userManager, roleManager, hostEnvironment);
                 }
                 catch (System.Exception ex)
                 {

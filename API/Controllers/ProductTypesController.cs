@@ -4,14 +4,17 @@ using System.Threading.Tasks;
 using Application.Types.Commands;
 using Application.Types.Dtos;
 using Application.Types.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/v{version:apiVersion}/productTypes")]
+    [Authorize(Roles = "admin")]
     public class ProductTypesController : BaseController
     {
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<List<ProductTypeForReturnDto>>> GetProductTypes()
         {
             var result = await Mediator.Send(new GetAllProductTypesQuery());

@@ -5,14 +5,17 @@ using Application.Common.Models;
 using Application.Products.Commands;
 using Application.Products.Dtos;
 using Application.Products.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/v{version:apiVersion}/products")]
+    [Authorize(Roles = "admin")]
     public class ProductsController : BaseController
     {
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<PaginationResult<ProductForReturnDto>>> GetAllProducts([FromQuery] ProductParams productParams)
         {
             var result = await Mediator.Send(new GetAllProductQuery { Params = productParams });
@@ -20,6 +23,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<List<ProductForReturnDto>>> GetProduct(Guid id)
         {
             var result = await Mediator.Send(new GetProductQuery { ProductId = id });

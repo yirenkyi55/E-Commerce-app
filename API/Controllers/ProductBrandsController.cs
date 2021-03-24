@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 using Application.Brands.Commands;
 using Application.Brands.Dtos;
 using Application.Brands.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
     [Route("api/v{version:apiVersion}/productTypes/{id}/brands")]
+    [Authorize(Roles = "admin")]
     public class ProductBrandsController : BaseController
     {
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<List<ProductBrandForReturnDto>>> GetProductBrands(Guid id)
         {
             var result = await Mediator.Send(new GetProductBrandsQuery { TypeId = id });

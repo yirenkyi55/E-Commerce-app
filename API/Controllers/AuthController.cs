@@ -29,9 +29,9 @@ namespace API.Controllers
         [HttpPost("account")]
         public async Task<ActionResult<AuthUserForReturnDto>> CreateAccount(AuthUserForCreateDto authUser)
         {
-            var (userToReturn, refreshToken) = await Mediator.Send(new CreateAccountCommand { AuthUser = authUser });
+            var (userToReturn, user) = await Mediator.Send(new CreateAccountCommand { AuthUser = authUser });
 
-            SetTokenCookie(refreshToken);
+            SetTokenCookie(user.RefreshToken);
 
             return Ok(userToReturn);
         }
