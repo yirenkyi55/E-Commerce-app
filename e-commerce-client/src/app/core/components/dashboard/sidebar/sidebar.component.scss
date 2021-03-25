@@ -1,0 +1,16 @@
+nz-sider {
+  overflow: auto;
+  height: 100vh;
+  left: 0;
+  border-right: 5px solid var(--color-primary);
+}
+
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+nz-menu-item:active {
+  outline: none;
+}

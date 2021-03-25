@@ -38,5 +38,9 @@
     ></app-input>
 
     <span>Already Have An Account? <a (click)="onLogin()">Login</a></span>
+
+    <div class="mgt">
+      <app-button [disabled]="registerForm.invalid">Register</app-button>
+    </div>
   </form>
 </div>

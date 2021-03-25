@@ -2,12 +2,16 @@
   [title]="''"
   [visible]="visible"
   (cancelled)="onCancelled($event)"
-  [okText]="loginTitle"
+  [okText]="''"
+  [okDisabled]="true"
 >
   <app-login-page
     *ngIf="isLoginForm"
     (register)="onRegister()"
+    (loginSubmit)="onLoginSubmit($event)"
+    [isLoading]="isLoading$ | async"
   ></app-login-page>
+
   <app-register-page
     *ngIf="!isLoginForm"
     (login)="onLogin()"

@@ -25,11 +25,12 @@ import { reducers, CustomSerializer, effects } from './store';
 import { GuestsModule } from './guests/guests.module';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
+import { AdminModule } from './admin/admin.module';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
-  return localStorageSync({ keys: [], rehydrate: true })(reducer);
+  return localStorageSync({ keys: ['authState'], rehydrate: true })(reducer);
 }
 
 export const metaReducers: MetaReducer<any>[] = !environment.production
@@ -49,8 +50,10 @@ registerLocaleData(en);
     GuestsModule,
     CoreModule,
     AuthModule,
+    AdminModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
+
     environment.production ? [] : StoreDevtoolsModule.instrument(),
     StoreRouterConnectingModule.forRoot({
       serializer: CustomSerializer,

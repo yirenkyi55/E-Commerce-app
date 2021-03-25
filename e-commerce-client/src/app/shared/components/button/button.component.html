@@ -1,1 +1,4 @@
-<p>button works!</p>
+<button [class]="btnClass" (click)="onClick($event)" [disabled]="disabled">
+  <i nz-icon nzType="loading" nzTheme="outline" *ngIf="isLoading"></i> &nbsp;
+  <ng-content></ng-content>
+</button>

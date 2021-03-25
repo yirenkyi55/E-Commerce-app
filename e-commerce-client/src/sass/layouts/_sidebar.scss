@@ -1,0 +1,41 @@
+.ant-layout-sider {
+  background: #10182f !important;
+  & .logo {
+    height: 32px;
+    background: #10182f; /* rgba(255, 255, 255, 0.3); */
+    margin: 16px;
+  }
+  & .sidebar-menu-container {
+    background: #10182f;
+  }
+  & .menu-trigger {
+    color: #7d9fa3;
+  }
+  & .gx-layout-sider-dark {
+    color: #8aadb2 !important;
+  }
+  & .gx-layout-sider-lite {
+    color: #8aadb2 !important;
+  }
+
+  & .ant-menu-item .anticon,
+  .ant-menu-submenu-title .anticon {
+    font-size: larger;
+  }
+  .ant-menu {
+    background: #10182f !important;
+  }
+  .gx-sidebar-notifications {
+    border-bottom: solid 1px #8aadb2;
+  }
+}
+
+.gx-mini-sidebar {
+  & .ant-menu-item .anticon,
+  .ant-menu-submenu-title .anticon {
+    margin-right: 40px;
+  }
+  & .ant-menu-submenu-vertical .anticon {
+    font-size: 20px;
+  }
+}

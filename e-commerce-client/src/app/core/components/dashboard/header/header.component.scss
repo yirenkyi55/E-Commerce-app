@@ -1,0 +1,33 @@
+nz-header {
+  background: #10182f;
+  padding: 0;
+  border-bottom: 5px solid var(--color-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-right {
+  margin-right: 10rem;
+}
+
+.menu-item {
+  padding: 1rem 5rem;
+}
+
+.icon-item {
+  cursor: pointer;
+}
+
+.trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: #ccc;
+}
+
+.trigger:hover {
+  color: #fff;
+}

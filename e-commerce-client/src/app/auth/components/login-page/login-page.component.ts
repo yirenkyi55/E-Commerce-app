@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginRequestModel } from 'src/app/core/models';
 
 @Component({
   selector: 'app-login-page',
@@ -8,11 +9,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginPageComponent implements OnInit {
   loginForm: FormGroup;
+  @Input() isLoading: boolean;
+
   @Output() register = new EventEmitter<boolean>();
+  @Output() loginSubmit = new EventEmitter<LoginRequestModel>();
 
   constructor(private fb: FormBuilder) {
     this.loginForm = fb.group({
-      emailAddress: ['', [Validators.required]],
+      email: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
@@ -20,7 +24,9 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    console.log(this.loginForm);
+    if (this.loginForm.valid) {
+      this.loginSubmit.emit(this.loginForm.value);
+    }
   }
 
   onRegister(): void {

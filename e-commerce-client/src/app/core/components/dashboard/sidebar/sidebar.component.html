@@ -1,0 +1,38 @@
+<nz-layout>
+  <nz-sider
+    nzCollapsible
+    [(nzCollapsed)]="isCollapsed"
+    nzBreakpoint="lg"
+    [nzCollapsedWidth]="0"
+    [nzTrigger]="null"
+  >
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <ng-container *ngFor="let menu of dashboardMenus">
+        <li
+          nz-submenu
+          [nzTitle]="menu.title"
+          [nzIcon]="menu.icon"
+          *ngIf="menu.children"
+        >
+          <ul>
+            <li
+              nz-menu-item
+              *ngFor="let child of menu.children"
+              [routerLink]="[child.route]"
+            >
+              {{ child.title }}
+            </li>
+          </ul>
+        </li>
+
+        <li nz-menu-item *ngIf="!menu.children" [routerLink]="[menu.route]">
+          <i nz-icon [nzType]="menu.icon"></i>
+          <span>{{ menu.title }}</span>
+        </li>
+      </ng-container>
+    </ul>
+  </nz-sider>
+
+  <ng-content></ng-content>
+</nz-layout>

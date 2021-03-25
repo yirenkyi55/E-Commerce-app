@@ -1,0 +1,17 @@
+<nz-layout>
+  <app-sidebar [isCollapsed]="isCollapsed" [dashboardMenus]="dashboardMenus">
+    <nz-layout>
+      <app-header
+        (collapse)="onCollapse($event)"
+        (logout)="onLogout()"
+        [isCollapsed]="isCollapsed"
+      ></app-header>
+      <nz-content>
+        <div class="inner-content">
+          <!-- Inject inner content over here such as routing -->
+          <ng-content></ng-content>
+        </div>
+      </nz-content>
+    </nz-layout>
+  </app-sidebar>
+</nz-layout>

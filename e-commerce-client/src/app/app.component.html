@@ -1,14 +1,31 @@
-<!-- Home Template when the user is not logged in -->
-<app-navbar (login)="onLogin()"></app-navbar>
+<!-- We presents admin dashboard when the user is an admin -->
+<ng-container
+  *ngIf="
+    currentUser?.roles?.includes('admin') &&
+    (dashboardType$ | async) === dashboardTye.Admin
+  "
+>
+  <app-dashboard [dashboardMenus]="dashboardMenuItems" (logout)="onLogOut()">
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+  </app-dashboard>
+</ng-container>
 
-<ng-container *ngTemplateOutlet="template"></ng-container>
+<!-- We presents a guest and shopping accounts when the user is not logged in or is not an admin -->
+<ng-container
+  *ngIf="!currentUser || (dashboardType$ | async) === dashboardTye.Guest"
+>
+  <app-navbar (login)="onLogin()"></app-navbar>
+  <ng-container *ngTemplateOutlet="template"></ng-container>
+  <app-footer></app-footer>
+</ng-container>
 
-<app-footer></app-footer>
-
-<!-- Dashboard template when the user is logged in -->
 <ng-template #template>
   <router-outlet #outlet="outlet"> </router-outlet>
 </ng-template>
 
-<app-auth-form [visible]="isLoginVisible" (cancelled)="onCancelled()">
+<!-- A login form that is called when the user needs to logs in -->
+<app-auth-form
+  [visible]="isLoginVisible || (authenticatedRequest$ | async)"
+  (cancelled)="onCancelled()"
+>
 </app-auth-form>

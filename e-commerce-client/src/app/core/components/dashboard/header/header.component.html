@@ -1,0 +1,29 @@
+<nz-header>
+  <i
+    class="trigger"
+    nz-icon
+    [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+    (click)="onCollapse()"
+  ></i>
+
+  <span class="item-right">
+    <nz-avatar
+      nzIcon="user"
+      class="icon-item"
+      nz-dropdown
+      [nzDropdownMenu]="menu"
+      nzPlacement="bottomCenter"
+    ></nz-avatar>
+  </span>
+</nz-header>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item class="menu-item">
+      <i nz-icon nzType="user" nzTheme="outline"></i> Account
+    </li>
+    <li nz-menu-item class="menu-item" (click)="onLogout()">
+      <i nz-icon nzType="logout" nzTheme="outline"></i> Log Out
+    </li>
+  </ul>
+</nz-dropdown-menu>

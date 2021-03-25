@@ -22,6 +22,10 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+
 import { ModalComponent } from './components/modal/modal.component';
 import { ButtonComponent } from './components/button/button.component';
 import { InputComponent } from './components/input/input.component';
@@ -54,6 +58,9 @@ const modules = [
   NgxGalleryModule,
   CommonModule,
   NzFormModule,
+  NzLayoutModule,
+  NzAvatarModule,
+  NzPopoverModule,
 ];
 
 @NgModule({

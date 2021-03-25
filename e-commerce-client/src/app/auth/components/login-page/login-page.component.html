@@ -2,7 +2,7 @@
   <h3>Login</h3>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <app-input
-      formControlName="emailAddress"
+      formControlName="email"
       placeholder="Email Address"
       label="Email Address"
     ></app-input>
@@ -11,10 +11,20 @@
       formControlName="password"
       placeholder="Password"
       label="Password"
+      type="password"
     ></app-input>
 
     <span
       >Don't Have an Account Yet? <a (click)="onRegister()">Register</a></span
     >
+
+    <div class="mgt">
+      <app-button
+        [disabled]="loginForm.invalid"
+        (btnClick)="onSubmit()"
+        [isLoading]="isLoading"
+        >Login</app-button
+      >
+    </div>
   </form>
 </div>

@@ -8,8 +8,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ScrollEventModule } from 'ngx-scroll-event';
 
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HeaderComponent } from './components/dashboard/header/header.component';
+import { SidebarComponent } from './components/dashboard/sidebar/sidebar.component';
+import { SharedModule } from '../shared/shared.module';
 @NgModule({
-  declarations: [NavbarComponent, FooterComponent],
+  declarations: [
+    NavbarComponent,
+    FooterComponent,
+    HeaderComponent,
+    SidebarComponent,
+    DashboardComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -17,6 +27,7 @@ import { ScrollEventModule } from 'ngx-scroll-event';
     ReactiveFormsModule,
     FormsModule,
     ScrollEventModule,
+    SharedModule,
   ],
   exports: [
     CommonModule,
@@ -26,6 +37,7 @@ import { ScrollEventModule } from 'ngx-scroll-event';
     FormsModule,
     NavbarComponent,
     FooterComponent,
+    DashboardComponent,
   ],
 })
 export class CoreModule {}

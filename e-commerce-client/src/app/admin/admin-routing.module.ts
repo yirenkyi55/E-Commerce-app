@@ -1,10 +1,44 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from '../core/guards';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: 'admin',
+    canActivate: [AdminGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: 'products',
+        pathMatch: 'full',
+      },
+      {
+        path: 'products',
+        loadChildren: () =>
+          import('./products/products.module').then((m) => m.ProductsModule),
+      },
+      {
+        path: 'types',
+        loadChildren: () =>
+          import('./types/types.module').then((m) => m.TypesModule),
+      },
+
+      {
+        path: 'purchases',
+        loadChildren: () =>
+          import('./purchases/purchases.module').then((m) => m.PurchasesModule),
+      },
+      {
+        path: 'info',
+        loadChildren: () =>
+          import('./info/info.module').then((m) => m.InfoModule),
+      },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}
