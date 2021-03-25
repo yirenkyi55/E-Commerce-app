@@ -1,1 +1,12 @@
-<p>about-page works!</p>
+<div class="header">
+  <div class="row section__about" [@bounceInDown]="bounceInDown">
+    <div class="section__about--features">
+      <div class="section__about--notes" *ngFor="let note of contentNotes">
+        <h2 class="section__about--notes-heading">{{ note.header }}</h2>
+        <div class="section__about--notes-content">
+          {{ note.content }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

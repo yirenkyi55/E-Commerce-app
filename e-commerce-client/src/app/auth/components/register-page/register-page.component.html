@@ -1,1 +1,42 @@
-<p>register-page works!</p>
+<div class="auth__page">
+  <h3>Register</h3>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <app-input
+      formControlName="firstName"
+      placeholder="First Name"
+      label="First Name"
+    ></app-input>
+
+    <app-input
+      formControlName="otherName"
+      placeholder="Other Name"
+      label="Other Name"
+    ></app-input>
+
+    <app-input
+      formControlName="lastName"
+      placeholder="Last Name"
+      label="Last Name"
+    ></app-input>
+
+    <app-input
+      formControlName="email"
+      placeholder="Email Address"
+      label="Email Address"
+    ></app-input>
+
+    <app-input
+      formControlName="password"
+      placeholder="Password"
+      label="Password"
+    ></app-input>
+
+    <app-input
+      formControlName="confirmPassword"
+      placeholder="Confirm Password"
+      label="Confirm Password"
+    ></app-input>
+
+    <span>Already Have An Account? <a (click)="onLogin()">Login</a></span>
+  </form>
+</div>

@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
@@ -29,6 +31,8 @@ import { InspectModeComponent } from './components/inspect-mode/inspect-mode.com
 import { EditModeComponent } from './components/edit-mode/edit-mode.component';
 
 const modules = [
+  FormsModule,
+  ReactiveFormsModule,
   NzInputModule,
   NzDropDownModule,
   NzCheckboxModule,
@@ -49,6 +53,7 @@ const modules = [
   NzTagModule,
   NgxGalleryModule,
   CommonModule,
+  NzFormModule,
 ];
 
 @NgModule({

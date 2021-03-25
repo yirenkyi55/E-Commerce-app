@@ -1,0 +1,44 @@
+.section__about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &--features {
+    min-height: 40rem;
+    background-color: var(--color-secondary-white);
+    border-radius: 0.7rem;
+    padding: 1rem;
+    box-shadow: 0 1rem 2rem rgba(#000, 0.3);
+    background-color: var(--color-secondary-dark);
+    color: var(--color-secondary-white);
+    font-size: 1.4rem;
+    margin-top: 8rem;
+    text-align: center;
+    border: 0.3rem solid var(--color-secondary);
+    transition: all 0.2s;
+    width: 80%;
+
+    &:hover {
+      box-shadow: 0 2rem 4rem rgba(#000, 0.3);
+    }
+  }
+
+  &--notes {
+    &:not(:last-child) {
+      margin-bottom: 3rem;
+    }
+
+    &-heading {
+      color: var(--color-primary);
+      border-bottom: 0.2rem solid var(--color-primary);
+      border-radius: 0.3rem;
+      margin-bottom: 0.2rem;
+      display: inline-block;
+    }
+
+    &-content {
+      text-align: justify;
+      padding: 0 2rem;
+    }
+  }
+}

@@ -1,1 +1,24 @@
-<p>input works!</p>
+<nz-form-item>
+  <nz-form-control [nzValidateStatus]="validationIconStatus" nzHasFeedback>
+    <input
+      #input
+      nz-input
+      placeholder="{{ placeholder }}"
+      [type]="type"
+      class="input"
+      [class.input-error]="isInValidState"
+      (input)="onChange($event.target.value)"
+      (blur)="onTouched()"
+      autocomplete="on"
+    />
+  </nz-form-control>
+
+  <span *ngIf="required" class="error">{{ label }} is required</span>
+  <span *ngIf="inValidPattern" class="error">{{ patternMessage }}</span>
+  <span *ngIf="notValidEmail" class="error">Email address already in use</span>
+  <span *ngIf="notValidUsername" class="error">Username already exists</span>
+  <span *ngIf="minLength" class="error"
+    >{{ label }} should contain at least
+    {{ requiredLengthFromMinLength }} characters</span
+  >
+</nz-form-item>

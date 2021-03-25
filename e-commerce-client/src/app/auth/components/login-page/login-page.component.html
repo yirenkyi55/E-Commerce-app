@@ -1,1 +1,20 @@
-<p>login-page works!</p>
+<div class="auth__page">
+  <h3>Login</h3>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <app-input
+      formControlName="emailAddress"
+      placeholder="Email Address"
+      label="Email Address"
+    ></app-input>
+
+    <app-input
+      formControlName="password"
+      placeholder="Password"
+      label="Password"
+    ></app-input>
+
+    <span
+      >Don't Have an Account Yet? <a (click)="onRegister()">Register</a></span
+    >
+  </form>
+</div>

@@ -1,1 +1,15 @@
-<app-modal [visible]="visible" (cancelled)="onCancelled($event)"> </app-modal>
+<app-modal
+  [title]="''"
+  [visible]="visible"
+  (cancelled)="onCancelled($event)"
+  [okText]="loginTitle"
+>
+  <app-login-page
+    *ngIf="isLoginForm"
+    (register)="onRegister()"
+  ></app-login-page>
+  <app-register-page
+    *ngIf="!isLoginForm"
+    (login)="onLogin()"
+  ></app-register-page>
+</app-modal>
