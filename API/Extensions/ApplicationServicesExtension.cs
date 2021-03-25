@@ -20,6 +20,17 @@ namespace API.Extensions
                 option.RegisterValidatorsFromAssemblyContaining<LoginQueryValidator>();
             });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", policy =>
+                 policy.WithOrigins("http://localhost:4200")
+                 .SetIsOriginAllowedToAllowWildcardSubdomains()
+                 .AllowAnyMethod()
+                 .AllowAnyHeader()
+                 .AllowCredentials()
+                );
+            });
+
             return services;
         }
     }
