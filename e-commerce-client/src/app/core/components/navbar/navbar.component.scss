@@ -86,10 +86,16 @@
   }
 
   .stand {
+    border: 0.2rem solid transparent;
     box-shadow: 0 1rem 3rem rgba(var(--color-black), 0.3);
     border-radius: 0.7rem;
     border-bottom: 0.2rem solid var(--color-primary);
     border-top: 0.2rem solid var(--color-primary);
     color: var(--color-primary);
+    padding: 1rem 2rem;
+
+    &:hover {
+      border: 0.2rem solid var(--color-primary);
+    }
   }
 }

@@ -24,6 +24,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers, CustomSerializer, effects } from './store';
 import { GuestsModule } from './guests/guests.module';
 import { CoreModule } from './core/core.module';
+import { AuthModule } from './auth/auth.module';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
@@ -47,6 +48,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     GuestsModule,
     CoreModule,
+    AuthModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
     environment.production ? [] : StoreDevtoolsModule.instrument(),

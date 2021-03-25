@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ScrollEvent } from 'ngx-scroll-event';
 import {
   trigger,
@@ -36,12 +36,13 @@ import {
 })
 export class NavbarComponent implements OnInit {
   isTop = true;
+  @Output() login = new EventEmitter<boolean>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  handleScroll(event: ScrollEvent) {
+  handleScroll(event: ScrollEvent): void {
     if (event.isReachingBottom && !event.isReachingTop) {
       this.isTop = false;
     }
@@ -49,5 +50,9 @@ export class NavbarComponent implements OnInit {
     if (event.isReachingTop) {
       this.isTop = true;
     }
+  }
+
+  onLogin(): void {
+    this.login.emit(true);
   }
 }

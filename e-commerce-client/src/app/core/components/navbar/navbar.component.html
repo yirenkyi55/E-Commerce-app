@@ -50,9 +50,9 @@
     <ul class="navigation__nav">
       <li class="navigation__nav--item">
         <a
-          routerLink="/auth/login"
           routerLinkActive="active"
           class="navigation__nav--item-link stand"
+          (click)="onLogin()"
         >
           Login
         </a>

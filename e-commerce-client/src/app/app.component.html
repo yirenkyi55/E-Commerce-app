@@ -1,5 +1,5 @@
 <!-- Home Template when the user is not logged in -->
-<app-navbar></app-navbar>
+<app-navbar (login)="onLogin()"></app-navbar>
 
 <ng-container *ngTemplateOutlet="template"></ng-container>
 
@@ -9,3 +9,6 @@
 <ng-template #template>
   <router-outlet #outlet="outlet"> </router-outlet>
 </ng-template>
+
+<app-auth-form [visible]="isLoginVisible" (cancelled)="onCancelled()">
+</app-auth-form>
