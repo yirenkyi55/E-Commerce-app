@@ -1,0 +1,115 @@
+.footer {
+  min-height: 50rem;
+  background-color: var(--color-tertiary-dark);
+  color: var(--color-secondary-white);
+  padding: 10rem 15rem;
+  font-size: 1.2rem;
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
+    &__header {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+
+    &__content {
+      font-size: 1.3rem;
+      padding: 2rem;
+      text-align: justify;
+    }
+
+    &__follow {
+      margin-top: 3rem;
+
+      &-title {
+        font-size: var(--default-font-size);
+        font-weight: 700;
+      }
+
+      &-element {
+        display: flex;
+      }
+
+      &-image {
+        fill: var(--color-primary);
+        height: 1.5rem;
+        width: 1.5rem;
+        margin: 1rem;
+        cursor: pointer;
+      }
+    }
+
+    &__link {
+      list-style: none;
+
+      &-contact {
+        text-align: center;
+        margin: 1rem;
+      }
+
+      &-item {
+        margin: 1rem;
+        font-size: 1.3rem;
+
+        a {
+          &:link,
+          &:visited {
+            text-decoration: none;
+            color: var(--color-primary-white);
+            padding: 0.5rem 2rem;
+            transition: all 0.5s;
+            display: block;
+          }
+
+          &:hover,
+          &:active {
+            background: linear-gradient(
+              to right bottom,
+              rgba(#864e05, 0.3),
+              rgba(#d47e10, 0.4)
+            );
+            transform: translateX(2rem);
+            box-shadow: 0 1rem 2rem rgba(var(--color-black), 0.2);
+          }
+        }
+      }
+    }
+
+    &__address {
+      text-align: justify;
+    }
+  }
+
+  &__image {
+    height: 10rem;
+    display: block;
+    margin-top: -4rem;
+  }
+
+  .bar {
+    border-top: 3px solid var(--color-primary);
+    flex: 1;
+  }
+
+  .footer__bar {
+    display: flex;
+    align-items: center;
+    margin-top: -8rem;
+
+    &-image {
+      fill: var(--color-primary);
+      height: 5rem;
+    }
+  }
+
+  .copyright {
+    float: right;
+  }
+}

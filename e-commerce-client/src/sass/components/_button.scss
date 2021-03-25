@@ -1,0 +1,66 @@
+.button {
+  &,
+  &:link,
+  &:visited {
+    text-decoration: none;
+    padding: 1rem 2rem;
+    display: inline-block;
+    font-size: 1.3rem;
+    //box-shadow: 0 2rem 3rem rgba($color-black, 0.2);
+    font-weight: 300;
+    position: relative;
+    transition: all 0.2s;
+    border-radius: 0.5rem;
+    font-style: inherit;
+
+    //for buttons
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  &-block {
+    width: 100%;
+  }
+
+  &:active,
+  &:hover {
+    box-shadow: 0 1rem 2rem rgba(#000, 0.4);
+    color: var(--color-secondary-grey);
+    transform: translateY(-0.3rem);
+    outline: none;
+  }
+
+  &-rounded {
+    border-radius: 2rem !important;
+  }
+
+  &:active {
+    transform: translateY(-0.1rem);
+  }
+
+  &-large {
+    padding: 1.5rem 3rem !important;
+    font-size: 1.8rem !important;
+  }
+
+  &-dark {
+    background-color: var(--color-primary-dark-pure);
+    color: var(--color-secondary-white);
+  }
+
+  &-primary {
+    color: var(--color-secondary-white);
+    box-shadow: 0 1rem 2rem rgba(#000, 0.3);
+    border: 1px solid transparent;
+    background: linear-gradient(
+      to right bottom,
+      rgba(#864e05, 0.8),
+      rgba(#d47e10, 0.8)
+    );
+  }
+
+  &-outline-pink {
+    border: 1px solid var(--color-primary);
+  }
+}

@@ -22,6 +22,8 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers, CustomSerializer, effects } from './store';
+import { GuestsModule } from './guests/guests.module';
+import { CoreModule } from './core/core.module';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
@@ -43,6 +45,8 @@ registerLocaleData(en);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    GuestsModule,
+    CoreModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
     environment.production ? [] : StoreDevtoolsModule.instrument(),

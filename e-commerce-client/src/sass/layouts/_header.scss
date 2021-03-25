@@ -1,0 +1,19 @@
+.header {
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(#01332b, 0.8),
+      rgba(#10182f, 1)
+    ),
+    url(/assets/img/background.jpg);
+
+  background-size: cover;
+  min-height: 90vh;
+  background-position: top;
+  background-attachment: fixed;
+  position: relative;
+  border-bottom: 1px solid var(--color-secondary);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,19 @@
+.shadow {
+  box-shadow: 0 1rem 2rem rgba(#000, 0.1) !important;
+}
+
+.margin-top-small {
+  margin-top: 2rem !important;
+}
+
+.color-primary {
+  color: var(--color-primary);
+}
+
+.movesInLeft {
+  animation: movesInLeft 1s ease-in;
+}
+
+.movesInRight {
+  animation: movesInRight 1s ease-in;
+}

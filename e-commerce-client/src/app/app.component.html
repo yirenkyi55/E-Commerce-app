@@ -1,0 +1,11 @@
+<!-- Home Template when the user is not logged in -->
+<app-navbar></app-navbar>
+
+<ng-container *ngTemplateOutlet="template"></ng-container>
+
+<app-footer></app-footer>
+
+<!-- Dashboard template when the user is logged in -->
+<ng-template #template>
+  <router-outlet #outlet="outlet"> </router-outlet>
+</ng-template>

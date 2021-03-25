@@ -1,0 +1,42 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%; //1rem = 10px
+}
+
+body {
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+
+  //Primary Colors
+  --color-primary: #93bc46;
+  --color-secondary: #004c3f;
+
+  //Dark Colors
+  --color-primary-dark: #004c3f;
+  --color-secondary-dark: #242e4c;
+  --color-tertiary-dark: #10182f;
+
+  --color-primary-dark-pure: #22262c;
+  --color-secondary-dark-pure: #191b1d;
+
+  //Gray Colors
+  --color-primary-grey: #eeeeee;
+  --color-secondary-grey: #e4e2e2;
+
+  //White colors
+  --color-primary-white: #fff;
+  --color-secondary-white: #f7f8fc;
+
+  //Black Colors
+  --color-black: #000;
+
+  --default-font-size: 1.6rem;
+}

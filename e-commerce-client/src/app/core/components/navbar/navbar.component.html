@@ -1,0 +1,62 @@
+<nav
+  class="navigation"
+  detect-scroll
+  (onScroll)="handleScroll($event)"
+  [topOffset]="80"
+  [@topBottom]="isTop ? 'top' : 'bottom'"
+>
+  <a class="navigation__brand" routerLink="/home">
+    <img src="/assets/img/logo.png" alt="" class="navigation__brand-image" />
+  </a>
+
+  <ul class="navigation__nav">
+    <li class="navigation__nav--item">
+      <a
+        routerLink="/home"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="true"
+        class="navigation__nav--item-link"
+        >Home</a
+      >
+    </li>
+    <li class="navigation__nav--item">
+      <a
+        routerLink="/products"
+        routerLinkActive="active"
+        class="navigation__nav--item-link"
+        >SHOP</a
+      >
+    </li>
+
+    <li class="navigation__nav--item">
+      <a
+        routerLink="/contact"
+        routerLinkActive="active"
+        class="navigation__nav--item-link"
+        >CONTACT</a
+      >
+    </li>
+    <li class="navigation__nav--item">
+      <a
+        routerLink="/about"
+        routerLinkActive="active"
+        class="navigation__nav--item-link"
+        >ABOUT</a
+      >
+    </li>
+  </ul>
+
+  <div class="navigation__left">
+    <ul class="navigation__nav">
+      <li class="navigation__nav--item">
+        <a
+          routerLink="/auth/login"
+          routerLinkActive="active"
+          class="navigation__nav--item-link stand"
+        >
+          Login
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

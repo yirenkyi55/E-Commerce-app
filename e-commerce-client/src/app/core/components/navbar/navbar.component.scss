@@ -1,0 +1,95 @@
+.navigation {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  // background-color: var(--color-tertiary-dark);
+  height: 8rem;
+  color: var(--color-secondary-white);
+  font-size: 1.6rem;
+  box-shadow: 0 1rem 2rem rgba(var(--color-black), 0.3);
+  z-index: 10000000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // border-bottom: 2px solid var(--color-primary);
+
+  & > * {
+    margin-top: 1.5rem;
+  }
+
+  &__brand {
+    padding: 2.5rem 1rem;
+    font-weight: 500;
+    font-size: 2rem;
+    color: var(--color-primary);
+
+    &-image {
+      height: 10rem;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 2.5rem 0;
+
+    &--item {
+      list-style: none;
+      display: block;
+      margin: 0 1rem;
+
+      &-link {
+        &:link,
+        &:visited {
+          text-decoration: none;
+          font-weight: 400;
+          color: inherit;
+          padding: 1rem 2rem;
+          text-transform: uppercase;
+          transition: all 0.4s;
+          border: 0.2rem solid transparent;
+        }
+
+        &:hover,
+        &:active {
+          color: var(--color-primary);
+          border: 0.2rem solid var(--color-primary);
+          transform: translateY(-0.3rem);
+          box-shadow: 0 1rem 3rem rgba(var(--color-black), 0.3);
+          border-radius: 7px;
+          background-color: var(--color-secondary-dark);
+        }
+
+        &:active {
+          transform: translateY(-0.1rem);
+          box-shadow: 0 0.5rem 2rem rgba(var(--color-black), 0.3);
+        }
+      }
+    }
+  }
+
+  &__left {
+    display: block;
+    padding: 0 2rem;
+  }
+
+  .active {
+    box-shadow: 0 1rem 3rem rgba(var(--color-black), 0.3);
+    border-radius: 0.7rem;
+    border: 0.2rem solid var(--color-primary);
+    color: var(--color-primary);
+    background-color: var(--color-secondary-dark);
+  }
+
+  .stand {
+    box-shadow: 0 1rem 3rem rgba(var(--color-black), 0.3);
+    border-radius: 0.7rem;
+    border-bottom: 0.2rem solid var(--color-primary);
+    border-top: 0.2rem solid var(--color-primary);
+    color: var(--color-primary);
+  }
+}

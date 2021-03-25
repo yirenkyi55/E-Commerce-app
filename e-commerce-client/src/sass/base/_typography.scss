@@ -1,0 +1,12 @@
+.heading__primary {
+  text-transform: uppercase;
+  transition: all 0.4s;
+  letter-spacing: 0.5rem;
+  font-weight: 700;
+  font-size: 3rem;
+  text-align: center;
+
+  &:hover {
+    transform: scale(1.4);
+  }
+}
