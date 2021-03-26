@@ -75,6 +75,10 @@ namespace Application.Auth.Commands
 
                 var userToReturn = _mapper.Map<AuthUserForReturnDto>(user);
                 userToReturn.AccessToken = _tokenService.GenerateAccessToken(user);
+                
+                var rolesForUse = await _identityService.GetRolesForUser(user);
+
+                userToReturn.Roles = rolesForUse;
 
                 return (userToReturn, user.RefreshToken);
 
