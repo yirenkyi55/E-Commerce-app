@@ -21,22 +21,29 @@ export const initialState: AuthenticationState = {
 
 const featureReducer = createReducer(
   initialState,
-  on(authActions.LoginRequest, (state) => ({ ...state, loading: true })),
+  on(authActions.LoginRequest, authActions.RefreshTokenRequest, (state) => ({
+    ...state,
+    loading: true,
+  })),
 
-  on(authActions.LoginRequestSuccess, (state, { response }) => {
-    const currentUser = response;
-    const dashboard = response.roles?.includes('admin')
-      ? DashboardTypes.Admin
-      : DashboardTypes.Guest;
+  on(
+    authActions.LoginRequestSuccess,
+    authActions.RefreshTokenRequestSuccess,
+    (state, { response }) => {
+      const currentUser = response;
+      const dashboard = response.roles?.includes('admin')
+        ? DashboardTypes.Admin
+        : DashboardTypes.Guest;
 
-    return {
-      ...state,
-      loading: false,
-      loaded: true,
-      currentUser,
-      dashboard,
-    };
-  }),
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        currentUser,
+        dashboard,
+      };
+    }
+  ),
 
   on(authActions.AuthenticateRequest, (state, { value }) => ({
     ...state,
@@ -51,11 +58,15 @@ const featureReducer = createReducer(
     };
   }),
 
-  on(authActions.LoginRequestFailure, (state) => ({
-    ...state,
-    loading: false,
-    loaded: false,
-  }))
+  on(
+    authActions.LoginRequestFailure,
+    authActions.RefreshTokenRequestFailure,
+    (state) => ({
+      ...state,
+      loading: false,
+      loaded: false,
+    })
+  )
 );
 
 export function reducer(

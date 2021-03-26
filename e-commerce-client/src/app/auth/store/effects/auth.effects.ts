@@ -43,4 +43,23 @@ export class AuthEffects {
       map(() => fromRoot.Go({ path: ['/'] }))
     )
   );
+
+  refreshToken$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromAuthAction.RefreshTokenRequest),
+      switchMap(({ token }) => {
+        if (!token) {
+          return of(fromAuthAction.RefreshTokenRequestFailure('error'));
+        }
+        return this.authService.refreshToken({ token }).pipe(
+          map((response) =>
+            fromAuthAction.RefreshTokenRequestSuccess({ response })
+          ),
+          catchError((error) =>
+            of(fromAuthAction.RefreshTokenRequestFailure(error))
+          )
+        );
+      })
+    )
+  );
 }

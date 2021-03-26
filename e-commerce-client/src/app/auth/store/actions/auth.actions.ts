@@ -20,4 +20,20 @@ export const LoginRequestFailure = createAction(
   props<any>()
 );
 
+// Refresh token request
+export const RefreshTokenRequest = createAction(
+  '[Authentication] Refresh Token Request',
+  props<{ token: string }>()
+);
+
+export const RefreshTokenRequestSuccess = createAction(
+  '[Authentication] Refresh Token Request Success',
+  props<{ response: AuthUserRequestResponse }>()
+);
+
+export const RefreshTokenRequestFailure = createAction(
+  '[Authentication] Refresh Token Request Failure',
+  props<any>()
+);
+
 export const Logout = createAction('[Authentication] Log out');

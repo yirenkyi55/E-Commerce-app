@@ -19,8 +19,26 @@ export class AuthService {
   ): Observable<AuthUserRequestResponse> {
     return this.http.post<AuthUserRequestResponse>(
       `${this.baseUrl}/login`,
-      loginRequest
+      loginRequest,
+      {
+        withCredentials: true,
+      }
     );
+  }
+
+  refreshToken(model: { token: string }): Observable<AuthUserRequestResponse> {
+    return this.http.post<AuthUserRequestResponse>(
+      `${this.baseUrl}/refresh`,
+      model,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  getToken(): string {
+    return JSON.parse(localStorage.getItem('authState'))?.auth?.currentUser
+      ?.accessToken;
   }
 
   logOut(): void {

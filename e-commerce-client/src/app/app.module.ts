@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,7 +8,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 
@@ -26,6 +26,9 @@ import { GuestsModule } from './guests/guests.module';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
+import { JwtInterceptor, RefreshTokenInterceptor } from './core/interceptors';
+import { appInitializer } from './core/initializers';
+import { AuthService } from './auth/services';
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
@@ -60,8 +63,20 @@ registerLocaleData(en);
     }),
   ],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializer,
+      multi: true,
+      deps: [AuthService, Store],
+    },
     { provide: NZ_I18N, useValue: en_US },
     { provide: RouterStateSerializer, useClass: CustomSerializer },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RefreshTokenInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

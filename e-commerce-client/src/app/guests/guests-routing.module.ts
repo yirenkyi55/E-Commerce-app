@@ -9,23 +9,23 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [],
+    canActivate: [GuestGuard],
   },
   {
     path: 'about',
     component: AboutComponent,
-    canActivate: [],
+    canActivate: [GuestGuard],
   },
   {
     path: 'contact',
     component: ContactComponent,
-    canActivate: [],
+    canActivate: [GuestGuard],
   },
   {
     path: 'products',
     loadChildren: () =>
       import('./products/products.module').then((m) => m.ProductsModule),
-    canActivate: [],
+    canActivate: [GuestGuard],
   },
 ];
 
