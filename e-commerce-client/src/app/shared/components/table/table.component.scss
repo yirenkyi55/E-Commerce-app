@@ -1,0 +1,26 @@
+.icon {
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+::ng-deep .ant-table-tbody > tr > td {
+  border-bottom: none;
+}
+
+::ng-deep .ant-empty {
+  margin-top: 10rem !important;
+}
+
+.app-table-row:hover {
+  cursor: pointer;
+}
+
+.ant-table-tbody > tr.ant-table-row:hover {
+  box-shadow: 0.1rem 0.1rem 0.3rem 0.1rem rgba(0, 0, 0, 0.1);
+  border: 5px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+  background-color: #fff;
+}

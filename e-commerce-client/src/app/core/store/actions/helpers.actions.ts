@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { NotificationMessage } from '../../models';
 
 export const UploadStartedAction = createAction('[File Upload] Upload Started');
 
@@ -14,4 +15,13 @@ export const UploadCompletedAction = createAction(
 export const UploadFailureAction = createAction(
   '[File Upload] Upload Failure',
   props<{ error: string }>()
+);
+
+export const DisplayNotification = createAction(
+  '[Notification] Display Notification',
+  props<NotificationMessage>()
+);
+
+export const CloseNotification = createAction(
+  '[Notification] Close Notification'
 );

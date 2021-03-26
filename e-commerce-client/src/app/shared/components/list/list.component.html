@@ -1,0 +1,45 @@
+<ul nz-list [nzDataSource]="data" nzBordered nzSize="large">
+  <li nz-list-item nzNoFlex *ngFor="let item of data">
+    <ng-container *ngIf="action">
+      <ul nz-list-item-actions *ngFor="let action of actions">
+        <ng-container *ngIf="action.hasAccess">
+          <nz-list-item-action *ngIf="action.includeConfirm">
+            <button
+              nz-button
+              [nzTooltipTitle]="action.toolTipMessage"
+              nzTooltipPlacement="bottom"
+              nz-tooltip
+              nz-popconfirm
+              [nzPopconfirmTitle]="action.confirmMessage || 'Confirm Operation'"
+              (nzOnConfirm)="onActionButtonClick(item[action.key], action.type)"
+              nzPopconfirmPlacement="bottom"
+            >
+              <fa-icon
+                [icon]="action.icon"
+                size="sm"
+                [styles]="action.style"
+              ></fa-icon>
+            </button>
+          </nz-list-item-action>
+
+          <nz-list-item-action *ngIf="!action.includeConfirm">
+            <button
+              nz-button
+              [nzTooltipTitle]="action.toolTipMessage"
+              nzTooltipPlacement="bottom"
+              nz-tooltip
+              (click)="onActionButtonClick(item[action.key], action.type)"
+            >
+              <fa-icon
+                [icon]="action.icon"
+                size="sm"
+                [styles]="action.style"
+              ></fa-icon>
+            </button>
+          </nz-list-item-action>
+        </ng-container>
+      </ul>
+    </ng-container>
+    {{ item.text | titlecase }}
+  </li>
+</ul>

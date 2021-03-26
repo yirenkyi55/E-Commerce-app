@@ -1,0 +1,25 @@
+<ng-container *ngIf="browseType === type.Table">
+  <app-table
+    [data]="tableData"
+    [action]="tableHasActionButtons"
+    [paginateTable]="paginateTable"
+    [actions]="tableActions"
+    [source]="tableSource"
+    [headers]="tableHeaders"
+    [showTableHoverIcon]="showTableHoverIcon"
+    (actionClick)="onTableActionClick($event)"
+    (recordClick)="onTableRecordClick($event)"
+  ></app-table>
+</ng-container>
+<ng-container *ngIf="browseType === type.List">
+  <app-list
+    [data]="listData"
+    [actions]="listActions"
+    [action]="listHasActionButtons"
+    (actionClick)="onListActionClick($event)"
+  ></app-list>
+</ng-container>
+
+<ng-container *ngIf="browseType === type.Other">
+  <ng-content></ng-content>
+</ng-container>

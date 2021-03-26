@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ScrollEventModule } from 'ngx-scroll-event';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/dashboard/header/header.component';
@@ -33,6 +34,7 @@ import { StoreModule } from '@ngrx/store';
     FormsModule,
     ScrollEventModule,
     SharedModule,
+    NzNotificationModule,
     EffectsModule.forFeature(effects),
     StoreModule.forFeature('applicationState', reducers),
   ],
@@ -45,6 +47,7 @@ import { StoreModule } from '@ngrx/store';
     NavbarComponent,
     FooterComponent,
     DashboardComponent,
+    NzNotificationModule,
   ],
 })
 export class CoreModule {}

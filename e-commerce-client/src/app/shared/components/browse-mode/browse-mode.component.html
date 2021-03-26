@@ -1,1 +1,77 @@
-<p>browse-mode works!</p>
+<div class="mode">
+  <div class="mode__header">
+    <ng-content select="#header"></ng-content>
+  </div>
+  <div class="browse">
+    <div class="browse__header">
+      <div class="browse__header-search">
+        <app-search-box
+          [placeholder]="searchPlaceholder"
+          [clear]="clearSearch"
+          [width]="searchWidth"
+          (search)="onSearch($event)"
+          (searchChange)="onSearchChange($event)"
+          (clearSearchContent)="onClearSearchContent($event)"
+        ></app-search-box>
+      </div>
+      <div class="browse__header-controls">
+        <!-- The filter component -->
+        <app-filter-button
+          *ngIf="showFilterButton"
+          [clearDisabled]="clearDisabled"
+          [filterDisabled]="filterDisabled"
+          [hasAppliedFilter]="hasAppliedFilter"
+          (clearButton)="onClearButton($event)"
+          (filterButton)="onFilterButton($event)"
+        >
+          <ng-content select="#filter"></ng-content>
+        </app-filter-button>
+
+        <!-- A Button for creating new content -->
+        <app-button
+          (btnClick)="onButtonClick($event)"
+          [disabled]="disabledButton"
+          *ngIf="showCreateButton"
+        >
+          Create New <i nz-icon nzType="plus" nzTheme="outline"></i>
+        </app-button>
+      </div>
+    </div>
+
+    <div class="browse__content" #browseContent>
+      <!-- Component for displaying content -->
+      <app-browse-content
+        [browseType]="browseType"
+        [tableData]="tableData"
+        [tableHeaders]="tableHeaders"
+        [tableHasActionButtons]="tableHasActionButtons"
+        [paginateTable]="paginateTable"
+        [tableActions]="tableActions"
+        [tableSource]="tableSource"
+        [showTableHoverIcon]="showTableHoverIcon"
+        (tableActionClick)="onTableActionClick($event)"
+        (tableRecordClick)="onTableRecordClick($event)"
+        [listData]="listData"
+        [listActions]="listActions"
+        [listHasActionButtons]="listHasActionButtons"
+        (listActionClick)="onListActionClick($event)"
+      >
+        <ng-container>
+          <ng-content select="#browse-content"></ng-content>
+        </ng-container>
+      </app-browse-content>
+    </div>
+
+    <div class="browse__footer">
+      <div class="buttons"></div>
+      <div class="pagination">
+        <app-paginator
+          [pageNumber]="pageNumber"
+          [totalPages]="totalPages"
+          [pageSize]="pageSize"
+          (pageNumberChange)="onPageNumberChange($event)"
+        ></app-paginator>
+      </div>
+    </div>
+  </div>
+</div>

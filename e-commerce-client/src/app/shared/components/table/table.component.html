@@ -1,1 +1,73 @@
-<p>table works!</p>
+<nz-table [nzData]="data" [nzFrontPagination]="paginateTable">
+  <thead>
+    <tr>
+      <th *ngFor="let header of headers">{{ header?.label }}</th>
+      <th *ngIf="action" nzRight>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let record of data"
+      (click)="onClickRecord(record)"
+      [ngClass]="{ 'app-table-row': showTableHoverIcon }"
+    >
+      <td
+        *ngFor="let header of headers"
+        [innerHTML]="record && record[header?.key]"
+      ></td>
+      <td nzRight *ngIf="action">
+        <ng-container *ngFor="let action of actions">
+          <ng-container *ngIf="action.hasAccess">
+            <button
+              *ngIf="action.includeConfirm"
+              nz-button
+              class="icon"
+              [nzTooltipTitle]="action.toolTipMessage"
+              nzTooltipPlacement="bottom"
+              nz-tooltip
+              nz-popconfirm
+              [nzPopconfirmTitle]="action.confirmMessage || 'Confirm Operation'"
+              (nzOnConfirm)="
+                onActionClick($event, record[action.key], action.type)
+              "
+              nzPopconfirmPlacement="bottom"
+              [nzOkText]="action.confirmButtonText || 'Ok'"
+              [disabled]="
+                action.disabled
+                  ? onDisabled(action.disabled, record[action.key])
+                  : false
+              "
+            >
+              <fa-icon
+                [icon]="action.icon"
+                size="sm"
+                [styles]="action.style"
+              ></fa-icon>
+            </button>
+
+            <button
+              *ngIf="!action.includeConfirm"
+              nz-button
+              class="icon"
+              [nzTooltipTitle]="action.toolTipMessage"
+              nzTooltipPlacement="bottom"
+              nz-tooltip
+              (click)="onActionClick($event, record[action.key], action.type)"
+              [disabled]="
+                action.disabled
+                  ? onDisabled(action.disabled, record[action.key])
+                  : false
+              "
+            >
+              <fa-icon
+                [icon]="action.icon"
+                size="sm"
+                [styles]="action.style"
+              ></fa-icon>
+            </button>
+          </ng-container>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

@@ -1,0 +1,28 @@
+<button
+  class="button button-primary"
+  nz-popover
+  nzPopoverTitle="Filter By"
+  [nzPopoverContent]="contentTemplate"
+  nzPopoverPlacement="leftTop"
+  [(nzPopoverVisible)]="visible"
+  (nzPopoverVisibleChange)="change($event)"
+  nzPopoverTrigger="click"
+  [ngClass]="{ active: hasAppliedFilter }"
+>
+  <i nz-icon nzType="funnel-plot" nzTheme="fill"></i>
+</button>
+
+<ng-template #contentTemplate>
+  <div class="hover-content">
+    <ng-content></ng-content>
+    <!-- <app-filter-contents></app-filter-contents> -->
+  </div>
+  <div class="hover-buttons">
+    <app-button (buttonClick)="onClearButton()" [disabled]="clearDisabled">
+      <i nz-icon nzType="close" nzTheme="outline"></i>
+    </app-button>
+    <app-button (buttonClick)="onFilterButton()" [disabled]="filterDisabled">
+      <i nz-icon nzType="check-circle" nzTheme="outline"></i>
+    </app-button>
+  </div>
+</ng-template>

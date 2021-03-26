@@ -1,1 +1,46 @@
-<p>edit-mode works!</p>
+<div class="mode">
+  <div class="mode__header">
+    <ng-content id="headerText"></ng-content>
+  </div>
+
+  <div class="mode__content">
+    <div class="mode__content-wrapper">
+      <ng-content select="#content"></ng-content>
+    </div>
+  </div>
+  <!-- <ng-scrollbar
+      [visibility]="'hover'"
+      [viewClass]="'view__class'"
+      class="mode__content"
+    >
+      <div class="mode__content-wrapper">
+        <ng-content select="#content"></ng-content>
+      </div>
+    </ng-scrollbar> -->
+
+  <div class="mode__footer">
+    <app-button (btnClick)="onNavigateBackwards($event)"
+      ><i nz-icon nzType="arrow-left" nzTheme="outline"></i>
+    </app-button>
+
+    <div class="mode__footer-center">
+      <app-button
+        *ngIf="resetButtonVisible"
+        [disabled]="resetButtonDisabled"
+        (btnClick)="onResetButtonClick($event)"
+      >
+        Reset <i nz-icon nzType="redo" nzTheme="outline"></i>
+      </app-button>
+
+      <ng-content select="#footer-center"></ng-content>
+      <app-button
+        *ngIf="saveButtonVisible"
+        [disabled]="saveButtonDisabled"
+        (btnClick)="onSaveButtonClick($event)"
+        [isLoading]="saveButtonLoading"
+      >
+        Save <i nz-icon nzType="save" nzTheme="outline"></i
+      ></app-button>
+    </div>
+  </div>
+</div>

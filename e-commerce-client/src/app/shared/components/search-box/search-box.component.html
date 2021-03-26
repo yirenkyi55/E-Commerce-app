@@ -1,0 +1,19 @@
+<div class="search">
+  <input
+    type="text"
+    class="search__input"
+    [(ngModel)]="searchWord"
+    placeholder="{{ placeholder }}"
+    (keyup.enter)="emitSearchEvent()"
+    (input)="onSearchChange($event.target.value)"
+  />
+  <button class="search__button" (click)="emitSearchEvent()" *ngIf="clear">
+    <svg class="search__icon">
+      <use xlink:href="/assets/icons/svg/icons.svg#icon-search"></use>
+    </svg>
+  </button>
+
+  <button class="search__button" (click)="emitClearEvent()" *ngIf="!clear">
+    <i nz-icon nzType="close" nzTheme="outline"></i>
+  </button>
+</div>

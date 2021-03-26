@@ -1,7 +1,9 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Observable, Subscription } from 'rxjs';
 import * as fromStore from 'src/app/auth/store';
+import * as fromAppStore from 'src/app/core/store';
 import { DashboardTypes } from './core/enums';
 import { AuthUserRequestResponse, DashboardMenu } from './core/models';
 @Component({
@@ -9,9 +11,11 @@ import { AuthUserRequestResponse, DashboardMenu } from './core/models';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
   isLoginVisible = false;
   authenticatedRequest$: Observable<boolean>;
+  notificationSubscription: Subscription;
+  notificationMessageSubscription: Subscription;
 
   currentUserSubscription: Subscription;
   currentUser: AuthUserRequestResponse;
@@ -60,7 +64,13 @@ export class AppComponent implements OnDestroy {
     },
   ];
 
-  constructor(private store: Store<fromStore.AuthenticationState>) {
+  constructor(
+    private store: Store<fromStore.AuthenticationState>,
+    private notification: NzNotificationService,
+    private appStore: Store<fromAppStore.ApplicationManagementState>
+  ) {}
+
+  ngOnInit(): void {
     this.authenticatedRequest$ = this.store.select(
       fromStore.getAuthenticateRequest
     );
@@ -72,7 +82,27 @@ export class AppComponent implements OnDestroy {
           this.isLoginVisible = false;
         }
       });
+
     this.dashboardType$ = this.store.select(fromStore.getDashboardType);
+    this.notificationSubscription = this.appStore
+      .select(fromAppStore.getNotification)
+      .subscribe((response) => {
+        if (response) {
+          this.createNotification(
+            response.notificationType,
+            response.title,
+            response.message
+          );
+        }
+      });
+  }
+
+  createNotification(type: string, title: string, message: string): void {
+    this.notificationMessageSubscription = this.notification
+      .create(type, title, message)
+      .onClose.subscribe(() => {
+        this.appStore.dispatch(fromAppStore.CloseNotification());
+      });
   }
 
   onLogin(): void {
@@ -90,5 +120,7 @@ export class AppComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.currentUserSubscription?.unsubscribe();
+    this.notificationSubscription?.unsubscribe();
+    this.notificationMessageSubscription?.unsubscribe();
   }
 }

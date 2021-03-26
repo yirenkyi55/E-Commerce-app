@@ -26,7 +26,11 @@ import { GuestsModule } from './guests/guests.module';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
-import { JwtInterceptor, RefreshTokenInterceptor } from './core/interceptors';
+import {
+  ErrorInterceptor,
+  JwtInterceptor,
+  RefreshTokenInterceptor,
+} from './core/interceptors';
 import { appInitializer } from './core/initializers';
 import { AuthService } from './auth/services';
 
@@ -71,6 +75,7 @@ registerLocaleData(en);
     },
     { provide: NZ_I18N, useValue: en_US },
     { provide: RouterStateSerializer, useClass: CustomSerializer },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,

@@ -40,7 +40,11 @@
     <span>Already Have An Account? <a (click)="onLogin()">Login</a></span>
 
     <div class="mgt">
-      <app-button [disabled]="registerForm.invalid">Register</app-button>
+      <app-button
+        [disabled]="registerForm.invalid"
+        btnClass="button button-primary button-block"
+        >Register</app-button
+      >
     </div>
   </form>
 </div>
