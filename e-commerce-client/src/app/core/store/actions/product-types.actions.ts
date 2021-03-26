@@ -35,7 +35,7 @@ export const GetProductTypeRequestFailure = createAction(
 // Creates a new product type requests
 export const CreateProductTypeRequest = createAction(
   '[Product Type] Create Product Type Request',
-  props<CreateProductTypeModel>()
+  props<{ model: CreateProductTypeModel }>()
 );
 
 export const CreateProductTypeRequestSuccess = createAction(

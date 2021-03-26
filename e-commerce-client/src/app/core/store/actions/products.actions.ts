@@ -9,11 +9,11 @@ export const GetProductsRequest = createAction(
 
 export const GetProductsRequestSuccess = createAction(
   '[Products] Get Products Request Success',
-  props<{ response: PaginationResult<Product[]> }>()
+  props<{ response: PaginationResult<Product> }>()
 );
 
-export const GetProductsRequestError = createAction(
-  '[Products] Get Products Request Error',
+export const GetProductsRequestFailure = createAction(
+  '[Products] Get Products Request Failure',
   props<any>()
 );
 
@@ -28,8 +28,8 @@ export const CreateProductRequestSuccess = createAction(
   props<{ product: Product }>()
 );
 
-export const CreateProductRequestFail = createAction(
-  '[Products] Create Product Request Fail',
+export const CreateProductRequestFailure = createAction(
+  '[Products] Create Product Request Failure',
   props<any>()
 );
 

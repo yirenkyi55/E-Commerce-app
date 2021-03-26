@@ -12,6 +12,11 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/dashboard/header/header.component';
 import { SidebarComponent } from './components/dashboard/sidebar/sidebar.component';
 import { SharedModule } from '../shared/shared.module';
+
+import { reducers, effects } from './store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -28,6 +33,8 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     ScrollEventModule,
     SharedModule,
+    EffectsModule.forFeature(effects),
+    StoreModule.forFeature('applicationState', reducers),
   ],
   exports: [
     CommonModule,
