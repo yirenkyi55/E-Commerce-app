@@ -3,7 +3,9 @@ import { switchMap, catchError, map } from 'rxjs/operators';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { ProductTypesService } from '../../services';
 import * as fromTypes from '../actions/product-types.actions';
+import * as fromHelpers from '../actions/helpers.actions';
 import { of } from 'rxjs';
+import { NotificationType } from '../../models';
 
 @Injectable()
 export class ProductTypeEffect {
@@ -49,9 +51,14 @@ export class ProductTypeEffect {
       ofType(fromTypes.CreateProductTypeRequest),
       switchMap(({ model }) => {
         return this.typeService.createProductType(model).pipe(
-          map((productType) =>
-            fromTypes.CreateProductTypeRequestSuccess({ productType })
-          ),
+          switchMap((productType) => [
+            fromTypes.CreateProductTypeRequestSuccess({ productType }),
+            fromHelpers.DisplayNotification({
+              notificationType: NotificationType.success,
+              title: 'Product Type',
+              message: 'Product Type has been created successfully',
+            }),
+          ]),
           catchError((error) =>
             of(fromTypes.CreateProductTypeRequestFailure(error))
           )

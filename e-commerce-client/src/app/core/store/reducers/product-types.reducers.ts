@@ -20,7 +20,7 @@ const featureReducer = createReducer(
     fromProductType.CreateProductTypeRequest,
     fromProductType.UpdateProductTypeRequest,
     fromProductType.GetAllProductTypesRequest,
-    (state) => ({ ...state })
+    (state) => ({ ...state, loading: true })
   ),
 
   on(

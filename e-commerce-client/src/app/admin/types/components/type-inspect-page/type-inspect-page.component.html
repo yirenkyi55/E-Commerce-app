@@ -1,1 +1,6 @@
-<p>type-inspect-page works!</p>
+<app-inspect-mode [inspectData]="listContentType">
+  <ng-container id="header">
+    <h3>{{ productType.name | uppercase }}</h3>
+  </ng-container>
+  <ng-container id="contents"> some content here </ng-container>
+</app-inspect-mode>

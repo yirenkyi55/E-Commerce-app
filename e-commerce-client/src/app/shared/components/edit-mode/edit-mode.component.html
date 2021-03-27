@@ -29,7 +29,7 @@
         [disabled]="resetButtonDisabled"
         (btnClick)="onResetButtonClick($event)"
       >
-        Reset <i nz-icon nzType="redo" nzTheme="outline"></i>
+        {{ resetButtonText }} <i nz-icon nzType="redo" nzTheme="outline"></i>
       </app-button>
 
       <ng-content select="#footer-center"></ng-content>
@@ -39,7 +39,7 @@
         (btnClick)="onSaveButtonClick($event)"
         [isLoading]="saveButtonLoading"
       >
-        Save <i nz-icon nzType="save" nzTheme="outline"></i
+        {{ saveButtonText }} <i nz-icon nzType="save" nzTheme="outline"></i
       ></app-button>
     </div>
   </div>

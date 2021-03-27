@@ -1,1 +1,4 @@
-<p>type-create works!</p>
+<app-type-create-page
+  [loading]="loading$ | async"
+  (createProductType)="onCreateProductType($event)"
+></app-type-create-page>

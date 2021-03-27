@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ScrollEventModule } from 'ngx-scroll-event';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/dashboard/header/header.component';
@@ -35,6 +36,7 @@ import { StoreModule } from '@ngrx/store';
     ScrollEventModule,
     SharedModule,
     NzNotificationModule,
+    NgxSpinnerModule,
     EffectsModule.forFeature(effects),
     StoreModule.forFeature('applicationState', reducers),
   ],
@@ -48,6 +50,7 @@ import { StoreModule } from '@ngrx/store';
     FooterComponent,
     DashboardComponent,
     NzNotificationModule,
+    NgxSpinnerModule,
   ],
 })
 export class CoreModule {}

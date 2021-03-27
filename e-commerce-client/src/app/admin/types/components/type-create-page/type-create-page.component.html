@@ -1,1 +1,21 @@
-<p>type-create-page works!</p>
+<app-edit-mode
+  [saveButtonDisabled]="typeForm.invalid"
+  (resetClick)="resetForm()"
+  (saveClick)="onFormSubmit()"
+  [saveButtonLoading]="loading"
+  [saveButtonText]="saveButtonText"
+>
+  <ng-container id="header"><h3>Create New Product Type</h3></ng-container>
+  <ng-container id="content">
+    <div class="form__container">
+      <form [formGroup]="typeForm">
+        <app-input
+          formControlName="name"
+          placeholder="Enter name of product type"
+          label="Product Type"
+        >
+        </app-input>
+      </form>
+    </div>
+  </ng-container>
+</app-edit-mode>

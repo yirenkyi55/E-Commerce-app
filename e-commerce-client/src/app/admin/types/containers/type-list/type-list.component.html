@@ -1,1 +1,5 @@
-<app-type-list-page></app-type-list-page>
+<app-type-list-page
+  (createType)="onCreateType()"
+  (recordClick)="onRecordClick($event)"
+  [productTypes]="productTypes$ | async"
+></app-type-list-page>

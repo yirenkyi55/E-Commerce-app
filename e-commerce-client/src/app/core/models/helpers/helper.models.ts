@@ -41,3 +41,15 @@ export interface InspectItem {
   label: string;
   text: string;
 }
+
+export interface InspectModeContent {
+  title?: string;
+  text?: string;
+  isMultiple: boolean;
+  contents?: InspectMultiple[];
+}
+
+export interface InspectMultiple {
+  title: string;
+  text: string;
+}

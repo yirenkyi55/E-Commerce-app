@@ -1,3 +1,9 @@
-<app-browse-mode>
+<app-browse-mode
+  [tableHeaders]="headers"
+  [tableData]="productTypes"
+  [showFilterButton]="false"
+  (buttonClick)="onCreateType()"
+  (tableRecordClick)="onRecordClick($event)"
+>
   <ng-container id="header"><h3>Product Types</h3></ng-container>
 </app-browse-mode>

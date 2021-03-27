@@ -1,0 +1,18 @@
+<ng-container *ngIf="content">
+  <div class="inspect__box" *ngIf="!content.isMultiple">
+    <h3>{{ content.title | titlecase }}</h3>
+    <p [innerHtml]="content.text"></p>
+  </div>
+
+  <div class="inspect__box" *ngIf="content.isMultiple">
+    <div class="inspect__box--flex">
+      <div
+        class="inspect__box--flex-item"
+        *ngFor="let item of content.contents"
+      >
+        <h4>{{ item.title | uppercase }}</h4>
+        <p>{{ item.text }}</p>
+      </div>
+    </div>
+  </div>
+</ng-container>

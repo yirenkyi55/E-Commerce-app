@@ -1,1 +1,44 @@
-<p>inspect-mode works!</p>
+<div class="mode">
+  <div class="mode__header">
+    <ng-content select="#header"></ng-content>
+  </div>
+
+  <div class="mode__content">
+    <div class="mode__content-wrapper">
+      <ng-container *ngFor="let data of inspectData">
+        <app-inspect-data [content]="data"></app-inspect-data>
+      </ng-container>
+      <ng-content select="#contents"></ng-content>
+    </div>
+  </div>
+
+  <div class="mode__footer">
+    <app-button (btnClick)="onNavigateBackwards($event)"
+      ><i nz-icon nzType="arrow-left" nzTheme="outline"></i>
+    </app-button>
+
+    <div class="mode__footer-center">
+      <app-button
+        *ngIf="extraCustomButtonVisible"
+        (btnClick)="onExtraCustumClick($event)"
+      >
+        <!-- {{ extraCustomButtonText }} -->
+        <i nz-icon [nzType]="extraCustomIcon" nzTheme="outline"></i
+      ></app-button>
+      <app-button
+        *ngIf="customButtonVisible"
+        (btnClick)="onOrderContent($event)"
+      >
+        <!-- {{ customButtonText }} -->
+        <i nz-icon [nzType]="customIcon" nzTheme="outline"></i
+      ></app-button>
+      <app-button *ngIf="!clientMode" (btnClick)="onEditContent($event)">
+        <i nz-icon [nzType]="editIcon" nzTheme="outline"></i
+      ></app-button>
+      <app-button *ngIf="!clientMode" (btnClick)="onDeleteContent($event)">
+        <i nz-icon nzType="delete" nzTheme="outline"></i
+      ></app-button>
+      <ng-content select="#footer-center"></ng-content>
+    </div>
+  </div>
+</div>

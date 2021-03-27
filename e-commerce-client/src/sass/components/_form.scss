@@ -83,6 +83,12 @@
     color: var(--color-secondary);
     transition: all 0.3s;
   }
+
+  &__container {
+    margin: 0 auto;
+    padding: 5rem;
+    width: 80%;
+  }
 }
 
 input[type="text"],

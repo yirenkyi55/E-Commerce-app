@@ -27,6 +27,7 @@ import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NzListModule } from 'ng-zorro-antd/list';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 import { ModalComponent } from './components/modal/modal.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -40,6 +41,7 @@ import { FilterButtonComponent } from './components/filter-button/filter-button.
 import { BrowseContentComponent } from './components/browse-content/browse-content.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { ListComponent } from './components/list/list.component';
+import { InspectDataComponent } from './components/inspect-data/inspect-data.component';
 
 const modules = [
   FormsModule,
@@ -70,6 +72,7 @@ const modules = [
   NzTableModule,
   FontAwesomeModule,
   NzListModule,
+  NgScrollbarModule,
 ];
 
 @NgModule({
@@ -86,6 +89,7 @@ const modules = [
     BrowseContentComponent,
     PaginatorComponent,
     ListComponent,
+    InspectDataComponent,
   ],
   imports: [...modules],
   exports: [
