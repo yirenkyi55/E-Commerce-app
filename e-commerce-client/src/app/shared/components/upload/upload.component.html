@@ -1,0 +1,23 @@
+<div class="upload">
+  <nz-upload
+    [(nzFileList)]="fileList"
+    [nzBeforeUpload]="beforeUpload"
+    [nzMultiple]="false"
+    (nzChange)="onChange($event)"
+  >
+    <button nz-button class="upload-button">
+      <fa-icon
+        [icon]="faFolderOpen"
+        size="4x"
+        [styles]="{ stroke: '#044a55f6', color: '#044a55f6' }"
+      ></fa-icon>
+    </button>
+  </nz-upload>
+  <app-button
+    [disabled]="fileList.length == 0"
+    (buttonClick)="handleUpload()"
+    *ngIf="showUploadButton"
+  >
+    <i nz-icon nzType="cloud-upload" nzTheme="outline"></i>
+  </app-button>
+</div>

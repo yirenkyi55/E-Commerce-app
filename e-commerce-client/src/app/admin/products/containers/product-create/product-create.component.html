@@ -1,1 +1,7 @@
-<app-product-create-page></app-product-create-page>
+<app-product-create-page
+  [productTypes]="productTypes$ | async"
+  [productBrands]="productBrands"
+  [loading]="loading$ | async"
+  (fetchProductBrands)="onFetchProductBrands($event)"
+  (createProduct)="onCreateProduct($event)"
+></app-product-create-page>

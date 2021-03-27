@@ -1,0 +1,44 @@
+<div class="form__group">
+  <select
+    #dropdown
+    [ngClass]="
+      controlDir &&
+      controlDir.control &&
+      !controlDir.control.valid &&
+      controlDir.control.touched
+        ? !controlDir.control.valid
+          ? 'is-invalid'
+          : 'is-valid'
+        : null
+    "
+    class="dropdown-control"
+    id="{{ label }}"
+    aria-describedby="emailHelp"
+    (change)="onChange($event.target.value)"
+    (blur)="onTouched()"
+    placeholder="{placeholder}"
+    (change)="onDropDownChange($event)"
+  >
+    <option
+      *ngFor="let option of options"
+      [disabled]="option?.disabled"
+      value="{{ option.value }}"
+    >
+      {{ option.label }}
+    </option>
+  </select>
+
+  <div
+    class="invalid-feedback"
+    *ngIf="
+      controlDir &&
+      controlDir.control &&
+      !controlDir.control.valid &&
+      controlDir.control.touched
+    "
+  >
+    <span *ngIf="controlDir.control.errors?.required" class="error"
+      >{{ label }} is required</span
+    >
+  </div>
+</div>

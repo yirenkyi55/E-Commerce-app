@@ -7,7 +7,7 @@ import * as fromProducts from '../actions/products.actions';
 import { of } from 'rxjs';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import * as fromHelpers from '../actions/helpers.actions';
-
+import { NotificationType } from '../../models';
 @Injectable()
 export class ProductsEffect {
   constructor(
@@ -106,6 +106,18 @@ export class ProductsEffect {
           updated
             ? fromProducts.UpdateProductRequestSuccess({ product })
             : fromProducts.CreateProductRequestSuccess({ product }),
+
+          updated
+            ? fromHelpers.DisplayNotification({
+                notificationType: NotificationType.success,
+                title: 'Products',
+                message: 'Product Updated successfully',
+              })
+            : fromHelpers.DisplayNotification({
+                notificationType: NotificationType.success,
+                title: 'Products',
+                message: 'Product has been successfully created',
+              }),
         ];
       }
 

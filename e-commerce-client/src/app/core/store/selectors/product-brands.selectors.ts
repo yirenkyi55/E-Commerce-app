@@ -21,6 +21,13 @@ export const getSelectedBrands = createSelector(
   }
 );
 
+export const getBrandsFromType = createSelector(
+  getBrandEntities,
+  (entities, props) => {
+    return entities[props.typeId];
+  }
+);
+
 export const getBrandsLoading = createSelector(
   getBrandState,
   fromBrands.getBrandsLoading

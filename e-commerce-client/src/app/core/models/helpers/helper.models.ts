@@ -53,3 +53,9 @@ export interface InspectMultiple {
   title: string;
   text: string;
 }
+
+export interface DropDownOptions {
+  value: any;
+  label: string;
+  disabled?: boolean;
+}

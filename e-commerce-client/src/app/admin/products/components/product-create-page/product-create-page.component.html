@@ -1,3 +1,52 @@
-<app-edit-mode>
+<app-edit-mode
+  [saveButtonDisabled]="!isFormValid"
+  [saveButtonLoading]="loading"
+  (resetClick)="onResetForm()"
+  (saveClick)="onCreateProduct()"
+>
   <ng-container id="header"><h3>Create New Product</h3></ng-container>
+  <ng-container id="content">
+    <div class="form__container">
+      <form [formGroup]="productForm">
+        <app-input
+          formControlName="name"
+          placeholder="Product Name"
+        ></app-input>
+
+        <app-text-area
+          formControlName="description"
+          placeholder="Product Description"
+        ></app-text-area>
+
+        <app-input
+          type="number"
+          formControlName="price"
+          placeholder="Unit Price"
+        ></app-input>
+
+        <app-drop-down
+          formControlName="productTypeId"
+          [options]="productTypeOptions"
+          label="Product Type"
+          (dropDownChange)="onProductTypeChange($event)"
+        >
+        </app-drop-down>
+
+        <app-drop-down
+          formControlName="productBrandId"
+          [options]="brandsOptions"
+          label="Product Brand"
+        >
+        </app-drop-down>
+
+        <app-upload
+          (hasFile)="checkFileStatus($event)"
+          (upload)="onUploadPhoto($event)"
+          [clearList]="clearUploadList"
+          [showUploadButton]="false"
+          [formDataKey]="'photo'"
+        ></app-upload>
+      </form>
+    </div>
+  </ng-container>
 </app-edit-mode>

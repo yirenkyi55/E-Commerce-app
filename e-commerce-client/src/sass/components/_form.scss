@@ -31,8 +31,9 @@
   }
 
   &__group {
+    margin: 2rem 0;
     &:not(:last-child) {
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
   }
 
@@ -94,4 +95,12 @@
 input[type="text"],
 input[type="email"] {
   height: 4rem;
+}
+
+.is-invalid {
+  border: 1px solid red;
+}
+
+.error {
+  color: red;
 }

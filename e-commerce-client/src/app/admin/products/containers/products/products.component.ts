@@ -12,7 +12,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {}
 
   onNewProduct(): void {
-    this.router.navigate(['new'], {
+    this.router.navigate(['new', 0], {
       relativeTo: this.route,
     });
   }

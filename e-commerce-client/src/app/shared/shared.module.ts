@@ -42,6 +42,9 @@ import { BrowseContentComponent } from './components/browse-content/browse-conte
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { ListComponent } from './components/list/list.component';
 import { InspectDataComponent } from './components/inspect-data/inspect-data.component';
+import { TextAreaComponent } from './components/text-area/text-area.component';
+import { DropDownComponent } from './components/drop-down/drop-down.component';
+import { UploadComponent } from './components/upload/upload.component';
 
 const modules = [
   FormsModule,
@@ -90,6 +93,9 @@ const modules = [
     PaginatorComponent,
     ListComponent,
     InspectDataComponent,
+    TextAreaComponent,
+    DropDownComponent,
+    UploadComponent,
   ],
   imports: [...modules],
   exports: [
@@ -101,6 +107,9 @@ const modules = [
     BrowseModeComponent,
     InspectModeComponent,
     EditModeComponent,
+    DropDownComponent,
+    TextAreaComponent,
+    UploadComponent,
   ],
 })
 export class SharedModule {}

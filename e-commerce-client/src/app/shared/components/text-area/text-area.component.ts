@@ -12,12 +12,12 @@ import {
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-text-area',
+  templateUrl: './text-area.component.html',
+  styleUrls: ['./text-area.component.scss'],
 })
-export class InputComponent implements OnInit, ControlValueAccessor, OnChanges {
-  @ViewChild('input', { static: true }) input: ElementRef; // Holds a reference of the control in the DOM
+export class TextAreaComponent implements OnInit {
+  @ViewChild('textArea', { static: true }) input: ElementRef; // Holds a reference of the control in the DOM
   @Input() type = 'text'; // The type for the input control, defaults to text
   @Input() label = 'Input Field'; // A label for the input control if any
   @Input() placeholder: string; // A placeholder for the input control if any
@@ -76,8 +76,7 @@ export class InputComponent implements OnInit, ControlValueAccessor, OnChanges {
       this.inValidPattern ||
       this.notValidEmail ||
       this.minLength ||
-      this.notValidUsername ||
-      this.minValue
+      this.notValidUsername
     );
   }
 
@@ -102,16 +101,8 @@ export class InputComponent implements OnInit, ControlValueAccessor, OnChanges {
     );
   }
 
-  get minValue() {
-    return this.notValidAndTouched && this.controlDir.control?.errors?.min;
-  }
-
   get requiredLengthFromMinLength() {
     return this.controlDir.control?.errors?.minlength?.requiredLength;
-  }
-
-  get requiredMinValue() {
-    return this.controlDir.control?.errors?.min?.min;
   }
 
   // Determines whether the control input is required

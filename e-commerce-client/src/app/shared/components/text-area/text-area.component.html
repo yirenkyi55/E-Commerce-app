@@ -1,16 +1,17 @@
 <nz-form-item>
   <nz-form-control [nzValidateStatus]="validationIconStatus" nzHasFeedback>
-    <input
-      #input
+    <textarea
+      #textArea
       nz-input
       placeholder="{{ placeholder }}"
-      [type]="type"
       class="input"
       [class.input-error]="isInValidState"
       (input)="onChange($event.target.value)"
       (blur)="onTouched()"
       autocomplete="on"
-    />
+      rows="4"
+      cols="5"
+    ></textarea>
   </nz-form-control>
 
   <span *ngIf="required" class="error">{{ label }} is required</span>
@@ -21,7 +22,4 @@
     >{{ label }} should contain at least
     {{ requiredLengthFromMinLength }} characters</span
   >
-  <span *ngIf="minValue" class="error"
-    >{{ label }} should have a minimum value of {{ requiredMinValue }}
-  </span>
 </nz-form-item>
