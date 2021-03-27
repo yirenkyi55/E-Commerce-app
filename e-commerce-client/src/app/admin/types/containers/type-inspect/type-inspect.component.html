@@ -1,3 +1,9 @@
 <app-type-inspect-page
-  [productType]="productType$ | async"
+  *ngIf="productType"
+  [productType]="productType"
+  [productBrands]="productBrands$ | async"
+  [loading]="isLoading$ | async"
+  (saveBrand)="onSaveBrand($event)"
+  (updateBrand)="onUpdateBrand($event)"
+  (editType)="onEditType($event)"
 ></app-type-inspect-page>

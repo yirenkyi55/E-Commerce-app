@@ -1,12 +1,20 @@
 import { TitleCasePipe } from '@angular/common';
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
-import { InspectModeContent, ProductType } from 'src/app/core/models';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  InspectModeContent,
+  ProductType,
+  CreateProductBrandModel,
+  ProductBrand,
+} from 'src/app/core/models';
 
 @Component({
   selector: 'app-type-inspect-page',
@@ -16,11 +24,35 @@ import { InspectModeContent, ProductType } from 'src/app/core/models';
 })
 export class TypeInspectPageComponent implements OnInit, OnChanges {
   @Input() productType: ProductType;
-  listContentType: InspectModeContent[];
+  @Input() loading: boolean;
+  @Input() productBrands: ProductBrand[];
+  brandToEdit: ProductBrand;
 
-  constructor(private titleCase: TitleCasePipe) {}
+  @Output() saveBrand = new EventEmitter<{
+    typeId: string;
+    brand: CreateProductBrandModel;
+  }>();
+
+  @Output() updateBrand = new EventEmitter<{
+    typeId: string;
+    brandId: string;
+    brand: CreateProductBrandModel;
+  }>();
+
+  @Output() editType = new EventEmitter<ProductType>();
+
+  listContentType: InspectModeContent[];
+  brandsForm: FormGroup;
+
+  constructor(private titleCase: TitleCasePipe, private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.createForm();
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
-    const { productType } = changes;
+    const { productType, loading } = changes;
+
     if (productType && productType.currentValue) {
       this.listContentType = [
         {
@@ -30,7 +62,50 @@ export class TypeInspectPageComponent implements OnInit, OnChanges {
         },
       ];
     }
+
+    if (loading && loading.previousValue && !loading.currentValue) {
+      // We Reset the form if saving was successful
+      this.resetForm();
+    }
   }
 
-  ngOnInit(): void {}
+  get saveText(): string {
+    return this.brandToEdit ? 'Update' : 'Save';
+  }
+
+  createForm(): void {
+    this.brandsForm = this.fb.group({
+      name: ['', Validators.required],
+    });
+  }
+
+  resetForm(): void {
+    this.brandsForm.reset();
+    this.brandToEdit = null;
+  }
+  saveBrands(): void {
+    if (this.brandToEdit) {
+      this.updateBrand.emit({
+        typeId: this.productType.id,
+        brandId: this.brandToEdit.id,
+        brand: this.brandsForm.value,
+      });
+    } else {
+      this.saveBrand.emit({
+        typeId: this.productType.id,
+        brand: this.brandsForm.value,
+      });
+    }
+  }
+
+  onEditBrand(brand: ProductBrand): void {
+    this.brandToEdit = brand;
+    this.brandsForm.setValue({
+      name: brand.name,
+    });
+  }
+
+  onEditType(): void {
+    this.editType.emit(this.productType);
+  }
 }

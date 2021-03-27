@@ -1,6 +1,58 @@
-<app-inspect-mode [inspectData]="listContentType">
+<app-inspect-mode
+  [inspectData]="listContentType"
+  [showDeleteButton]="false"
+  (editContent)="onEditType()"
+>
   <ng-container id="header">
     <h3>{{ productType.name | uppercase }}</h3>
   </ng-container>
-  <ng-container id="contents"> some content here </ng-container>
+  <ng-container id="contents">
+    <div class="brands__container">
+      <div class="brands__form">
+        <div class="brands__form-header">
+          <h3>
+            Brands For {{ productType.name | titlecase }} : ({{
+              productBrands ? productBrands?.length : 0
+            }})
+          </h3>
+        </div>
+        <div class="brands__form-details">
+          <form [formGroup]="brandsForm">
+            <app-input
+              formControlName="name"
+              placeholder="Enter Brand"
+              label="Brand"
+            ></app-input>
+          </form>
+
+          <div class="brands__button">
+            <app-button [isLoading]="loading" (btnClick)="resetForm()"
+              ><i nz-icon nzType="undo" nzTheme="outline"></i> Reset
+            </app-button>
+
+            <app-button
+              [disabled]="brandsForm.invalid"
+              [isLoading]="loading"
+              (btnClick)="saveBrands()"
+              ><i nz-icon nzType="save" nzTheme="outline"></i>
+              {{ saveText }}</app-button
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        class="brands__list-form"
+        *ngIf="productBrands && productBrands.length > 0"
+      >
+        <ul class="brand__list">
+          <li *ngFor="let brand of productBrands">
+            <app-brand-item
+              [brand]="brand"
+              (editBrand)="onEditBrand($event)"
+            ></app-brand-item>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ng-container>
 </app-inspect-mode>

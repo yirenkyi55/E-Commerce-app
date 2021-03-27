@@ -4,6 +4,7 @@ import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { ProductTypesService } from '../../services';
 import * as fromTypes from '../actions/product-types.actions';
 import * as fromHelpers from '../actions/helpers.actions';
+import * as fromRoot from 'src/app/store';
 import { of } from 'rxjs';
 import { NotificationType } from '../../models';
 
@@ -72,9 +73,15 @@ export class ProductTypeEffect {
       ofType(fromTypes.UpdateProductTypeRequest),
       switchMap(({ id, model }) => {
         return this.typeService.updateProductType(id, model).pipe(
-          map((productType) =>
-            fromTypes.UpdateProductTypeRequestSuccess({ productType })
-          ),
+          switchMap((productType) => [
+            fromTypes.UpdateProductTypeRequestSuccess({ productType }),
+            fromRoot.Go({ path: ['admin', 'types'] }),
+            fromHelpers.DisplayNotification({
+              notificationType: NotificationType.success,
+              title: 'Product Type',
+              message: 'Product Type has been updated successfully',
+            }),
+          ]),
           catchError((error) =>
             of(fromTypes.UpdateProductTypeRequestFailure(error))
           )

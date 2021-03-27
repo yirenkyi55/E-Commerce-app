@@ -9,6 +9,7 @@ import { TypeListComponent } from './containers/type-list/type-list.component';
 import { TypeCreateComponent } from './containers/type-create/type-create.component';
 import { TypeInspectComponent } from './containers/type-inspect/type-inspect.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { BrandItemComponent } from './components/brand-item/brand-item.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     TypeListComponent,
     TypeCreateComponent,
     TypeInspectComponent,
+    BrandItemComponent,
   ],
   imports: [CommonModule, TypesRoutingModule, SharedModule],
 })

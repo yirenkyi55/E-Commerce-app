@@ -35,7 +35,10 @@
       <app-button *ngIf="!clientMode" (btnClick)="onEditContent($event)">
         <i nz-icon [nzType]="editIcon" nzTheme="outline"></i
       ></app-button>
-      <app-button *ngIf="!clientMode" (btnClick)="onDeleteContent($event)">
+      <app-button
+        *ngIf="!clientMode && showDeleteButton"
+        (btnClick)="onDeleteContent($event)"
+      >
         <i nz-icon nzType="delete" nzTheme="outline"></i
       ></app-button>
       <ng-content select="#footer-center"></ng-content>

@@ -23,7 +23,7 @@ export class TypeListComponent implements OnInit {
   }
 
   onCreateType(): void {
-    this.router.navigate(['new'], {
+    this.router.navigate(['new', 0], {
       relativeTo: this.route,
     });
   }

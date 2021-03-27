@@ -1,0 +1,21 @@
+.brand__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand__btn {
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

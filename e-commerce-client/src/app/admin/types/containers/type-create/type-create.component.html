@@ -1,4 +1,6 @@
 <app-type-create-page
   [loading]="loading$ | async"
+  [productType]="productType$ | async"
   (createProductType)="onCreateProductType($event)"
+  (updateProductType)="onUpdateProductType($event)"
 ></app-type-create-page>

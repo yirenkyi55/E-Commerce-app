@@ -64,7 +64,7 @@ const featureReducer = createReducer(
         [productType.id]: productToUpdate,
         ...remainingEntities
       } = state.entities;
-      const entities = { ...remainingEntities, productType };
+      const entities = { ...remainingEntities, [productType.id]: productType };
 
       return {
         ...state,

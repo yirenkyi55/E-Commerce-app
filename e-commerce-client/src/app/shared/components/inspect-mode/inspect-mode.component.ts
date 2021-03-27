@@ -14,6 +14,7 @@ export class InspectModeComponent implements OnInit {
   @Output() customButtonClicked = new EventEmitter<boolean>();
   @Output() extraCustomButtonClicked = new EventEmitter<boolean>();
   @Output() deleteContent = new EventEmitter<boolean>();
+  @Input() showDeleteButton = true;
   @Input() navigateByEvent = false;
   @Input() customButtonVisible = false;
   @Input() extraCustomButtonVisible = false;

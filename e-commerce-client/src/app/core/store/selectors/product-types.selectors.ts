@@ -17,7 +17,7 @@ export const getTypes = createSelector(getTypeEntities, (entities) =>
   Object.keys(entities).map((id) => entities[id])
 );
 
-export const getSeletedType = createSelector(
+export const getSelectedType = createSelector(
   getTypeEntities,
   fromRoot.getRouterState,
   (entities, router) => {

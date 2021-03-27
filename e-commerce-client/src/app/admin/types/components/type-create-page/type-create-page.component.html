@@ -5,7 +5,9 @@
   [saveButtonLoading]="loading"
   [saveButtonText]="saveButtonText"
 >
-  <ng-container id="header"><h3>Create New Product Type</h3></ng-container>
+  <ng-container id="header"
+    ><h3>{{ titleText }}</h3></ng-container
+  >
   <ng-container id="content">
     <div class="form__container">
       <form [formGroup]="typeForm">
