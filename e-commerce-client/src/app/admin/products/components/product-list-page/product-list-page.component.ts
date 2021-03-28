@@ -15,6 +15,7 @@ export class ProductListPageComponent implements OnInit {
     { key: 'productType', label: 'Type' },
     { key: 'productBrand', label: 'Brand' },
     { key: 'picture', label: 'Image', isImage: true },
+    { key: 'showOnHomePage', label: 'On Home Page' },
   ];
 
   @Output() newProduct = new EventEmitter();

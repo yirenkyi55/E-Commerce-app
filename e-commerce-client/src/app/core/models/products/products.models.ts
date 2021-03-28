@@ -9,6 +9,7 @@ export interface Product {
   picture: string;
   productType: ProductType;
   productBrand: ProductBrand;
+  showOnHomePage: boolean;
 }
 
 export interface ProductToDisplay {
@@ -19,4 +20,5 @@ export interface ProductToDisplay {
   picture: string;
   productType: string;
   productBrand: string;
+  showOnHomePage: string;
 }

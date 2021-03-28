@@ -73,7 +73,7 @@
   }
 
   &__left {
-    display: block;
+    display: flex;
     padding: 0 2rem;
   }
 
@@ -97,5 +97,11 @@
     &:hover {
       border: 0.2rem solid var(--color-primary);
     }
+  }
+}
+
+.cart {
+  & > * {
+    padding-top: 2rem;
   }
 }

@@ -1,1 +1,18 @@
-<p>products-page works!</p>
+<div class="header">
+  <ng-container *ngIf="products">
+    <div class="products">
+      <div class="products__header">
+        <app-browse-header [showCreateButton]="false"></app-browse-header>
+      </div>
+
+      <div class="products__container">
+        <div class="product__item" *ngFor="let product of products">
+          <app-product-item
+            [product]="product"
+            (addToCart)="onAddToCart($event)"
+          ></app-product-item>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

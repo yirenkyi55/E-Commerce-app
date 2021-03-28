@@ -80,3 +80,19 @@ export const DeleteProductRequestFailure = createAction(
   '[Products] Deletes Product Request Failure',
   props<any>()
 );
+
+// Request To Get A single product
+export const GetHomePageProductsRequest = createAction(
+  '[Products] Get Home Page Products Request',
+  props<{ params: ProductParams }>()
+);
+
+export const GetHomePageProductsRequestSuccess = createAction(
+  '[Products] Get Home Page  Products Request Success',
+  props<{ response: PaginationResult<Product> }>()
+);
+
+export const GetHomePageProductsRequestFailure = createAction(
+  '[Products] Get Home Page Products Request Failure',
+  props<any>()
+);

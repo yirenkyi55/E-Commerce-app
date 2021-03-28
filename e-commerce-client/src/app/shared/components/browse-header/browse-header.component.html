@@ -1,0 +1,34 @@
+<div class="browse__header">
+  <div class="browse__header-search">
+    <app-search-box
+      [placeholder]="searchPlaceholder"
+      [clear]="clearSearch"
+      [width]="searchWidth"
+      (search)="onSearch($event)"
+      (searchChange)="onSearchChange($event)"
+      (clearSearchContent)="onClearSearchContent($event)"
+    ></app-search-box>
+  </div>
+  <div class="browse__header-controls">
+    <!-- The filter component -->
+    <app-filter-button
+      *ngIf="showFilterButton"
+      [clearDisabled]="clearDisabled"
+      [filterDisabled]="filterDisabled"
+      [hasAppliedFilter]="hasAppliedFilter"
+      (clearButton)="onClearButton($event)"
+      (filterButton)="onFilterButton($event)"
+    >
+      <ng-content select="#filter"></ng-content>
+    </app-filter-button>
+
+    <!-- A Button for creating new content -->
+    <app-button
+      (btnClick)="onButtonClick($event)"
+      [disabled]="disabledButton"
+      *ngIf="showCreateButton"
+    >
+      Create New <i nz-icon nzType="plus" nzTheme="outline"></i>
+    </app-button>
+  </div>
+</div>

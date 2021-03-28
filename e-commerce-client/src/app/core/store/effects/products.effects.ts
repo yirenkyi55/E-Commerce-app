@@ -32,6 +32,22 @@ export class ProductsEffect {
     )
   );
 
+  getAllProductsOnHomePage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromProducts.GetHomePageProductsRequest),
+      switchMap(({ params }) => {
+        return this.productService.getProducts(params, true).pipe(
+          map((response) =>
+            fromProducts.GetHomePageProductsRequestSuccess({ response })
+          ),
+          catchError((error) =>
+            of(fromProducts.GetHomePageProductsRequestFailure(error))
+          )
+        );
+      })
+    )
+  );
+
   getProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromProducts.GetProductRequest),

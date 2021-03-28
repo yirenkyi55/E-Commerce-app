@@ -15,7 +15,7 @@
 <ng-container
   *ngIf="!currentUser || (dashboardType$ | async) === dashboardTye.Guest"
 >
-  <app-navbar (login)="onLogin()"></app-navbar>
+  <app-navbar (login)="onLogin()" [totalCart]="totalCart"></app-navbar>
   <ng-container *ngTemplateOutlet="template"></ng-container>
   <app-footer></app-footer>
 </ng-container>

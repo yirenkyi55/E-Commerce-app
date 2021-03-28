@@ -8,6 +8,8 @@ import { ProductCartPageComponent } from './components/product-cart-page/product
 import { ProductCartComponent } from './containers/product-cart/product-cart.component';
 import { ProductDetailComponent } from './containers/product-detail/product-detail.component';
 import { ProductsComponent } from './containers/products/products.component';
+import { ProductItemComponent } from './components/product-item/product-item.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { ProductsComponent } from './containers/products/products.component';
     ProductCartComponent,
     ProductDetailComponent,
     ProductsComponent,
+    ProductItemComponent,
   ],
-  imports: [CommonModule, ProductsRoutingModule],
+  imports: [CommonModule, ProductsRoutingModule, SharedModule],
 })
 export class ProductsModule {}

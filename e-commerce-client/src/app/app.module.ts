@@ -37,7 +37,10 @@ import { AuthService } from './auth/services';
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
-  return localStorageSync({ keys: ['authState'], rehydrate: true })(reducer);
+  return localStorageSync({
+    keys: ['authState', 'guestState'],
+    rehydrate: true,
+  })(reducer);
 }
 
 export const metaReducers: MetaReducer<any>[] = !environment.production

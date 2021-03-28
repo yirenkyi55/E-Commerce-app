@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { rubberBand, zoomInLeft, lightSpeedIn } from 'ng-animate';
 import {
@@ -6,6 +6,7 @@ import {
   NgxGalleryImage,
   NgxGalleryAnimation,
 } from '@kolkov/ngx-gallery';
+import { Product } from 'src/app/core/models';
 
 @Component({
   selector: 'app-home-page',
@@ -41,6 +42,8 @@ import {
   ],
 })
 export class HomePageComponent implements OnInit {
+  @Input() products: Product[];
+
   rubberBand: any;
   zoomInLeft: any;
   lightSpeedIn: any;
@@ -112,5 +115,15 @@ export class HomePageComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.products && this.products.length > 0) {
+      this.galleryImages = this.products.map((product) => {
+        return {
+          small: product.picture,
+          medium: product.picture,
+          big: product.picture,
+        };
+      });
+    }
+  }
 }

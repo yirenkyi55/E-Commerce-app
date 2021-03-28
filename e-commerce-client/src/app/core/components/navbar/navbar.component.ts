@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ScrollEvent } from 'ngx-scroll-event';
 import {
   trigger,
@@ -37,6 +37,7 @@ import {
 export class NavbarComponent implements OnInit {
   isTop = true;
   @Output() login = new EventEmitter<boolean>();
+  @Input() totalCart = 0;
 
   constructor() {}
 

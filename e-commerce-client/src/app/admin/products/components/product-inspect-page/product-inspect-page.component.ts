@@ -57,6 +57,10 @@ export class ProductInspectPageComponent implements OnInit, OnChanges {
               title: 'Brand',
               text: this.titleCase.transform(this.product.productBrand.name),
             },
+            {
+              title: 'Show On Home Page',
+              text: this.product.showOnHomePage.toString(),
+            },
           ],
         },
         {

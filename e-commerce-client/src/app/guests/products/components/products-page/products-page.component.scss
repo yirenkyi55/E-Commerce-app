@@ -1,0 +1,30 @@
+.products__container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  min-height: 80rem;
+  margin-bottom: 2rem;
+}
+
+.product__item {
+  margin-right: 1rem;
+}
+.products {
+  margin-top: 10rem;
+  border: 2px solid var(--color-primary);
+  width: 90%;
+  border-radius: 0.7rem;
+  background: linear-gradient(
+    to right bottom,
+    rgba(#577a17, 0.8),
+    rgba(#00312a, 0.8)
+  );
+  box-shadow: 0 1rem 2rem rgba(#000, 0.3);
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.products__header {
+  padding: 2rem 10rem;
+}

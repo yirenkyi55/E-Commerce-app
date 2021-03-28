@@ -21,7 +21,7 @@
     </li>
     <li class="navigation__nav--item">
       <a
-        routerLink="/products"
+        routerLink="/shop"
         routerLinkActive="active"
         class="navigation__nav--item-link"
         >SHOP</a
@@ -47,6 +47,20 @@
   </ul>
 
   <div class="navigation__left">
+    <ul class="navigation__nav" *ngIf="totalCart">
+      <li class="navigation__nav--item">
+        <a
+          routerLinkActive="active"
+          class="navigation__nav--item-link stand cart"
+        >
+          Cart
+          <nz-badge [nzCount]="totalCart">
+            <a class="head-example"></a>
+          </nz-badge>
+        </a>
+      </li>
+    </ul>
+
     <ul class="navigation__nav">
       <li class="navigation__nav--item">
         <a

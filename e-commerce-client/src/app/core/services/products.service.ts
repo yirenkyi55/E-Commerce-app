@@ -19,7 +19,8 @@ export class ProductsService {
   constructor(private http: HttpClient) {}
 
   getProducts(
-    productParams: ProductParams
+    productParams: ProductParams,
+    homePage = false
   ): Observable<PaginationResult<Product>> {
     let params = new HttpParams();
 
@@ -37,6 +38,7 @@ export class ProductsService {
 
     params = params.append('pageSize', productParams.pageSize.toString());
     params = params.append('pageNumber', productParams.pageNumber.toString());
+    params = params.append('homePage', homePage.toString());
 
     return this.http.get<PaginationResult<Product>>(`${this.baseUrl}`, {
       params,

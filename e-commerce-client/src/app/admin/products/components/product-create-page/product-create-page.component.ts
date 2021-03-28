@@ -73,6 +73,7 @@ export class ProductCreatePageComponent
       price: ['', [Validators.required, Validators.min(1)]],
       productTypeId: ['', [Validators.required]],
       productBrandId: ['', [Validators.required]],
+      showOnHomePage: [false],
     });
   }
 
@@ -99,6 +100,7 @@ export class ProductCreatePageComponent
         price: this.productToUpdate.price.toString(),
         productTypeId: this.productToUpdate.productType.id,
         productBrandId: this.productToUpdate.productBrand.id,
+        showOnHomePage: this.productToUpdate.showOnHomePage,
       });
     }
   }
@@ -153,15 +155,21 @@ export class ProductCreatePageComponent
         'productBrandId',
         this.productForm.value.productBrandId
       );
+      this.formData.append(
+        'showOnHomePage',
+        this.productForm.value.showOnHomePage
+      );
 
       this.createProduct.emit(this.formData);
     } else {
+      console.log(this.productForm.value);
       const formData = this.formData ? this.formData : new FormData();
       formData.append('name', this.productForm.value.name);
       formData.append('description', this.productForm.value.description);
       formData.append('price', this.productForm.value.price);
       formData.append('productTypeId', this.productForm.value.productTypeId);
       formData.append('productBrandId', this.productForm.value.productBrandId);
+      formData.append('showOnHomePage', this.productForm.value.showOnHomePage);
 
       this.updateProduct.emit({
         productId: this.productToUpdate.id,

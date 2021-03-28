@@ -4,8 +4,13 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Observable, Subscription } from 'rxjs';
 import * as fromStore from 'src/app/auth/store';
 import * as fromAppStore from 'src/app/core/store';
+import * as fromGuestStore from 'src/app/guests/store';
 import { DashboardTypes } from './core/enums';
-import { AuthUserRequestResponse, DashboardMenu } from './core/models';
+import {
+  AuthUserRequestResponse,
+  CartItem,
+  DashboardMenu,
+} from './core/models';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,6 +21,8 @@ export class AppComponent implements OnInit, OnDestroy {
   authenticatedRequest$: Observable<boolean>;
   notificationSubscription: Subscription;
   notificationMessageSubscription: Subscription;
+  cartItemsSubscription: Subscription;
+  totalCart = 0;
 
   currentUserSubscription: Subscription;
   currentUser: AuthUserRequestResponse;
@@ -67,7 +74,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<fromStore.AuthenticationState>,
     private notification: NzNotificationService,
-    private appStore: Store<fromAppStore.ApplicationManagementState>
+    private appStore: Store<fromAppStore.ApplicationManagementState>,
+    private guestStore: Store<fromGuestStore.GuestState>
   ) {}
 
   ngOnInit(): void {
@@ -94,6 +102,14 @@ export class AppComponent implements OnInit, OnDestroy {
             response.message
           );
         }
+      });
+
+    this.cartItemsSubscription = this.guestStore
+      .select(fromGuestStore.getCartItems)
+      .subscribe((cartItems) => {
+        this.totalCart = cartItems
+          .map((item) => item.quantity)
+          .reduce((total, numb) => total + numb, 0);
       });
   }
 

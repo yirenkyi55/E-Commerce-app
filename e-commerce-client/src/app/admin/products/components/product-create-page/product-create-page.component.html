@@ -61,6 +61,12 @@
           </nz-select>
         </div>
 
+        <div class="form__group">
+          <label nz-checkbox formControlName="showOnHomePage"
+            >Show Product on Home Page</label
+          >
+        </div>
+
         <app-upload
           (hasFile)="checkFileStatus($event)"
           (upload)="onUploadPhoto($event)"

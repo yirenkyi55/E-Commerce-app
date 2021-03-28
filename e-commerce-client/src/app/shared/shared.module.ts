@@ -28,6 +28,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 import { ModalComponent } from './components/modal/modal.component';
 import { ButtonComponent } from './components/button/button.component';
@@ -45,6 +46,7 @@ import { InspectDataComponent } from './components/inspect-data/inspect-data.com
 import { TextAreaComponent } from './components/text-area/text-area.component';
 import { DropDownComponent } from './components/drop-down/drop-down.component';
 import { UploadComponent } from './components/upload/upload.component';
+import { BrowseHeaderComponent } from './components/browse-header/browse-header.component';
 
 const modules = [
   FormsModule,
@@ -76,6 +78,7 @@ const modules = [
   FontAwesomeModule,
   NzListModule,
   NgScrollbarModule,
+  NzBadgeModule,
 ];
 
 @NgModule({
@@ -96,6 +99,7 @@ const modules = [
     TextAreaComponent,
     DropDownComponent,
     UploadComponent,
+    BrowseHeaderComponent,
   ],
   imports: [...modules],
   exports: [
@@ -110,6 +114,7 @@ const modules = [
     DropDownComponent,
     TextAreaComponent,
     UploadComponent,
+    BrowseHeaderComponent,
   ],
 })
 export class SharedModule {}

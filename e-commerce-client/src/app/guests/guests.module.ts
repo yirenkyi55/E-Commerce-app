@@ -10,6 +10,9 @@ import { ContactPageComponent } from './components/contact-page/contact-page.com
 import { ContactComponent } from './containers/contact/contact.component';
 import { SharedModule } from '../shared/shared.module';
 
+import { reducers } from './store';
+import { StoreModule } from '@ngrx/store';
+
 @NgModule({
   declarations: [
     HomePageComponent,
@@ -19,6 +22,11 @@ import { SharedModule } from '../shared/shared.module';
     ContactComponent,
     ContactPageComponent,
   ],
-  imports: [CommonModule, GuestsRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    GuestsRoutingModule,
+    SharedModule,
+    StoreModule.forFeature('guestState', reducers),
+  ],
 })
 export class GuestsModule {}

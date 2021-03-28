@@ -3,6 +3,7 @@ import { Pagination, Product } from '../../models';
 import * as fromProductAction from '../actions/products.actions';
 export interface ProductsState {
   entities: { [id: string]: Product };
+  homePageProducts: Product[];
   loaded: boolean;
   loading: boolean;
   pagination: Pagination;
@@ -13,6 +14,7 @@ export const initialState: ProductsState = {
   loading: false,
   loaded: false,
   pagination: null,
+  homePageProducts: [],
 };
 
 const featureReducer = createReducer(
@@ -24,6 +26,7 @@ const featureReducer = createReducer(
     fromProductAction.GetProductsRequest,
     fromProductAction.UpdateProductRequest,
     fromProductAction.DeleteProductRequest,
+    fromProductAction.GetHomePageProductsRequest,
     (state) => ({
       ...state,
       loading: true,
@@ -52,6 +55,20 @@ const featureReducer = createReducer(
       loaded: true,
     };
   }),
+
+  on(
+    fromProductAction.GetHomePageProductsRequestSuccess,
+    (state, { response }) => {
+      const homePageProducts = response.results;
+
+      return {
+        ...state,
+        homePageProducts,
+        loading: false,
+        loaded: true,
+      };
+    }
+  ),
 
   on(
     fromProductAction.GetProductRequestSuccess,
@@ -85,6 +102,7 @@ const featureReducer = createReducer(
     fromProductAction.GetProductsRequestFailure,
     fromProductAction.UpdateProductRequestFailure,
     fromProductAction.DeleteProductRequestFailure,
+    fromProductAction.GetHomePageProductsRequestFailure,
     (state) => ({
       ...state,
       loading: false,
@@ -104,3 +122,5 @@ export const getProductsEntities = (state: ProductsState) => state.entities;
 export const getProductsLoading = (state: ProductsState) => state.loading;
 export const getProductsLoaded = (state: ProductsState) => state.loaded;
 export const getProductsPagination = (state: ProductsState) => state.pagination;
+export const getHomePageProducts = (state: ProductsState) =>
+  state.homePageProducts;

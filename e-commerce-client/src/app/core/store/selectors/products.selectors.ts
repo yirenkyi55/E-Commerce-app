@@ -13,6 +13,11 @@ export const getProductEntities = createSelector(
   fromProducts.getProductsEntities
 );
 
+export const getHomePageProducts = createSelector(
+  getProductsState,
+  fromProducts.getHomePageProducts
+);
+
 export const getProducts = createSelector(getProductEntities, (entities) =>
   Object.keys(entities).map((id) => entities[id])
 );

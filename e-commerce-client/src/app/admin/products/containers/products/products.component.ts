@@ -38,6 +38,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
             price: this.currencyPipe.transform(product.price).toString(),
             productBrand: this.titleCase.transform(product.productBrand.name),
             productType: this.titleCase.transform(product.productType.name),
+            showOnHomePage: product.showOnHomePage ? 'Yes' : 'No',
           };
         });
       });
