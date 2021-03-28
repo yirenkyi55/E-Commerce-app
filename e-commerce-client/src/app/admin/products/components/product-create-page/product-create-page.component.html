@@ -3,6 +3,8 @@
   [saveButtonLoading]="loading"
   (resetClick)="onResetForm()"
   (saveClick)="onCreateProduct()"
+  [resetButtonVisible]="!productToUpdate"
+  [saveButtonText]="buttonText"
 >
   <ng-container id="header"
     ><h3>{{ pageTitle }}</h3></ng-container
@@ -26,20 +28,38 @@
           placeholder="Unit Price"
         ></app-input>
 
-        <app-drop-down
-          formControlName="productTypeId"
-          [options]="productTypeOptions"
-          label="Product Type"
-          (dropDownChange)="onProductTypeChange($event)"
-        >
-        </app-drop-down>
+        <div class="form__group">
+          <nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Select Content Privacy Status"
+            class="form__control"
+            formControlName="productTypeId"
+            (ngModelChange)="onProductTypeChange($event)"
+          >
+            <nz-option
+              *ngFor="let type of productTypeOptions"
+              [nzLabel]="type.label"
+              [nzValue]="type.value"
+            ></nz-option>
+          </nz-select>
+        </div>
 
-        <app-drop-down
-          formControlName="productBrandId"
-          [options]="brandsOptions"
-          label="Product Brand"
-        >
-        </app-drop-down>
+        <div class="form__group">
+          <nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Select Content Privacy Status"
+            class="form__control"
+            formControlName="productBrandId"
+          >
+            <nz-option
+              *ngFor="let type of brandsOptions"
+              [nzLabel]="type.label"
+              [nzValue]="type.value"
+            ></nz-option>
+          </nz-select>
+        </div>
 
         <app-upload
           (hasFile)="checkFileStatus($event)"
@@ -47,6 +67,7 @@
           [clearList]="clearUploadList"
           [showUploadButton]="false"
           [formDataKey]="'photo'"
+          [imageToDisplay]="productToUpdate && productToUpdate.picture"
         ></app-upload>
       </form>
     </div>

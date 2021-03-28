@@ -32,6 +32,7 @@ export class UploadComponent implements OnInit, OnChanges {
   @Input() showUploadButton = true;
   @Input() clearList = false;
   @Input() filter: UploadFilter[] = [];
+  @Input() imageToDisplay: string;
 
   @Output() upload = new EventEmitter<FormData>();
   @Output() hasFile = new EventEmitter<boolean>();

@@ -1,6 +1,12 @@
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  AfterContentChecked,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { Product, ProductBrand, ProductType } from 'src/app/core/models';
 import * as fromAppStore from 'src/app/core/store';
 import { Store } from '@ngrx/store';
@@ -9,7 +15,8 @@ import { Store } from '@ngrx/store';
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.scss'],
 })
-export class ProductCreateComponent implements OnInit, OnDestroy {
+export class ProductCreateComponent
+  implements OnInit, OnDestroy, AfterContentChecked {
   productTypes$: Observable<ProductType[]>;
   loading$: Observable<boolean>;
   productBrands: ProductBrand[];
@@ -19,10 +26,15 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<fromAppStore.ApplicationManagementState>,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cd: ChangeDetectorRef
   ) {}
+  ngAfterContentChecked(): void {
+    this.cd.detectChanges();
+  }
 
   ngOnInit(): void {
+    console.log('inside the init method');
     this.productTypes$ = this.store.select(fromAppStore.getTypes);
     this.loading$ = this.store.select(fromAppStore.getProductsLoading);
 
@@ -67,6 +79,10 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
 
   onCreateProduct(productForm: FormData): void {
     this.store.dispatch(fromAppStore.CreateProductRequest({ productForm }));
+  }
+
+  onUpdateProduct(model: { productId: string; productForm: FormData }): void {
+    this.store.dispatch(fromAppStore.UpdateProductRequest(model));
   }
 
   ngOnDestroy(): void {

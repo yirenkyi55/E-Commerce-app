@@ -1,5 +1,7 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
+  AfterContentChecked,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -22,7 +24,8 @@ import { TitleCasePipe } from '@angular/common';
   styleUrls: ['./product-create-page.component.scss'],
   providers: [TitleCasePipe],
 })
-export class ProductCreatePageComponent implements OnInit, OnChanges {
+export class ProductCreatePageComponent
+  implements OnInit, OnChanges, AfterContentChecked {
   @Input() productTypes: ProductType[];
   @Input() productBrands: ProductBrand[];
   @Input() productToUpdate: Product;
@@ -32,33 +35,35 @@ export class ProductCreatePageComponent implements OnInit, OnChanges {
 
   @Output() fetchProductBrands = new EventEmitter<{ typeId: string }>();
   @Output() createProduct = new EventEmitter<FormData>();
+  @Output() updateProduct = new EventEmitter<{
+    productId: string;
+    productForm: FormData;
+  }>();
 
   productForm: FormGroup;
   hasFile: boolean;
   formData: FormData;
+  hasTypeChange: boolean;
 
-  productTypeOptions: DropDownOptions[] = [
-    {
-      label: 'Select Product Type',
-      value: '',
-    },
-    {
-      label: 'product type 1',
-      value: 1,
-    },
-  ];
+  productTypeOptions: DropDownOptions[] = [];
 
-  brandsOptions: DropDownOptions[] = [
-    {
-      label: 'Select Brand',
-      value: '',
-    },
-  ];
+  brandsOptions: DropDownOptions[] = [];
 
-  constructor(private fb: FormBuilder, private titleCase: TitleCasePipe) {}
+  constructor(
+    private fb: FormBuilder,
+    private titleCase: TitleCasePipe,
+    private cd: ChangeDetectorRef
+  ) {}
+  ngAfterContentChecked(): void {
+    //this.cd.detectChanges();
+  }
 
   get pageTitle(): string {
     return this.productToUpdate ? 'Update Product' : 'Create Product';
+  }
+
+  get buttonText(): string {
+    return this.productToUpdate ? 'Update' : 'Save';
   }
 
   createForm(): void {
@@ -81,12 +86,7 @@ export class ProductCreatePageComponent implements OnInit, OnChanges {
         };
       });
 
-      this.productTypeOptions = [
-        {
-          label: 'Select Product Type',
-          value: '',
-        },
-      ];
+      this.productTypeOptions = [];
 
       this.productTypeOptions = [...this.productTypeOptions, ...values];
     }
@@ -104,7 +104,7 @@ export class ProductCreatePageComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const { productBrands, loading, productToUpdate } = changes;
+    const { productBrands, loading } = changes;
     if (productBrands && productBrands.currentValue) {
       if (this.productBrands?.length > 0) {
         const values = this.productBrands.map((brand) => {
@@ -113,21 +113,18 @@ export class ProductCreatePageComponent implements OnInit, OnChanges {
             value: brand.id,
           };
         });
-        this.brandsOptions = [
-          {
-            label: 'Select Brand',
-            value: '',
-          },
-        ];
+        this.brandsOptions = [];
 
         this.brandsOptions = [...this.brandsOptions, ...values];
       } else {
-        this.brandsOptions = [
-          {
-            label: 'Select Brand',
-            value: '',
-          },
-        ];
+        this.brandsOptions = [];
+      }
+
+      if (this.hasTypeChange) {
+        console.log('patching values');
+        this.productForm.patchValue({
+          productBrandId: '',
+        });
       }
     }
 
@@ -138,10 +135,13 @@ export class ProductCreatePageComponent implements OnInit, OnChanges {
   }
 
   get isFormValid(): boolean {
-    return this.hasFile && this.productForm.valid;
+    return this.productToUpdate
+      ? this.productForm.valid
+      : this.hasFile && this.productForm.valid;
   }
+
   onCreateProduct(): void {
-    if (this.isFormValid) {
+    if (!this.productToUpdate) {
       this.formData.append('name', this.productForm.value.name);
       this.formData.append('description', this.productForm.value.description);
       this.formData.append('price', this.productForm.value.price);
@@ -155,11 +155,22 @@ export class ProductCreatePageComponent implements OnInit, OnChanges {
       );
 
       this.createProduct.emit(this.formData);
+    } else {
+      const formData = this.formData ? this.formData : new FormData();
+      formData.append('name', this.productForm.value.name);
+      formData.append('description', this.productForm.value.description);
+      formData.append('price', this.productForm.value.price);
+      formData.append('productTypeId', this.productForm.value.productTypeId);
+      formData.append('productBrandId', this.productForm.value.productBrandId);
+
+      this.updateProduct.emit({
+        productId: this.productToUpdate.id,
+        productForm: formData,
+      });
     }
   }
 
   onResetForm(): void {
-    console.log(this.productForm.value);
     this.productForm.reset();
     this.clearUploadList = true;
   }
@@ -176,7 +187,10 @@ export class ProductCreatePageComponent implements OnInit, OnChanges {
     this.clearUploadList = false;
   }
 
-  onProductTypeChange(model: { value: any }): void {
-    this.fetchProductBrands.emit({ typeId: model.value });
+  onProductTypeChange(typeId: string): void {
+    if (typeId) {
+      this.hasTypeChange = true;
+      this.fetchProductBrands.emit({ typeId });
+    }
   }
 }

@@ -1,6 +1,7 @@
 <app-inspect-mode
   [inspectData]="productListData"
   (editContent)="onEditContent()"
+  (deleteContent)="onDeleteContent()"
 >
   <ng-container id="header">
     <h3>{{ product?.name | uppercase }}</h3>

@@ -21,6 +21,7 @@ export class ProductInspectPageComponent implements OnInit, OnChanges {
   productListData: InspectModeContent[];
 
   @Output() editProduct = new EventEmitter<Product>();
+  @Output() deleteProduct = new EventEmitter<Product>();
 
   constructor(
     private titleCase: TitleCasePipe,
@@ -72,5 +73,8 @@ export class ProductInspectPageComponent implements OnInit, OnChanges {
     this.editProduct.emit(this.product);
   }
 
+  onDeleteContent(): void {
+    this.deleteProduct.emit(this.product);
+  }
   ngOnInit(): void {}
 }

@@ -16,43 +16,15 @@ import { DropDownOptions } from 'src/app/core/models';
   templateUrl: './drop-down.component.html',
   styleUrls: ['./drop-down.component.scss'],
 })
-export class DropDownComponent implements OnInit, ControlValueAccessor {
-  @ViewChild('dropdown', { static: true }) input: ElementRef;
-  @Input() label = 'Field';
-  @Input() placeholder: string;
-  @Input() options: DropDownOptions[] = [];
-  @Output() dropDownChange = new EventEmitter<{ value: any }>();
+export class DropDownComponent implements OnInit {
+  @Input() options: DropDownOptions[];
+  @Input() formControlName: string | number;
 
-  constructor(@Self() public controlDir: NgControl) {
-    this.controlDir.valueAccessor = this;
-  }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    const control = this.controlDir.control;
-    const validators = control.validator ? [control.validator] : [];
-    const asyncValidators = control.asyncValidator
-      ? [control.asyncValidator]
-      : [];
-    control.setValidators(validators);
-    control.setAsyncValidators(asyncValidators);
-    control.updateValueAndValidity();
-  }
+  constructor() {}
 
-  onChange(event) {}
-
-  onTouched() {}
-
-  writeValue(obj: any): void {
-    this.input.nativeElement.value = obj || '';
-  }
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  onDropDownChange(event: any): void {
-    this.dropDownChange.emit({ value: event?.target?.value });
-  }
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
+  onDropDownchange(event: any): void {
+    console.log(event);
   }
 }

@@ -8,6 +8,7 @@ import { of } from 'rxjs';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import * as fromHelpers from '../actions/helpers.actions';
 import { NotificationType } from '../../models';
+import * as fromRoot from 'src/app/store';
 @Injectable()
 export class ProductsEffect {
   constructor(
@@ -73,12 +74,29 @@ export class ProductsEffect {
     )
   );
 
+  updateProductSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromProducts.UpdateProductRequestSuccess),
+      map(() => {
+        return fromRoot.Back();
+      })
+    )
+  );
+
   deleteProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromProducts.DeleteProductRequest),
       concatMap(({ productId }) => {
         return this.productService.deleteProduct(productId).pipe(
-          map(() => fromProducts.DeleteProductRequestSuccess({ productId })),
+          switchMap(() => [
+            fromProducts.DeleteProductRequestSuccess({ productId }),
+            fromHelpers.DisplayNotification({
+              notificationType: NotificationType.success,
+              title: 'Products',
+              message: 'Product has been successfully deleted',
+            }),
+            fromRoot.Go({ path: ['admin', 'products'] }),
+          ]),
           catchError((error) =>
             of(fromProducts.DeleteProductRequestFailure(error))
           )
@@ -128,9 +146,9 @@ export class ProductsEffect {
               error: `Unknown Event: ${JSON.stringify(event)}`,
             }),
           ];
+        } else {
+          return [fromHelpers.UploadCompletedAction()];
         }
-
-        break;
       }
 
       case HttpEventType.DownloadProgress: {

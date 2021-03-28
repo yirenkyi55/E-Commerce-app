@@ -25,4 +25,10 @@ export class ProductInspectComponent implements OnInit {
   onEditProduct(product: Product): void {
     this.router.navigate(['admin', 'products', 'new', product.id]);
   }
+
+  onDeleteProduct(product: Product): void {
+    this.store.dispatch(
+      fromAppStore.DeleteProductRequest({ productId: product.id })
+    );
+  }
 }

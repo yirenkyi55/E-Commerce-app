@@ -18,3 +18,18 @@
   display: block;
   color: var(--color-primary-white);
 }
+
+.upload__controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload__image {
+  display: block;
+  max-width: 15rem;
+  max-height: 15rem;
+  width: auto;
+  height: auto;
+  border-radius: 50%;
+}
