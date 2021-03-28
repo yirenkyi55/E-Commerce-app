@@ -9,6 +9,8 @@ namespace Application.Products.Queries
 
         public Guid? BrandId { get; set; }
 
+        public bool HomePage { get; set; }
+
         private string _search;
         public string Search
         {

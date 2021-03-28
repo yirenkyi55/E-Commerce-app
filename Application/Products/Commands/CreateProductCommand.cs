@@ -59,6 +59,10 @@ namespace Application.Products.Commands
 
                 await _context.SaveChangesAsync(cancellationToken);
 
+                product = await _context.Products
+                    .Include(p=>p.ProductBrand)
+                    .Include(p=>p.ProductType).FirstOrDefaultAsync(p=>p.Id==product.Id);
+
                 return _mapper.Map<ProductForReturnDto>(product);
             }
         }

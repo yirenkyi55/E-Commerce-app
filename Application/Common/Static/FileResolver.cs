@@ -10,7 +10,8 @@ namespace Application.Common.Static
 
             var currentUrl = DependencyInjection.StaticConfig["AppSettings:ApiUrl"];
             //Generate the access patch
-            return Path.Combine(currentUrl, folderName, fileName);
+            return Path.Combine(currentUrl, folderName, fileName).Replace("\\", "/");
+            
         }
     }
 }

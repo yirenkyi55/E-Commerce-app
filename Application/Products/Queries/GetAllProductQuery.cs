@@ -50,6 +50,11 @@ namespace Application.Products.Queries
                     queryable = queryable.Where(p => p.ProductBrandId == request.Params.BrandId);
                 }
 
+                if (request.Params.HomePage)
+                {
+                    queryable = queryable.Where(p => p.ShowOnHomePage);
+                }
+
                 // Perform pagination on the queryable object
                 var results = await _paginationService.PaginateAsync(queryable, request.Params.PageNumber, request.Params.PageSize);
 

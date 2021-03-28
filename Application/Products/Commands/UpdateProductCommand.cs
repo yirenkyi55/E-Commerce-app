@@ -58,6 +58,7 @@ namespace Application.Products.Commands
                 product.Price = request.ProductForUpdate.Price;
                 product.ProductBrandId = request.ProductForUpdate.ProductBrandId;
                 product.ProductTypeId = request.ProductForUpdate.ProductTypeId;
+                product.ShowOnHomePage = request.ProductForUpdate.ShowOnHomePage;
 
                 await _context.SaveChangesAsync(cancellationToken);
 

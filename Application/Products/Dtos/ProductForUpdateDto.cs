@@ -10,6 +10,8 @@ namespace Application.Products.Dtos
         public string Description { get; set; }
 
         public decimal Price { get; set; }
+        
+        public bool ShowOnHomePage { get; set; }
 
         public IFormFile Photo { get; set; }
 

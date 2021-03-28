@@ -26,6 +26,11 @@ namespace Domain
         public string Picture { get; set; }
 
         /// <summary>
+        /// Indicates whether we want to show product on home page or not
+        /// </summary>
+        public bool ShowOnHomePage { get; set; }
+
+        /// <summary>
         /// The product tye id for this product
         /// </summary>
         public Guid ProductTypeId { get; set; }

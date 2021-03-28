@@ -15,6 +15,8 @@ namespace Application.Products.Dtos
         public decimal Price { get; set; }
 
         public string Picture { get; set; }
+        
+        public bool ShowOnHomePage { get; set; }
 
         public ProductTypeForReturnDto ProductType { get; set; }
 
