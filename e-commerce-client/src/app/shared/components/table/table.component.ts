@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActionButtonTypes } from 'src/app/core/enums';
-import { ActionButton, ActionButtonData } from 'src/app/core/models';
+import {
+  ActionButton,
+  ActionButtonData,
+  TableHeaders,
+} from 'src/app/core/models';
 
 @Component({
   selector: 'app-table',
@@ -9,7 +13,7 @@ import { ActionButton, ActionButtonData } from 'src/app/core/models';
 })
 export class TableComponent implements OnInit {
   @Input() data = [];
-  @Input() headers: { key: string; label: string }[] = [];
+  @Input() headers: TableHeaders[] = [];
   @Input() action = false;
   @Input() paginateTable = true;
   @Input() actions: ActionButton[] = [];

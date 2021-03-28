@@ -20,7 +20,7 @@ export class TypeCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading$ = this.appStore.select(fromAppStore.getTypesLoading);
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('typeId');
     if (id !== '0') {
       this.productType$ = this.appStore.select(fromAppStore.getSelectedType);
     }

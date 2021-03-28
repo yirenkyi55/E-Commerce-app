@@ -1,1 +1,5 @@
-<app-product-list-page (newProduct)="onNewProduct()"></app-product-list-page>
+<app-product-list-page
+  (newProduct)="onNewProduct()"
+  (recordClick)="onRecordClick($event)"
+  [products]="products"
+></app-product-list-page>

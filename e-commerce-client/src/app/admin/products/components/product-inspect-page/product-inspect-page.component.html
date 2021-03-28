@@ -1,1 +1,12 @@
-<p>product-inspect-page works!</p>
+<app-inspect-mode
+  [inspectData]="productListData"
+  (editContent)="onEditContent()"
+>
+  <ng-container id="header">
+    <h3>{{ product?.name | uppercase }}</h3>
+  </ng-container>
+
+  <ng-container id="content" *ngIf="product">
+    Some Contents over here
+  </ng-container>
+</app-inspect-mode>

@@ -47,15 +47,23 @@ export interface InspectModeContent {
   text?: string;
   isMultiple: boolean;
   contents?: InspectMultiple[];
+  isImage?: boolean;
 }
 
 export interface InspectMultiple {
   title: string;
   text: string;
+  isImage?: boolean;
 }
 
 export interface DropDownOptions {
   value: any;
   label: string;
   disabled?: boolean;
+}
+
+export interface TableHeaders {
+  key: string;
+  label: string;
+  isImage?: boolean;
 }

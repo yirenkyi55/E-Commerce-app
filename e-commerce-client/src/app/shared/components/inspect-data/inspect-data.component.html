@@ -1,7 +1,8 @@
 <ng-container *ngIf="content">
   <div class="inspect__box" *ngIf="!content.isMultiple">
     <h3>{{ content.title | titlecase }}</h3>
-    <p [innerHtml]="content.text"></p>
+    <p [innerHtml]="content.text" *ngIf="!content.isImage"></p>
+    <img *ngIf="content.isImage" [src]="content.text" class="image__box" />
   </div>
 
   <div class="inspect__box" *ngIf="content.isMultiple">
@@ -11,7 +12,8 @@
         *ngFor="let item of content.contents"
       >
         <h4>{{ item.title | uppercase }}</h4>
-        <p>{{ item.text }}</p>
+        <p *ngIf="!item.isImage">{{ item.text }}</p>
+        <img *ngIf="item.isImage" [src]="item.text" class="image__box" />
       </div>
     </div>
   </div>

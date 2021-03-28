@@ -7,7 +7,6 @@ import { Location } from '@angular/common';
   styleUrls: ['./inspect-mode.component.scss'],
 })
 export class InspectModeComponent implements OnInit {
-  @Input() data: InspectItem[] = [];
   @Input() inspectData: InspectModeContent[] = [];
 
   @Output() editContent = new EventEmitter<boolean>();

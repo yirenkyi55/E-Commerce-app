@@ -1,6 +1,7 @@
 <app-product-create-page
   [productTypes]="productTypes$ | async"
   [productBrands]="productBrands"
+  [productToUpdate]="product"
   [loading]="loading$ | async"
   (fetchProductBrands)="onFetchProductBrands($event)"
   (createProduct)="onCreateProduct($event)"

@@ -10,3 +10,13 @@ export interface Product {
   productType: ProductType;
   productBrand: ProductBrand;
 }
+
+export interface ProductToDisplay {
+  id: string;
+  name: string;
+  description: string;
+  price: string;
+  picture: string;
+  productType: string;
+  productBrand: string;
+}

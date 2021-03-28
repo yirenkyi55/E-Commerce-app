@@ -1,1 +1,5 @@
-<p>product-inspect works!</p>
+<app-product-inspect-page
+  [product]="product$ | async"
+  (editProduct)="onEditProduct($event)"
+>
+</app-product-inspect-page>

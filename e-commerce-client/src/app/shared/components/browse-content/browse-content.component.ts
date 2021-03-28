@@ -1,6 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActionButtonTypes, BrowseType } from 'src/app/core/enums';
-import { ActionButton, ActionButtonData, ListItem } from 'src/app/core/models';
+import {
+  ActionButton,
+  ActionButtonData,
+  ListItem,
+  TableHeaders,
+} from 'src/app/core/models';
 
 @Component({
   selector: 'app-browse-content',
@@ -13,7 +18,7 @@ export class BrowseContentComponent implements OnInit {
 
   // Properties for tables
   @Input() tableData = [];
-  @Input() tableHeaders: { key: string; label: string }[] = [];
+  @Input() tableHeaders: TableHeaders[] = [];
   @Input() tableHasActionButtons = false;
   @Input() paginateTable = true;
   @Input() tableActions: ActionButton[] = [];

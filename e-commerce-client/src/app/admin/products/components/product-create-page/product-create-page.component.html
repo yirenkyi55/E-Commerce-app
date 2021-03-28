@@ -4,7 +4,9 @@
   (resetClick)="onResetForm()"
   (saveClick)="onCreateProduct()"
 >
-  <ng-container id="header"><h3>Create New Product</h3></ng-container>
+  <ng-container id="header"
+    ><h3>{{ pageTitle }}</h3></ng-container
+  >
   <ng-container id="content">
     <div class="form__container">
       <form [formGroup]="productForm">

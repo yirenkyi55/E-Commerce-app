@@ -8,7 +8,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { BrowseType } from 'src/app/core/enums';
-import { ActionButton, ActionButtonData, ListItem } from 'src/app/core/models';
+import {
+  ActionButton,
+  ActionButtonData,
+  ListItem,
+  TableHeaders,
+} from 'src/app/core/models';
 import { Location } from '@angular/common';
 
 @Component({
@@ -41,7 +46,7 @@ export class BrowseModeComponent implements OnInit {
   // Properties for displaying contents
   @Input() browseType: BrowseType = BrowseType.Table;
   @Input() tableData = [];
-  @Input() tableHeaders: { key: string; label: string }[] = [];
+  @Input() tableHeaders: TableHeaders[] = [];
   @Input() tableHasActionButtons = false;
   @Input() paginateTable = false;
   @Input() tableActions: ActionButton[] = [];

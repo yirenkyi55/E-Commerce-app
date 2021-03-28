@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { ProductToDisplay, TableHeaders } from 'src/app/core/models';
 
 @Component({
   selector: 'app-product-list-page',
@@ -6,12 +7,27 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./product-list-page.component.scss'],
 })
 export class ProductListPageComponent implements OnInit {
-  constructor() {}
-  @Output() newProduct = new EventEmitter();
+  @Input() products: ProductToDisplay[];
+  headers: TableHeaders[] = [
+    { key: 'name', label: 'Name' },
+    { key: 'description', label: 'Description' },
+    { key: 'price', label: 'Price' },
+    { key: 'productType', label: 'Type' },
+    { key: 'productBrand', label: 'Brand' },
+    { key: 'picture', label: 'Image', isImage: true },
+  ];
 
+  @Output() newProduct = new EventEmitter();
+  @Output() recordClick = new EventEmitter<ProductToDisplay>();
+
+  constructor() {}
   ngOnInit(): void {}
 
   onNewProduct(): void {
     this.newProduct.emit();
+  }
+
+  onRecordClick(product: ProductToDisplay): void {
+    this.recordClick.emit(product);
   }
 }

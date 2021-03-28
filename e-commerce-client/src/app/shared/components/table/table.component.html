@@ -11,10 +11,16 @@
       (click)="onClickRecord(record)"
       [ngClass]="{ 'app-table-row': showTableHoverIcon }"
     >
-      <td
-        *ngFor="let header of headers"
-        [innerHTML]="record && record[header?.key]"
-      ></td>
+      <ng-container *ngFor="let header of headers">
+        <td
+          *ngIf="!header.isImage"
+          [innerHTML]="record && record[header?.key]"
+        ></td>
+        <td *ngIf="header.isImage">
+          <img [src]="record[header?.key]" class="image__rounded" />
+        </td>
+      </ng-container>
+
       <td nzRight *ngIf="action">
         <ng-container *ngFor="let action of actions">
           <ng-container *ngIf="action.hasAccess">

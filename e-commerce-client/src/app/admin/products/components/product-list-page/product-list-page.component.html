@@ -1,3 +1,8 @@
-<app-browse-mode (buttonClick)="onNewProduct()">
+<app-browse-mode
+  (buttonClick)="onNewProduct()"
+  [tableHeaders]="headers"
+  [tableData]="products"
+  (tableRecordClick)="onRecordClick($event)"
+>
   <ng-container id="header"><h3>Products</h3></ng-container>
 </app-browse-mode>

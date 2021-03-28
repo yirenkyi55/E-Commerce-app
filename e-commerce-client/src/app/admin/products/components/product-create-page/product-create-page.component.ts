@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import {
   DropDownOptions,
+  Product,
   ProductBrand,
   ProductType,
 } from 'src/app/core/models';
@@ -24,6 +25,8 @@ import { TitleCasePipe } from '@angular/common';
 export class ProductCreatePageComponent implements OnInit, OnChanges {
   @Input() productTypes: ProductType[];
   @Input() productBrands: ProductBrand[];
+  @Input() productToUpdate: Product;
+
   @Input() loading: boolean;
   clearUploadList: boolean;
 
@@ -54,6 +57,10 @@ export class ProductCreatePageComponent implements OnInit, OnChanges {
 
   constructor(private fb: FormBuilder, private titleCase: TitleCasePipe) {}
 
+  get pageTitle(): string {
+    return this.productToUpdate ? 'Update Product' : 'Create Product';
+  }
+
   createForm(): void {
     this.productForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -83,10 +90,21 @@ export class ProductCreatePageComponent implements OnInit, OnChanges {
 
       this.productTypeOptions = [...this.productTypeOptions, ...values];
     }
+
+    if (this.productToUpdate) {
+      //console.log('setting values', this.productToUpdate);
+      this.productForm.setValue({
+        name: this.productToUpdate.name,
+        description: this.productToUpdate.description,
+        price: this.productToUpdate.price.toString(),
+        productTypeId: this.productToUpdate.productType.id,
+        productBrandId: this.productToUpdate.productBrand.id,
+      });
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    const { productBrands, loading } = changes;
+    const { productBrands, loading, productToUpdate } = changes;
     if (productBrands && productBrands.currentValue) {
       if (this.productBrands?.length > 0) {
         const values = this.productBrands.map((brand) => {
@@ -141,6 +159,7 @@ export class ProductCreatePageComponent implements OnInit, OnChanges {
   }
 
   onResetForm(): void {
+    console.log(this.productForm.value);
     this.productForm.reset();
     this.clearUploadList = true;
   }

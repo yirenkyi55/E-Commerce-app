@@ -1,6 +1,7 @@
+import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductBrand, ProductType } from 'src/app/core/models';
+import { Product, ProductBrand, ProductType } from 'src/app/core/models';
 import * as fromAppStore from 'src/app/core/store';
 import { Store } from '@ngrx/store';
 @Component({
@@ -13,12 +14,42 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
   loading$: Observable<boolean>;
   productBrands: ProductBrand[];
   brandsSubscription: Subscription;
+  productSubscription: Subscription;
+  product: Product;
 
-  constructor(private store: Store<fromAppStore.ApplicationManagementState>) {}
+  constructor(
+    private store: Store<fromAppStore.ApplicationManagementState>,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.productTypes$ = this.store.select(fromAppStore.getTypes);
     this.loading$ = this.store.select(fromAppStore.getProductsLoading);
+
+    const id = this.route.snapshot.paramMap.get('productId');
+    if (id !== '0') {
+      this.productSubscription = this.store
+        .select(fromAppStore.getSelectedProduct)
+        .subscribe((selectedProduct) => {
+          this.product = selectedProduct;
+
+          this.brandsSubscription = this.store
+            .select(fromAppStore.getBrandsFromType, {
+              typeId: selectedProduct.productType.id,
+            })
+            .subscribe((response) => {
+              this.productBrands = response;
+
+              if (!response) {
+                this.store.dispatch(
+                  fromAppStore.GetAllBrandsForTypeRequest({
+                    typeId: selectedProduct.productType.id,
+                  })
+                );
+              }
+            });
+        });
+    }
   }
 
   onFetchProductBrands(model: { typeId: string }): void {
@@ -40,5 +71,6 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.brandsSubscription?.unsubscribe();
+    this.productSubscription?.unsubscribe();
   }
 }
