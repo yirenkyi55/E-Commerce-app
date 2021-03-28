@@ -23,6 +23,7 @@
       <a
         routerLink="/shop"
         routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
         class="navigation__nav--item-link"
         >SHOP</a
       >
@@ -52,6 +53,8 @@
         <a
           routerLinkActive="active"
           class="navigation__nav--item-link stand cart"
+          routerLink="/shop/cart"
+          routerLinkActive="active"
         >
           Cart
           <nz-badge [nzCount]="totalCart">

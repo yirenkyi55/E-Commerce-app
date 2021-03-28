@@ -10,6 +10,7 @@ import { ProductDetailComponent } from './containers/product-detail/product-deta
 import { ProductsComponent } from './containers/products/products.component';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ProductCartItemComponent } from './components/product-cart-item/product-cart-item.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ProductDetailComponent,
     ProductsComponent,
     ProductItemComponent,
+    ProductCartItemComponent,
   ],
   imports: [CommonModule, ProductsRoutingModule, SharedModule],
 })
