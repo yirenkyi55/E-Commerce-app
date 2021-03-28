@@ -39,9 +39,9 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ProductForReturnDto>> UpdateProduct(Guid id, [FromForm] ProductForCreateDto productForCreate)
+        public async Task<ActionResult<ProductForReturnDto>> UpdateProduct(Guid id, [FromForm] ProductForUpdateDto productForUpdate)
         {
-            var result = await Mediator.Send(new UpdateProductCommand { ProductId = id, ProductForCreate = productForCreate });
+            var result = await Mediator.Send(new UpdateProductCommand { ProductId = id, ProductForUpdate = productForUpdate });
             return Ok(result);
         }
 

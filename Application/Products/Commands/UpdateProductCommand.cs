@@ -15,7 +15,7 @@ namespace Application.Products.Commands
     {
         public Guid ProductId { get; set; }
 
-        public ProductForCreateDto ProductForCreate { get; set; }
+        public ProductForUpdateDto ProductForUpdate { get; set; }
         public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, ProductForReturnDto>
         {
             private readonly IApplicationDbContext _context;
@@ -37,13 +37,27 @@ namespace Application.Products.Commands
                     throw new RestException(HttpStatusCode.NotFound, "Product does not exists");
                 }
 
-                var picture = await _fileService.SaveFileAsync(request.ProductForCreate.Photo, AppSettings.MediaFolder);
+                var productImage = product.Picture;
+                
+                //_mapper.Map(request.ProductForUpdate, product);
 
-                _fileService.DeleteFile(product.Picture, AppSettings.MediaFolder);
+                if (request.ProductForUpdate.Photo != null)
+                {
+                    var picture = await _fileService.SaveFileAsync(request.ProductForUpdate.Photo, AppSettings.MediaFolder);
 
-                _mapper.Map(request.ProductForCreate, product);
+                    _fileService.DeleteFile(product.Picture, AppSettings.MediaFolder);
+                    product.Picture = picture;
+                }
+                else
+                {
+                    product.Picture = productImage;
+                }
 
-                product.Picture = picture;
+                product.Name = request.ProductForUpdate.Name ;
+                product.Description = request.ProductForUpdate.Description ;
+                product.Price = request.ProductForUpdate.Price;
+                product.ProductBrandId = request.ProductForUpdate.ProductBrandId;
+                product.ProductTypeId = request.ProductForUpdate.ProductTypeId;
 
                 await _context.SaveChangesAsync(cancellationToken);
 

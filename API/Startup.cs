@@ -38,8 +38,7 @@ namespace API
         {
             app.UseMiddleware<GlobalExceptionMiddleware>();
 
-
-            app.UseSwaggerDocumentation(env, provider);
+            app.UseStaticFiles();
             // app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -48,6 +47,8 @@ namespace API
 
             app.UseAuthentication();
             app.UseAuthorization();
+            
+            app.UseSwaggerDocumentation(env, provider);
 
             app.UseEndpoints(endpoints =>
             {
