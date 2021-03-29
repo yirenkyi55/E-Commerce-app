@@ -21,6 +21,11 @@ namespace Domain
         public decimal Price { get; set; }
 
         /// <summary>
+        /// The quantity for the product
+        /// </summary>
+        public int Quantity { get; set; }
+
+        /// <summary>
         /// The picture for the product
         /// </summary>
         public string Picture { get; set; }

@@ -14,9 +14,11 @@ namespace Application.Products.Dtos
 
         public decimal Price { get; set; }
 
+        public int Quantity { get; set; }
+
         public string Picture { get; set; }
-        
-        public bool ShowOnHomePage { get; set; }
+
+        public bool ShowOnHomePage { get; set; } = false;
 
         public ProductTypeForReturnDto ProductType { get; set; }
 

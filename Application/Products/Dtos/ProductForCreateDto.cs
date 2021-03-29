@@ -11,9 +11,11 @@ namespace Application.Products.Dtos
 
         public decimal Price { get; set; }
 
+        public int Quantity { get; set; }
+
         public IFormFile Photo { get; set; }
 
-        public bool ShowOnHomePage { get; set; }
+        public bool ShowOnHomePage { get; set; } = false;
 
         public Guid ProductTypeId { get; set; }
 

@@ -59,6 +59,7 @@ namespace Application.Products.Commands
                 product.ProductBrandId = request.ProductForUpdate.ProductBrandId;
                 product.ProductTypeId = request.ProductForUpdate.ProductTypeId;
                 product.ShowOnHomePage = request.ProductForUpdate.ShowOnHomePage;
+                product.Quantity = request.ProductForUpdate.Quantity;
 
                 await _context.SaveChangesAsync(cancellationToken);
 
