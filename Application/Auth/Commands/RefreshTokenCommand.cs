@@ -63,7 +63,17 @@ namespace Application.Auth.Commands
                     user.RefreshToken != request.RefreshToken ||
                     user.RefreshTokenExpiry < DateTime.Now)
                 {
-                    throw new RestException(HttpStatusCode.Unauthorized);
+                    if (user == null)
+                    {
+                        throw new RestException(HttpStatusCode.Unauthorized,"User not found");
+                    }else if(user.RefreshToken != request.RefreshToken)
+
+                    {
+                        throw new RestException(HttpStatusCode.Unauthorized,"Refresh Token does not match the one in db");
+                    }else if (user.RefreshTokenExpiry < DateTime.Now)
+                    {
+                        throw new RestException(HttpStatusCode.Unauthorized,"Refresh token has been expired");
+                    }
                 }
 
                 //Generates a new refresh token for the user

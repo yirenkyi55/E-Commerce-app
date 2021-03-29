@@ -1,10 +1,15 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Identity
 {
     public class User : IdentityUser
     {
+        public User()
+        {
+            ProductPurchases = new HashSet<ProductPurchase>();
+        }
         public string FirstName { get; set; }
 
         public string OtherName { get; set; }
@@ -18,5 +23,7 @@ namespace Domain.Identity
         public DateTime? RefreshTokenExpiry { get; set; }
 
         public DateTime? PasswordResetTokenExpiry { get; set; }
+
+        public virtual  ICollection<ProductPurchase> ProductPurchases { get; set; }
     }
 }

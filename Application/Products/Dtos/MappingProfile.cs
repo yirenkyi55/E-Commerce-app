@@ -2,6 +2,7 @@ using Application.Common.Models;
 using Application.Common.Static;
 using AutoMapper;
 using Domain;
+using Domain.Identity;
 
 namespace Application.Products.Dtos
 {
@@ -14,6 +15,10 @@ namespace Application.Products.Dtos
             memberOptions.MapFrom(dest => FileResolver.GetFullFilePath(AppSettings.MediaFolder, dest.Picture)));
 
             CreateMap<ProductForCreateDto, Product>();
+
+            CreateMap<User, UserForReturnDto>();
+            CreateMap<ProductPurchase, ProductPurchaseForReturnDto>();
+            CreateMap<ProductPurchaseForCreateDto, ProductPurchase>();
         }
     }
 }

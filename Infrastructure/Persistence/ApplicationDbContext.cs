@@ -20,6 +20,8 @@ namespace Infrastructure.Persistence
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<ProductBrand> ProductBrands { get; set; }
 
+        public DbSet<ProductPurchase> ProductPurchases { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

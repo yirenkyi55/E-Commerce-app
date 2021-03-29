@@ -1,10 +1,15 @@
 using System;
+using System.Collections.Generic;
 using Domain.Common;
 
 namespace Domain
 {
     public class Product : BaseEntity
     {
+        public Product()
+        {
+            ProductPurchases = new HashSet<ProductPurchase>();
+        }
         /// <summary>
         /// The name of the product
         /// </summary> 
@@ -54,5 +59,10 @@ namespace Domain
         /// A navigation property for the product brand
         /// </summary>
         public virtual ProductBrand ProductBrand { get; set; }
+
+        /// <summary>
+        /// A collection of purchases for this product
+        /// </summary>
+        public virtual  ICollection<ProductPurchase> ProductPurchases { get; set; }
     }
 }

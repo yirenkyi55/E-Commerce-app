@@ -15,6 +15,8 @@ namespace Application.Common.Interfaces
         DbSet<ProductType> ProductTypes { get; set; }
 
         DbSet<ProductBrand> ProductBrands { get; set; }
+        
+        public DbSet<ProductPurchase> ProductPurchases { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

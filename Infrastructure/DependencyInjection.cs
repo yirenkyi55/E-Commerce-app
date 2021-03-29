@@ -24,6 +24,7 @@ namespace Infrastructure
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IFileService, FileService>();
+            services.AddTransient<ILoggedInUserService, LoggedInUserService>();
 
             return services;
         }

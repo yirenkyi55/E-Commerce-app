@@ -51,5 +51,13 @@ namespace API.Controllers
             var result = await Mediator.Send(new DeleteProductCommand { ProductId = id });
             return NoContent();
         }
+
+        [HttpPost("purchase")]
+        public async Task<ActionResult<List<ProductPurchaseForReturnDto>>> PurchaseProduct(List<ProductPurchaseForCreateDto> purchases)
+        {
+            var result = await Mediator.Send(new PurchaseProductCommand {ProductsPurchased = purchases});
+
+            return Ok(result);
+        }
     }
 }

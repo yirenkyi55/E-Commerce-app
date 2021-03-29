@@ -2,6 +2,6 @@
 {
     public interface ILoggedInUserService
     {
-        
+        string GetLoggedInUserEmail();
     }
 }
