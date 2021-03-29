@@ -1,11 +1,72 @@
 <div class="header">
-  <app-cart-card cartHeaderLeft="Check Out" cartHeaderRight="$99.00">
+  <app-cart-card
+    cartHeaderLeft="Check Out"
+    cartHeaderRight="{{ totalPurchase | currency }}"
+  >
     <ng-container id="mainContent">
-      Some contents to display over here
+      <form [formGroup]="checkoutForm">
+        <div class="shipping__info">
+          <h3>Shipping Info</h3>
+          <app-input
+            formControlName="firstName"
+            placeholder="First Name"
+          ></app-input>
+
+          <app-input
+            formControlName="lastName"
+            placeholder="Last Name"
+          ></app-input>
+
+          <app-text-area
+            formControlName="address"
+            placeholder="Shipping Address"
+          ></app-text-area>
+
+          <app-input formControlName="city" placeholder="City"></app-input>
+
+          <app-input
+            formControlName="postalCode"
+            placeholder="Postal Code"
+          ></app-input>
+
+          <app-input
+            formControlName="country"
+            placeholder="Country"
+          ></app-input>
+
+          <app-input
+            formControlName="phoneNumber"
+            placeholder="Phone Number"
+          ></app-input>
+        </div>
+
+        <div class="shipping__info">
+          <h3>Card Details</h3>
+          <app-input
+            formControlName="creditCardNo"
+            placeholder="Credit Card Number"
+          ></app-input>
+
+          <app-input
+            formControlName="securityCode"
+            placeholder="Security Code"
+          ></app-input>
+
+          <app-input
+            formControlName="creditCardExpiry"
+            placeholder="Credit Card Expiry Date"
+          ></app-input>
+        </div>
+      </form>
     </ng-container>
     <ng-container id="footer">
       <div></div>
-      <app-button>Purchase</app-button>
+      <app-button
+        [disabled]="checkoutForm.invalid"
+        [isLoading]="loading"
+        (btnClick)="onPurchaseProduct()"
+        >Purchase <i nz-icon nzType="dollar-circle" nzTheme="outline"></i
+      ></app-button>
     </ng-container>
   </app-cart-card>
 </div>

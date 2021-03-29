@@ -27,6 +27,7 @@ const featureReducer = createReducer(
     fromProductAction.UpdateProductRequest,
     fromProductAction.DeleteProductRequest,
     fromProductAction.GetHomePageProductsRequest,
+    fromProductAction.PurchaseProductsRequest,
     (state) => ({
       ...state,
       loading: true,
@@ -71,6 +72,30 @@ const featureReducer = createReducer(
   ),
 
   on(
+    fromProductAction.PurchaseProductsRequestSuccess,
+    (state, { response }) => {
+      console.log(response);
+      let entities: { [id: string]: Product } = { ...state.entities };
+
+      response.map((purchase) => {
+        const updateEntities = {
+          ...entities,
+          [purchase.product.id]: purchase.product,
+        };
+
+        entities = { ...updateEntities };
+      });
+
+      return {
+        ...state,
+        entities,
+        loading: false,
+        loaded: true,
+      };
+    }
+  ),
+
+  on(
     fromProductAction.GetProductRequestSuccess,
     fromProductAction.UpdateProductRequestSuccess,
     fromProductAction.CreateProductRequestSuccess,
@@ -103,6 +128,7 @@ const featureReducer = createReducer(
     fromProductAction.UpdateProductRequestFailure,
     fromProductAction.DeleteProductRequestFailure,
     fromProductAction.GetHomePageProductsRequestFailure,
+    fromProductAction.PurchaseProductsRequestFailure,
     (state) => ({
       ...state,
       loading: false,

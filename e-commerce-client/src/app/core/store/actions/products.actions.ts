@@ -1,5 +1,11 @@
 import { createAction, props } from '@ngrx/store';
-import { PaginationResult, Product, ProductParams } from 'src/app/core/models';
+import {
+  PaginationResult,
+  Product,
+  ProductParams,
+  PurchaseModel,
+  PurchaseResponse,
+} from 'src/app/core/models';
 
 // Request to Get All Products
 export const GetProductsRequest = createAction(
@@ -94,5 +100,20 @@ export const GetHomePageProductsRequestSuccess = createAction(
 
 export const GetHomePageProductsRequestFailure = createAction(
   '[Products] Get Home Page Products Request Failure',
+  props<any>()
+);
+
+export const PurchaseProductsRequest = createAction(
+  '[Products] Purchase Products Request',
+  props<PurchaseModel>()
+);
+
+export const PurchaseProductsRequestSuccess = createAction(
+  '[Products] Purchase Products Request Success',
+  props<{ response: PurchaseResponse[] }>()
+);
+
+export const PurchaseProductsRequestFailure = createAction(
+  '[Products] Purchase Products Request Failure',
   props<any>()
 );

@@ -1,4 +1,9 @@
-import { Product, ProductParams } from 'src/app/core/models';
+import {
+  Product,
+  ProductParams,
+  PurchaseModel,
+  PurchaseResponse,
+} from 'src/app/core/models';
 import { Observable } from 'rxjs';
 import {
   HttpClient,
@@ -69,6 +74,13 @@ export class ProductsService {
       }
     );
     return this.http.request<Product>(request);
+  }
+
+  purchaseProduct(purchaseForm: PurchaseModel): Observable<PurchaseResponse[]> {
+    return this.http.post<PurchaseResponse[]>(
+      `${this.baseUrl}/purchase`,
+      purchaseForm
+    );
   }
 
   deleteProduct(productId: string): Observable<any> {

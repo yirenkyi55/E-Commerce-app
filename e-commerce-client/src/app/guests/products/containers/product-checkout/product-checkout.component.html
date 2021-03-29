@@ -1,1 +1,6 @@
-<app-product-checkout-page></app-product-checkout-page>
+<app-product-checkout-page
+  [currentUser]="currentUser$ | async"
+  [cartItems]="cartItems$ | async"
+  [loading]="loading$ | async"
+  (checkout)="onCheckout($event)"
+></app-product-checkout-page>

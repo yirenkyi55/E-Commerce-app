@@ -76,6 +76,27 @@ export class ProductsEffect {
     )
   );
 
+  purchaseProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromProducts.PurchaseProductsRequest),
+      concatMap((purchaseModel) => {
+        return this.productService.purchaseProduct(purchaseModel).pipe(
+          switchMap((response) => [
+            fromProducts.PurchaseProductsRequestSuccess({ response }),
+            fromHelpers.DisplayNotification({
+              notificationType: NotificationType.success,
+              title: 'Products',
+              message: 'Your purchase is successful',
+            }),
+          ]),
+          catchError((error) =>
+            of(fromProducts.PurchaseProductsRequestFailure(error))
+          )
+        );
+      })
+    )
+  );
+
   updateProduct$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromProducts.UpdateProductRequest),

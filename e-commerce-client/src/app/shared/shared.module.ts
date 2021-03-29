@@ -48,6 +48,8 @@ import { DropDownComponent } from './components/drop-down/drop-down.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { BrowseHeaderComponent } from './components/browse-header/browse-header.component';
 import { CartCardComponent } from './components/cart-card/cart-card.component';
+import { CreditCardDirective } from './directives/credit-card.directive';
+import { SecurityCodeDirective } from './directives/security-code.directive';
 
 const modules = [
   FormsModule,
@@ -102,6 +104,8 @@ const modules = [
     UploadComponent,
     BrowseHeaderComponent,
     CartCardComponent,
+    CreditCardDirective,
+    SecurityCodeDirective,
   ],
   imports: [...modules],
   exports: [
@@ -118,6 +122,8 @@ const modules = [
     UploadComponent,
     BrowseHeaderComponent,
     CartCardComponent,
+    CreditCardDirective,
+    SecurityCodeDirective,
   ],
 })
 export class SharedModule {}
