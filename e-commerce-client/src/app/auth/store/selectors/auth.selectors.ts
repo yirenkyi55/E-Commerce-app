@@ -31,7 +31,7 @@ export const getDashboardType = createSelector(
   fromAuthentication.getDashboardType
 );
 
-export const getAuthenticateRequest = createSelector(
-  getAuthState,
-  fromAuthentication.getAuthenticateState
-);
+// export const getAuthenticateRequest = createSelector(
+//   getAuthState,
+//   fromAuthentication.getAuthenticateState
+// );

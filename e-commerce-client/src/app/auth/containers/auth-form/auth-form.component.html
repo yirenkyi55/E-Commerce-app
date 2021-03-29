@@ -15,5 +15,7 @@
   <app-register-page
     *ngIf="!isLoginForm"
     (login)="onLogin()"
+    (createAccount)="onCreateAccount($event)"
+    [loading]="isLoading$ | async"
   ></app-register-page>
 </app-modal>

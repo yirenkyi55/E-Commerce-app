@@ -2,4 +2,5 @@
   [cartItems]="cartItems$ | async"
   (decreaseCart)="onDecreaseCart($event)"
   (increaseCart)="onIncreaseCart($event)"
+  (checkout)="onCheckout()"
 ></app-product-cart-page>

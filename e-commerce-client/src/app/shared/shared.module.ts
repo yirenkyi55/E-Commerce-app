@@ -47,6 +47,7 @@ import { TextAreaComponent } from './components/text-area/text-area.component';
 import { DropDownComponent } from './components/drop-down/drop-down.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { BrowseHeaderComponent } from './components/browse-header/browse-header.component';
+import { CartCardComponent } from './components/cart-card/cart-card.component';
 
 const modules = [
   FormsModule,
@@ -100,6 +101,7 @@ const modules = [
     DropDownComponent,
     UploadComponent,
     BrowseHeaderComponent,
+    CartCardComponent,
   ],
   imports: [...modules],
   exports: [
@@ -115,6 +117,7 @@ const modules = [
     TextAreaComponent,
     UploadComponent,
     BrowseHeaderComponent,
+    CartCardComponent,
   ],
 })
 export class SharedModule {}

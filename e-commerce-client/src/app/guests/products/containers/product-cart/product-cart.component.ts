@@ -24,4 +24,8 @@ export class ProductCartComponent implements OnInit {
   onIncreaseCart(cartItem: CartItem): void {
     this.guestStore.dispatch(fromGuestStore.AddToCart(cartItem));
   }
+
+  onCheckout(): void {
+    this.guestStore.dispatch(fromGuestStore.CheckoutRequest());
+  }
 }

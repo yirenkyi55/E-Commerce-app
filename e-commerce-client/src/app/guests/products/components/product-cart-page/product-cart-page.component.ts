@@ -10,6 +10,7 @@ export class ProductCartPageComponent implements OnInit {
   @Input() cartItems: CartItem[];
   @Output() decreaseCart = new EventEmitter<CartItem>();
   @Output() increaseCart = new EventEmitter<CartItem>();
+  @Output() checkout = new EventEmitter();
 
   constructor() {}
 
@@ -29,5 +30,9 @@ export class ProductCartPageComponent implements OnInit {
 
   onIncreaseCartItem(cartItem: CartItem): void {
     this.increaseCart.emit(cartItem);
+  }
+
+  onCheckOut(): void {
+    this.checkout.emit();
   }
 }

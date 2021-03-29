@@ -12,3 +12,9 @@ export const ClearCartItem = createAction(
   '[Cart] Clear Cart Item',
   props<CartItem>()
 );
+
+export const CheckoutRequest = createAction('[Cart] Check Out Request');
+
+export const CheckOutRequestSuccess = createAction(
+  '[Cart] Checkout Request Success'
+);

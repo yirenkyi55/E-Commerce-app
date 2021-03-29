@@ -64,7 +64,7 @@
       </li>
     </ul>
 
-    <ul class="navigation__nav">
+    <ul class="navigation__nav" *ngIf="!currentUser">
       <li class="navigation__nav--item">
         <a
           routerLinkActive="active"
@@ -75,5 +75,31 @@
         </a>
       </li>
     </ul>
+
+    <span
+      class="right"
+      *ngIf="currentUser"
+      nz-dropdown
+      [nzDropdownMenu]="menu"
+      nzPlacement="bottomCenter"
+    >
+      <span class="user-details">{{
+        (currentUser.firstName | titlecase) +
+          " " +
+          (currentUser.lastName | titlecase)
+      }}</span>
+      <nz-avatar nzIcon="user" class="icon-item"></nz-avatar>
+    </span>
   </div>
 </nav>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item class="menu-item">
+      <i nz-icon nzType="user" nzTheme="outline"></i> Account
+    </li>
+    <li nz-menu-item class="menu-item" (click)="onLogout()">
+      <i nz-icon nzType="logout" nzTheme="outline"></i> Log Out
+    </li>
+  </ul>
+</nz-dropdown-menu>

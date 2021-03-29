@@ -9,3 +9,5 @@ export const Go = createAction(
 export const Back = createAction('[Router] Back');
 
 export const Forward = createAction('[Router] Forward');
+
+export const NoWork = createAction('[Router] No Work');

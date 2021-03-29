@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   AuthUserRequestResponse,
+  CreateAccountRequestModel,
   LoginRequestModel,
 } from 'src/app/core/models';
 import { environment } from 'src/environments/environment';
@@ -20,6 +21,18 @@ export class AuthService {
     return this.http.post<AuthUserRequestResponse>(
       `${this.baseUrl}/login`,
       loginRequest,
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  createAccount(
+    accountRequest: CreateAccountRequestModel
+  ): Observable<AuthUserRequestResponse> {
+    return this.http.post<AuthUserRequestResponse>(
+      `${this.baseUrl}/account`,
+      accountRequest,
       {
         withCredentials: true,
       }

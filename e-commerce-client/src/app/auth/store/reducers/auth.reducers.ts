@@ -8,7 +8,7 @@ export interface AuthenticationState {
   loading: boolean;
   loaded: boolean;
   dashboard: DashboardTypes;
-  authenticate: boolean;
+  //authenticate: boolean;
 }
 
 export const initialState: AuthenticationState = {
@@ -16,19 +16,25 @@ export const initialState: AuthenticationState = {
   loading: false,
   loaded: false,
   dashboard: DashboardTypes.Guest,
-  authenticate: false,
+  // authenticate: false,
 };
 
 const featureReducer = createReducer(
   initialState,
-  on(authActions.LoginRequest, authActions.RefreshTokenRequest, (state) => ({
-    ...state,
-    loading: true,
-  })),
+  on(
+    authActions.LoginRequest,
+    authActions.RefreshTokenRequest,
+    authActions.CreateAccountRequest,
+    (state) => ({
+      ...state,
+      loading: true,
+    })
+  ),
 
   on(
     authActions.LoginRequestSuccess,
     authActions.RefreshTokenRequestSuccess,
+    authActions.CreateAccountRequestSuccess,
     (state, { response }) => {
       const currentUser = response;
       const dashboard = response.roles?.includes('admin')
@@ -45,10 +51,10 @@ const featureReducer = createReducer(
     }
   ),
 
-  on(authActions.AuthenticateRequest, (state, { value }) => ({
-    ...state,
-    authenticate: value,
-  })),
+  // on(authActions.AuthenticateRequest, (state, { value }) => ({
+  //   ...state,
+  //   authenticate: value,
+  // })),
 
   on(authActions.Logout, (state) => {
     return {
@@ -61,6 +67,7 @@ const featureReducer = createReducer(
   on(
     authActions.LoginRequestFailure,
     authActions.RefreshTokenRequestFailure,
+    authActions.CreateAccountRequestFailure,
     (state) => ({
       ...state,
       loading: false,
@@ -81,5 +88,5 @@ export const getCurrentUserEntity = (state: AuthenticationState) =>
 export const getAuthLoading = (state: AuthenticationState) => state.loading;
 export const getAuthLoaded = (state: AuthenticationState) => state.loaded;
 export const getDashboardType = (state: AuthenticationState) => state.dashboard;
-export const getAuthenticateState = (state: AuthenticationState) =>
-  state.authenticate;
+// export const getAuthenticateState = (state: AuthenticationState) =>
+//   state.authenticate;

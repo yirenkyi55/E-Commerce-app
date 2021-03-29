@@ -15,3 +15,11 @@ export interface AuthUserRequestResponse {
   accessToken: string;
   roles: string[];
 }
+
+export interface CreateAccountRequestModel {
+  email: string;
+  firstName: string;
+  otherName: string;
+  lastName: string;
+  password: string;
+}

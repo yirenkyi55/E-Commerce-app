@@ -23,13 +23,36 @@ export class AuthEffects {
     )
   );
 
+  createAccount$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromAuthAction.CreateAccountRequest),
+      switchMap((requestModel) =>
+        this.authService.createAccount(requestModel).pipe(
+          map((response) =>
+            fromAuthAction.CreateAccountRequestSuccess({ response })
+          ),
+          catchError((error) =>
+            of(fromAuthAction.CreateAccountRequestFailure(error))
+          )
+        )
+      )
+    )
+  );
+
+  createAccountSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromAuthAction.CreateAccountRequestSuccess),
+      switchMap(() => [fromRoot.Go({ path: ['/shop/checkout'] })])
+    )
+  );
+
   loginSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromAuthAction.LoginRequestSuccess),
       switchMap(({ response }) => [
         response?.roles?.includes('admin')
           ? fromRoot.Go({ path: ['/admin'] })
-          : fromRoot.Go({ path: ['/'] }),
+          : fromRoot.NoWork(),
       ])
     )
   );

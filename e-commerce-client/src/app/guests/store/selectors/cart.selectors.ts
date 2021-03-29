@@ -8,3 +8,8 @@ export const getCartState = createSelector(
 );
 
 export const getCartItems = createSelector(getCartState, fromCart.getCartItems);
+
+export const getCheckoutState = createSelector(
+  getCartState,
+  fromCart.getCheckoutState
+);

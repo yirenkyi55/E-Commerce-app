@@ -1,5 +1,6 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CreateAccountRequestModel } from 'src/app/core/models';
 
 @Component({
   selector: 'app-register-page',
@@ -7,15 +8,18 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./register-page.component.scss'],
 })
 export class RegisterPageComponent implements OnInit {
+  @Input() loading: boolean;
+
   registerForm: FormGroup;
   @Output() login = new EventEmitter<boolean>();
+  @Output() createAccount = new EventEmitter<CreateAccountRequestModel>();
 
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group({
-      firstName: ['', [Validators.required]],
-      otherName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
       email: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      otherName: [''],
+      lastName: ['', [Validators.required]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
     });
@@ -23,7 +27,9 @@ export class RegisterPageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit(): void {}
+  onSubmit(): void {
+    this.createAccount.emit(this.registerForm.value);
+  }
 
   onLogin(): void {
     this.login.emit(true);

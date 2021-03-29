@@ -29,11 +29,13 @@
       formControlName="password"
       placeholder="Password"
       label="Password"
+      type="password"
     ></app-input>
 
     <app-input
       formControlName="confirmPassword"
       placeholder="Confirm Password"
+      type="password"
       label="Confirm Password"
     ></app-input>
 
@@ -43,6 +45,8 @@
       <app-button
         [disabled]="registerForm.invalid"
         btnClass="button button-primary button-block"
+        [isLoading]="loading"
+        (btnClick)="onSubmit()"
         >Register</app-button
       >
     </div>

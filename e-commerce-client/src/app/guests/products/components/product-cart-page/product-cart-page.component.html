@@ -25,6 +25,8 @@
         >
 
         <app-button
+          (btnClick)="onCheckOut()"
+          [disabled]="cartItems?.length === 0"
           ><i nz-icon nzType="shopping-cart" nzTheme="outline"></i> Check
           Out</app-button
         >

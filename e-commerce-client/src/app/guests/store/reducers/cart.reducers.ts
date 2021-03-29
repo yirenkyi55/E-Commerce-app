@@ -4,10 +4,12 @@ import * as fromCart from '../actions/cart.actions';
 
 export interface CartState {
   cartItems: CartItem[];
+  checkOut: boolean;
 }
 
 export const initialState: CartState = {
   cartItems: [],
+  checkOut: false,
 };
 
 const featureReducer = createReducer(
@@ -64,6 +66,20 @@ const featureReducer = createReducer(
       ...state,
       cartItems,
     };
+  }),
+
+  on(fromCart.CheckoutRequest, (state) => {
+    return {
+      ...state,
+      checkOut: true,
+    };
+  }),
+
+  on(fromCart.CheckOutRequestSuccess, (state) => {
+    return {
+      ...state,
+      checkOut: false,
+    };
   })
 );
 
@@ -75,3 +91,4 @@ export function reducer(
 }
 
 export const getCartItems = (state: CartState) => state.cartItems;
+export const getCheckoutState = (state: CartState) => state.checkOut;

@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import {
   AuthUserRequestResponse,
+  CreateAccountRequestModel,
   LoginRequestModel,
 } from 'src/app/core/models';
 
@@ -33,6 +34,21 @@ export const RefreshTokenRequestSuccess = createAction(
 
 export const RefreshTokenRequestFailure = createAction(
   '[Authentication] Refresh Token Request Failure',
+  props<any>()
+);
+
+export const CreateAccountRequest = createAction(
+  '[Authentication] Create Account Request',
+  props<CreateAccountRequestModel>()
+);
+
+export const CreateAccountRequestSuccess = createAction(
+  '[Authentication] Create Account Request Success',
+  props<{ response: AuthUserRequestResponse }>()
+);
+
+export const CreateAccountRequestFailure = createAction(
+  '[Authentication] Create Account Request Failure',
   props<any>()
 );
 

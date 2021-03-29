@@ -15,7 +15,12 @@
 <ng-container
   *ngIf="!currentUser || (dashboardType$ | async) === dashboardTye.Guest"
 >
-  <app-navbar (login)="onLogin()" [totalCart]="totalCart"></app-navbar>
+  <app-navbar
+    (login)="onLogin()"
+    (logout)="onLogOut()"
+    [totalCart]="totalCart"
+    [currentUser]="currentUser"
+  ></app-navbar>
   <ng-container *ngTemplateOutlet="template"></ng-container>
   <app-footer></app-footer>
 </ng-container>
@@ -25,8 +30,5 @@
 </ng-template>
 
 <!-- A login form that is called when the user needs to logs in -->
-<app-auth-form
-  [visible]="isLoginVisible || (authenticatedRequest$ | async)"
-  (cancelled)="onCancelled()"
->
+<app-auth-form [visible]="isLoginVisible" (cancelled)="onCancelled()">
 </app-auth-form>

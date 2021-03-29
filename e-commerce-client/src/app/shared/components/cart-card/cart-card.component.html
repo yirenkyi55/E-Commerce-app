@@ -1,0 +1,22 @@
+<div class="header">
+  <div class="cart__container">
+    <div class="cart__wrapper">
+      <div class="cart__header">
+        <span class="cart__title">{{ cartHeaderLeft }}</span>
+        <span class="cart__total">{{ cartHeaderRight }}</span>
+      </div>
+
+      <ng-container>
+        <div class="empty" *ngIf="showEmptyContainer">
+          <nz-empty [nzNotFoundContent]="'Content is empty'"></nz-empty>
+        </div>
+        <!-- Inject main content over here -->
+        <ng-content select="#mainContent"></ng-content>
+      </ng-container>
+
+      <div class="cart__footer">
+        <ng-content select="#footer"></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

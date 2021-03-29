@@ -11,6 +11,8 @@ import { ProductsComponent } from './containers/products/products.component';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ProductCartItemComponent } from './components/product-cart-item/product-cart-item.component';
+import { ProductCheckoutPageComponent } from './components/product-checkout-page/product-checkout-page.component';
+import { ProductCheckoutComponent } from './containers/product-checkout/product-checkout.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { ProductCartItemComponent } from './components/product-cart-item/product
     ProductsComponent,
     ProductItemComponent,
     ProductCartItemComponent,
+    ProductCheckoutPageComponent,
+    ProductCheckoutComponent,
   ],
   imports: [CommonModule, ProductsRoutingModule, SharedModule],
 })

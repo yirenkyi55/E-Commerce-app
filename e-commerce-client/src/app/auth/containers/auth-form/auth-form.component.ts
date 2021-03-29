@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { LoginRequestModel } from 'src/app/core/models';
+import {
+  CreateAccountRequestModel,
+  LoginRequestModel,
+} from 'src/app/core/models';
 import * as fromStore from 'src/app/auth/store';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -25,7 +28,7 @@ export class AuthFormComponent implements OnInit {
 
   onCancelled(event: boolean): void {
     this.cancelled.emit(event);
-    this.store.dispatch(fromStore.AuthenticateRequest({ value: false }));
+    // this.store.dispatch(fromStore.AuthenticateRequest({ value: false }));
   }
 
   get loginTitle(): string {
@@ -40,6 +43,10 @@ export class AuthFormComponent implements OnInit {
   onLogin(): void {
     this.isLoginForm = true;
     this.registerText = 'Login';
+  }
+
+  onCreateAccount(account: CreateAccountRequestModel): void {
+    this.store.dispatch(fromStore.CreateAccountRequest(account));
   }
 
   onLoginSubmit(requestModel: LoginRequestModel): void {
