@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [Route("api/v{version:apiVersion}/products")]
-    [Authorize(Roles = "admin")]
+    
     public class ProductsController : BaseController
     {
         [HttpGet]
@@ -31,6 +31,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<ProductForReturnDto>> CreateProduct([FromForm] ProductForCreateDto product)
         {
             var result = await Mediator.Send(new CreateProductCommand { Product = product });
@@ -39,6 +40,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<ProductForReturnDto>> UpdateProduct(Guid id, [FromForm] ProductForUpdateDto productForUpdate)
         {
             var result = await Mediator.Send(new UpdateProductCommand { ProductId = id, ProductForUpdate = productForUpdate });
@@ -46,6 +48,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> DeleteProduct(Guid id)
         {
             var result = await Mediator.Send(new DeleteProductCommand { ProductId = id });
@@ -53,7 +56,7 @@ namespace API.Controllers
         }
 
         [HttpPost("purchase")]
-        public async Task<ActionResult<List<ProductPurchaseForReturnDto>>> PurchaseProduct(List<ProductPurchaseForCreateDto> purchases)
+        public async Task<ActionResult<List<ProductPurchaseForReturnDto>>> PurchaseProduct(ProductPurchaseForCreateDto purchases)
         {
             var result = await Mediator.Send(new PurchaseProductCommand {ProductsPurchased = purchases});
 

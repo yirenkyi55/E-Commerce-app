@@ -13,7 +13,7 @@ namespace Application.Products.Commands
 {
     public class PurchaseProductCommand: IRequest<List<ProductPurchaseForReturnDto>>
     {
-        public List<ProductPurchaseForCreateDto> ProductsPurchased { get; set; }
+        public ProductPurchaseForCreateDto ProductsPurchased { get; set; }
         
         public class PurchaseProductCommandHandler: IRequestHandler<PurchaseProductCommand, List<ProductPurchaseForReturnDto>>
         {
@@ -42,7 +42,7 @@ namespace Application.Products.Commands
                     throw new RestException(HttpStatusCode.NotFound, "Account does not exists");
                 }
                 
-                foreach (var purchase in request.ProductsPurchased)
+                foreach (var purchase in request.ProductsPurchased.PurchaseDetails)
                 {
                     var product = await _context.Products.FindAsync(purchase.ProductId);
 
@@ -51,7 +51,7 @@ namespace Application.Products.Commands
                         throw new RestException(HttpStatusCode.NotFound, "Product does not exists");
                     }
 
-                    if (product.Quantity > purchase.QuantityPurchased)
+                    if ( purchase.QuantityPurchased > product.Quantity)
                     {
                         throw new RestException(HttpStatusCode.BadRequest, $"Purchased quantity of " +
                                                                            $"{purchase.QuantityPurchased} is greater than the on " +
@@ -60,8 +60,10 @@ namespace Application.Products.Commands
                     }
                 }
                 
-
-                foreach (var purchase in request.ProductsPurchased)
+                var purchaseProducts = _mapper.Map<List<ProductPurchase>>(request.ProductsPurchased.PurchaseDetails);
+                var shippingInfo = _mapper.Map<ShippingInfo>(request.ProductsPurchased.ShippingInfo);
+                
+                foreach (var purchase in request.ProductsPurchased.PurchaseDetails)
                 {
                     var product = await _context.Products.FindAsync(purchase.ProductId);
 
@@ -70,11 +72,13 @@ namespace Application.Products.Commands
                     await _context.SaveChangesAsync(cancellationToken);
                 }
 
-                var purchaseProducts = _mapper.Map<List<ProductPurchase>>(request.ProductsPurchased);
+           
+                shippingInfo.User = user;
 
                 foreach (var purchase in purchaseProducts)
                 {
                     purchase.User = user;
+                    purchase.ShippingInfo = shippingInfo;
                 }
 
                 _context.ProductPurchases.AddRange(purchaseProducts);

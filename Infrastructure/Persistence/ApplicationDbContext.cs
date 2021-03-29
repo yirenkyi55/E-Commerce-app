@@ -19,8 +19,9 @@ namespace Infrastructure.Persistence
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<ProductBrand> ProductBrands { get; set; }
-
         public DbSet<ProductPurchase> ProductPurchases { get; set; }
+
+        public DbSet<ShippingInfo> ShippingInfos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

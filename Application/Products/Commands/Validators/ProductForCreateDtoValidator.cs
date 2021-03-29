@@ -8,7 +8,7 @@ namespace Application.Products.Commands.Validators
         public ProductForCreateDtoValidator()
         {
             RuleFor(x => x.Name).NotEmpty().MaximumLength(100);
-            RuleFor(x => x.Description).NotEmpty().MaximumLength(180);
+            RuleFor(x => x.Description).NotEmpty();
             RuleFor(x => x.Photo).NotEmpty();
             RuleFor(x => x.ProductBrandId).NotEmpty();
             RuleFor(x => x.ProductTypeId).NotEmpty();

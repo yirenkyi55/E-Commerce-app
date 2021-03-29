@@ -21,5 +21,9 @@ namespace Domain
         public bool IsConfirmed { get; set; }
 
         public DateTime PurchasedDate { get; set; }
+
+        public virtual ShippingInfo ShippingInfo { get; set; }
+        
+        
     }
 }

@@ -16,6 +16,9 @@ namespace Infrastructure.Persistence.Configurations
                 .WithMany(u => u.ProductPurchases)
                 .HasForeignKey(x => x.UserId);
             
+            builder.HasOne(p=>p.ShippingInfo)
+                .WithOne(s=>s.ProductPurchase)
+                .HasForeignKey<ShippingInfo>(s=>s.ProductPurchaseId);
         }
     }
 }

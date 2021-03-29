@@ -9,6 +9,7 @@ namespace Domain.Identity
         public User()
         {
             ProductPurchases = new HashSet<ProductPurchase>();
+            ShippingInfos = new HashSet<ShippingInfo>();
         }
         public string FirstName { get; set; }
 
@@ -25,5 +26,7 @@ namespace Domain.Identity
         public DateTime? PasswordResetTokenExpiry { get; set; }
 
         public virtual  ICollection<ProductPurchase> ProductPurchases { get; set; }
+
+        public virtual ICollection<ShippingInfo> ShippingInfos { get; set; }
     }
 }
