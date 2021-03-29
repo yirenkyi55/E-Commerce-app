@@ -8,6 +8,8 @@
   padding: 1rem 5rem;
 
   &-details {
+    min-width: 30rem;
+
     h3 {
       color: var(--color-primary);
       font-size: 2rem;

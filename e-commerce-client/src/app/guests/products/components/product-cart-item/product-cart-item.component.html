@@ -1,17 +1,21 @@
 <div class="cart__item">
-  <img
-    class="cart__item-image"
-    src="http://localhost:5000/Media/f76b3c49-7209-4c5e-85e3-698007a59f9a.jpg"
-  />
+  <img class="cart__item-image" [src]="cartItem.picture" />
 
   <div class="cart__item-details">
-    <h3>Printed lightweight scarf</h3>
-    <span>$79.0 x 2 = $190</span>
+    <h3>{{ cartItem.name | titlecase }}</h3>
+    <span
+      >{{ cartItem.price | currency }} x {{ cartItem.quantity }} =
+      {{ cartItem.price * cartItem.quantity | currency }}</span
+    >
   </div>
 
   <div class="cart__item-add">
-    <app-button><i nz-icon nzType="down" nzTheme="outline"></i></app-button>
-    <span class="cart__count">3</span>
-    <app-button><i nz-icon nzType="up" nzTheme="outline"></i></app-button>
+    <app-button (btnClick)="decreseCartItem()"
+      ><i nz-icon nzType="down" nzTheme="outline"></i
+    ></app-button>
+    <span class="cart__count">{{ cartItem.quantity }}</span>
+    <app-button (btnClick)="increaseCartItem()"
+      ><i nz-icon nzType="up" nzTheme="outline"></i
+    ></app-button>
   </div>
 </div>

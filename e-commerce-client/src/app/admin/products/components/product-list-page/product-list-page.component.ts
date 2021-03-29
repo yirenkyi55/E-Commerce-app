@@ -12,6 +12,8 @@ export class ProductListPageComponent implements OnInit {
     { key: 'name', label: 'Name' },
     { key: 'description', label: 'Description' },
     { key: 'price', label: 'Price' },
+    { key: 'quantity', label: 'Quanitity' },
+    { key: 'availability', label: 'Status' },
     { key: 'productType', label: 'Type' },
     { key: 'productBrand', label: 'Brand' },
     { key: 'picture', label: 'Image', isImage: true },

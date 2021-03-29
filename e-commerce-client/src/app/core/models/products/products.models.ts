@@ -6,6 +6,7 @@ export interface Product {
   name: string;
   description: string;
   price: number;
+  quantity: number;
   picture: string;
   productType: ProductType;
   productBrand: ProductBrand;
@@ -17,6 +18,8 @@ export interface ProductToDisplay {
   name: string;
   description: string;
   price: string;
+  quantity: string;
+  availability: string;
   picture: string;
   productType: string;
   productBrand: string;

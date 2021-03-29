@@ -36,6 +36,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
               (product.description.length > 60 ? '...' : ''),
             picture: product.picture,
             price: this.currencyPipe.transform(product.price).toString(),
+            quantity: product.quantity.toString(),
+            availability: product.quantity > 0 ? 'Available' : 'Out of Stock',
             productBrand: this.titleCase.transform(product.productBrand.name),
             productType: this.titleCase.transform(product.productType.name),
             showOnHomePage: product.showOnHomePage ? 'Yes' : 'No',

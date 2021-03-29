@@ -71,9 +71,10 @@ export class ProductCreatePageComponent
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       price: ['', [Validators.required, Validators.min(1)]],
+      quantity: ['', [Validators.required, Validators.min(0)]],
       productTypeId: ['', [Validators.required]],
       productBrandId: ['', [Validators.required]],
-      showOnHomePage: [false],
+      showOnHomePage: [false, [Validators.required]],
     });
   }
 
@@ -98,6 +99,7 @@ export class ProductCreatePageComponent
         name: this.productToUpdate.name,
         description: this.productToUpdate.description,
         price: this.productToUpdate.price.toString(),
+        quantity: this.productToUpdate.quantity,
         productTypeId: this.productToUpdate.productType.id,
         productBrandId: this.productToUpdate.productBrand.id,
         showOnHomePage: this.productToUpdate.showOnHomePage,
@@ -143,10 +145,12 @@ export class ProductCreatePageComponent
   }
 
   onCreateProduct(): void {
+    console.log(this.productForm.value);
     if (!this.productToUpdate) {
       this.formData.append('name', this.productForm.value.name);
       this.formData.append('description', this.productForm.value.description);
       this.formData.append('price', this.productForm.value.price);
+      this.formData.append('quantity', this.productForm.value.quantity);
       this.formData.append(
         'productTypeId',
         this.productForm.value.productTypeId
@@ -167,6 +171,7 @@ export class ProductCreatePageComponent
       formData.append('name', this.productForm.value.name);
       formData.append('description', this.productForm.value.description);
       formData.append('price', this.productForm.value.price);
+      formData.append('quantity', this.productForm.value.quantity);
       formData.append('productTypeId', this.productForm.value.productTypeId);
       formData.append('productBrandId', this.productForm.value.productBrandId);
       formData.append('showOnHomePage', this.productForm.value.showOnHomePage);
