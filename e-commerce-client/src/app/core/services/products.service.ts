@@ -78,8 +78,19 @@ export class ProductsService {
 
   purchaseProduct(purchaseForm: PurchaseModel): Observable<PurchaseResponse[]> {
     return this.http.post<PurchaseResponse[]>(
-      `${this.baseUrl}/purchase`,
+      `${this.baseUrl}/purchases`,
       purchaseForm
+    );
+  }
+
+  getAllPurchases(): Observable<PurchaseResponse[]> {
+    return this.http.get<PurchaseResponse[]>(`${this.baseUrl}/purchases`);
+  }
+
+  togglePurchaseConfirm(purchaseId: string): Observable<PurchaseResponse> {
+    return this.http.post<PurchaseResponse>(
+      `${this.baseUrl}/purchases/${purchaseId}/confirm`,
+      {}
     );
   }
 

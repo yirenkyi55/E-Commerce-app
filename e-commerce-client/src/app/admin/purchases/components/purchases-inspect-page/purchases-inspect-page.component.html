@@ -1,0 +1,13 @@
+<app-inspect-mode
+  [showDeleteButton]="false"
+  [showEditButton]="false"
+  [inspectData]="listContentType"
+>
+  <ng-container id="header">
+    <h3>Purchase</h3>
+  </ng-container>
+
+  <ng-container id="contents">
+    <app-button (btnClick)="toggleStatus()">{{ deliveredStatus }}</app-button>
+  </ng-container>
+</app-inspect-mode>

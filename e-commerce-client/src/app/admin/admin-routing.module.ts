@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminGuard, ProductsGuard, ProductTypesGuard } from '../core/guards';
+import {
+  AdminGuard,
+  ProductsGuard,
+  ProductTypesGuard,
+  PurchasesGuard,
+} from '../core/guards';
 
 const routes: Routes = [
   {
     path: 'admin',
-    canActivate: [AdminGuard, ProductTypesGuard, ProductsGuard],
+    canActivate: [AdminGuard, ProductTypesGuard, ProductsGuard, PurchasesGuard],
     children: [
       {
         path: '',

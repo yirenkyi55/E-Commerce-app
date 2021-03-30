@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 })
 export class InspectModeComponent implements OnInit {
   @Input() inspectData: InspectModeContent[] = [];
+  @Input() showEditButton = true;
 
   @Output() editContent = new EventEmitter<boolean>();
   @Output() customButtonClicked = new EventEmitter<boolean>();

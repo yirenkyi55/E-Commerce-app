@@ -4,3 +4,4 @@ export * from './admin.guard';
 export * from './product-types.guard';
 export * from './products.guard';
 export * from './home-page-products.guard';
+export * from './purchases.guard';

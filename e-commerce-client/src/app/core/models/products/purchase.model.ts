@@ -1,6 +1,7 @@
 import { Product } from '.';
 
 export interface ShippingInfo {
+  id?: string;
   firstName: string;
   lastName: string;
   address: string;
@@ -22,12 +23,25 @@ export interface PurchaseModel {
 }
 
 export interface PurchaseResponse {
+  id: string;
   product: Product;
   user: User;
   quantityPurchased: number;
   purchasedPrice: number;
   purchasedDate: Date;
   isConfirmed: boolean;
+  shippingInfo: ShippingInfo;
+}
+
+export interface PurchaseToDisplay {
+  id: string;
+  productName: string;
+  purchasedPrice: string;
+  quantityPurchased: string;
+  purchasedDate: string;
+  userPurchased: string;
+  isConfirmed: string;
+  totalCost: string;
 }
 
 export interface User {

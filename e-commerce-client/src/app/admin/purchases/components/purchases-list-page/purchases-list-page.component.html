@@ -1,0 +1,9 @@
+<app-browse-mode
+  [tableHeaders]="headers"
+  [tableData]="purchasesToDisplay"
+  [showFilterButton]="false"
+  [showCreateButton]="false"
+  (tableRecordClick)="onRecordClick($event)"
+>
+  <ng-container id="header"><h3>All Purchases</h3></ng-container>
+</app-browse-mode>
