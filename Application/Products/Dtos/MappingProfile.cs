@@ -20,6 +20,7 @@ namespace Application.Products.Dtos
             CreateMap<ProductPurchase, ProductPurchaseForReturnDto>();
             CreateMap<PurchaseDetailsDto, ProductPurchase>();
             CreateMap<ShippingInfoDto, ShippingInfo>();
+            CreateMap<ShippingInfo, ShippingInfoForReturnDto>();
         }
     }
 }

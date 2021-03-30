@@ -10,6 +10,7 @@ namespace Domain.Identity
         {
             ProductPurchases = new HashSet<ProductPurchase>();
             ShippingInfos = new HashSet<ShippingInfo>();
+            Ratings = new HashSet<Rating>();
         }
         public string FirstName { get; set; }
 
@@ -28,5 +29,7 @@ namespace Domain.Identity
         public virtual  ICollection<ProductPurchase> ProductPurchases { get; set; }
 
         public virtual ICollection<ShippingInfo> ShippingInfos { get; set; }
+
+        public virtual ICollection<Rating> Ratings { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Domain
 
         public bool IsConfirmed { get; set; }
 
-        public DateTime PurchasedDate { get; set; }
+        public DateTime PurchasedDate { get; set; } =  DateTime.Now;
 
         public virtual ShippingInfo ShippingInfo { get; set; }
         

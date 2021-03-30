@@ -55,10 +55,36 @@ namespace API.Controllers
             return NoContent();
         }
 
-        [HttpPost("purchase")]
+        [HttpPost("purchases")]
         public async Task<ActionResult<List<ProductPurchaseForReturnDto>>> PurchaseProduct(ProductPurchaseForCreateDto purchases)
         {
             var result = await Mediator.Send(new PurchaseProductCommand {ProductsPurchased = purchases});
+
+            return Ok(result);
+        }
+        
+        [HttpGet("purchases")]
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult<List<ProductPurchaseForReturnDto>>> GetAllPurchases()
+        {
+            var result = await Mediator.Send(new GetAllPurchasesQuery());
+
+            return Ok(result);
+        }
+        
+        [HttpPost("purchases/{id}/confirm")]
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult<ProductPurchaseForReturnDto>> ConfirmPurchases(Guid id)
+        {
+            var result = await Mediator.Send(new ConfirmPurchaseCommand{PurchaseId = id});
+
+            return Ok(result);
+        }
+        
+        [HttpGet("purchases/user")]
+        public async Task<ActionResult<List<ProductPurchaseForReturnDto>>> GetAllUserPurchases()
+        {
+            var result = await Mediator.Send(new GetAllUserPurchases());
 
             return Ok(result);
         }

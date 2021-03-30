@@ -9,6 +9,7 @@ namespace Domain
         public Product()
         {
             ProductPurchases = new HashSet<ProductPurchase>();
+            Ratings = new HashSet<Rating>();
         }
         /// <summary>
         /// The name of the product
@@ -64,5 +65,8 @@ namespace Domain
         /// A collection of purchases for this product
         /// </summary>
         public virtual  ICollection<ProductPurchase> ProductPurchases { get; set; }
+
+        public virtual ICollection<Rating> Ratings { get; set; }
+        
     }
 }
