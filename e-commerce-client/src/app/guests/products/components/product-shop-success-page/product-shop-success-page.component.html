@@ -1,0 +1,18 @@
+<div class="header">
+  <app-cart-card cartHeaderLeft="Payment Success">
+    <ng-container id="mainContent">
+      <div class="shipping__info">
+        <h2>Congratulations! Your purchase was successful</h2>
+        <p>Your product(s) will be delivered as soon as possible</p>
+        <p>Thanks for shopping with us!</p>
+      </div>
+    </ng-container>
+
+    <ng-container id="footer">
+      <div></div>
+      <app-button [routerLink]="['/shop']"
+        >Continue Shopping <i nz-icon nzType="rollback" nzTheme="outline"></i
+      ></app-button>
+    </ng-container>
+  </app-cart-card>
+</div>

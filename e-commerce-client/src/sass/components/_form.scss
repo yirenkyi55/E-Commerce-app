@@ -8,14 +8,18 @@
   }
 
   &__bg-blue {
-    border: 5px solid var(--color-secondary);
-    background-color: var(--color-secondary-dark);
+    border: 5px solid var(--color-primary);
+    background: linear-gradient(
+      to right bottom,
+      rgba(#415e0d, 0.8),
+      rgba(#00312a, 0.8)
+    );
     border-radius: 7px;
   }
 
   &__title {
     font-size: 2rem;
-    color: var(--color-secondary);
+    color: #fff;
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 0.6rem;

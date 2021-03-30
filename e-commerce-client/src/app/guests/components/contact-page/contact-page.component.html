@@ -1,1 +1,48 @@
-<div class="header"></div>
+<div class="header">
+  <div class="contact-form" [@swing]="swing">
+    <form action="#" class="form form__bg-blue shadow">
+      <h3 class="form__title movesInLeft">Drop Us a line</h3>
+      <h3 class="form__title-message">We are here for you! How can we help?</h3>
+
+      <div class="form__group">
+        <input
+          type="text"
+          class="form__input"
+          required
+          id="name"
+          placeholder="Name"
+          autocomplete="off"
+        />
+        <label for="name" class="form__label">Name</label>
+      </div>
+
+      <div class="form__group">
+        <input
+          type="email"
+          class="form__input"
+          required
+          id="email"
+          placeholder="Email"
+          autocomplete="off"
+        />
+        <label for="email" class="form__label">Email</label>
+      </div>
+
+      <div class="form__group">
+        <textarea
+          name="message"
+          id="message"
+          cols="30"
+          rows="10"
+          class="form__input"
+          placeholder="Message"
+        ></textarea>
+        <label for="email" class="form__label">Message</label>
+      </div>
+
+      <div class="form__group">
+        <button class="button button-primary button-block">Contact Us</button>
+      </div>
+    </form>
+  </div>
+</div>

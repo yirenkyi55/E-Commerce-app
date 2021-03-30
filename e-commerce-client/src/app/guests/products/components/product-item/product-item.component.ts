@@ -14,15 +14,21 @@ export class ProductItemComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  get outOfStock(): boolean {
+    return this.product.quantity === 0;
+  }
+
   onAddToCart(): void {
-    const cartItem: CartItem = {
-      id: this.product.id,
-      name: this.product.name,
-      description: this.product.description,
-      picture: this.product.picture,
-      quantity: 1,
-      price: this.product.price,
-    };
-    this.addToCart.emit(cartItem);
+    if (!this.outOfStock) {
+      const cartItem: CartItem = {
+        id: this.product.id,
+        name: this.product.name,
+        description: this.product.description,
+        picture: this.product.picture,
+        quantity: 1,
+        price: this.product.price,
+      };
+      this.addToCart.emit(cartItem);
+    }
   }
 }

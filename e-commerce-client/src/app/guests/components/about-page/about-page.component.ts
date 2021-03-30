@@ -15,12 +15,12 @@ export class AboutPageComponent implements OnInit {
   contentNotes = [
     {
       header: 'Our E-Commerce App',
-      content: `WE@ is a teaching and learning platform that
-      allows storage of learning materials such as screen-cam video’s,
-      Computer Based Training components, Business Simulations, Games,
-      Texts, Slides, process schemes or -models, role-based training
-      schedules etc well as providing such contents to users in a friendly
-      manner. (Powered by Exalio)`,
+      content: `E-commerce has helped businesses establish a wider market 
+      presence by providing cheaper and more efficient distribution channels 
+      for their products or services. For example, the mass retailer Target has 
+      supplemented its brick-and-mortar presence with an online store that lets
+       customers purchase everything from clothes to coffeemakers to toothpaste
+        to action figures.`,
     },
   ];
 

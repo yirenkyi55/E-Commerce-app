@@ -13,6 +13,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ProductCartItemComponent } from './components/product-cart-item/product-cart-item.component';
 import { ProductCheckoutPageComponent } from './components/product-checkout-page/product-checkout-page.component';
 import { ProductCheckoutComponent } from './containers/product-checkout/product-checkout.component';
+import { ProductShopSuccessPageComponent } from './components/product-shop-success-page/product-shop-success-page.component';
+import { ProductShopSuccessComponent } from './containers/product-shop-success/product-shop-success.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { ProductCheckoutComponent } from './containers/product-checkout/product-
     ProductCartItemComponent,
     ProductCheckoutPageComponent,
     ProductCheckoutComponent,
+    ProductShopSuccessPageComponent,
+    ProductShopSuccessComponent,
   ],
   imports: [CommonModule, ProductsRoutingModule, SharedModule],
 })

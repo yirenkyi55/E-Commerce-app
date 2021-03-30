@@ -13,6 +13,8 @@ export const ClearCartItem = createAction(
   props<CartItem>()
 );
 
+export const ClearAllCartItems = createAction('[Cart] Clear All Cart Items');
+
 export const CheckoutRequest = createAction('[Cart] Check Out Request');
 
 export const CheckOutRequestSuccess = createAction(

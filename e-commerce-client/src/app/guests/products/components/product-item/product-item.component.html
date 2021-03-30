@@ -12,6 +12,8 @@
               (product.name.length > 30 ? "..." : "")
           }}</span
         >
+
+        <p *ngIf="outOfStock" class="out">Out of Stock</p>
       </div>
     </div>
   </div>
@@ -21,10 +23,10 @@
       <div class="h-bg-inner"></div>
     </div>
 
-    <a class="cart" (click)="onAddToCart()">
+    <a class="cart" (click)="onAddToCart()" [class.disabled]="outOfStock">
       <span class="price">{{ product.price | currency }}</span>
       <span class="add-to-cart">
-        <span class="txt">Add to cart</span>
+        <span class="txt"> Add to cart </span>
       </span>
     </a>
   </div>

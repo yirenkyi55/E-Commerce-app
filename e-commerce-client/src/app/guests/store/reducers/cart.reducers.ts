@@ -68,6 +68,13 @@ const featureReducer = createReducer(
     };
   }),
 
+  on(fromCart.ClearAllCartItems, (state) => {
+    return {
+      ...state,
+      cartItems: [],
+    };
+  }),
+
   on(fromCart.CheckoutRequest, (state) => {
     return {
       ...state,

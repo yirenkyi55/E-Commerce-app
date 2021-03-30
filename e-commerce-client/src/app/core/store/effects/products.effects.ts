@@ -9,6 +9,8 @@ import { HttpEvent, HttpEventType } from '@angular/common/http';
 import * as fromHelpers from '../actions/helpers.actions';
 import { NotificationType } from '../../models';
 import * as fromRoot from 'src/app/store';
+import * as fromGuests from 'src/app/guests/store';
+
 @Injectable()
 export class ProductsEffect {
   constructor(
@@ -88,6 +90,8 @@ export class ProductsEffect {
               title: 'Products',
               message: 'Your purchase is successful',
             }),
+            fromRoot.Go({ path: ['shop', 'success'] }),
+            fromGuests.ClearAllCartItems(),
           ]),
           catchError((error) =>
             of(fromProducts.PurchaseProductsRequestFailure(error))

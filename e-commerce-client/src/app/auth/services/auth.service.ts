@@ -55,7 +55,6 @@ export class AuthService {
   }
 
   logOut(): void {
-    console.log('inside services');
-    localStorage.clear();
+    localStorage.removeItem('authState');
   }
 }

@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductDetailComponent } from './containers/product-detail/product-detail.component';
 import { ProductCheckoutComponent } from './containers/product-checkout/product-checkout.component';
 import { AuthGuard } from 'src/app/core/guards';
+import { ProductShopSuccessComponent } from './containers/product-shop-success/product-shop-success.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: ProductCheckoutComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'success',
+    component: ProductShopSuccessComponent,
     canActivate: [AuthGuard],
   },
   {
