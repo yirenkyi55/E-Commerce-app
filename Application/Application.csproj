@@ -7,6 +7,26 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.5.3" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Contacts\Dtos\MappingProfile.cs">
+      <Link>Contacts\Dtos\MappingProfile.cs</Link>
+    </Compile>
+    <Compile Update="Contacts\Dtos\ContactForReturnDto.cs">
+      <Link>Contacts\Dtos\ContactForReturnDto.cs</Link>
+    </Compile>
+    <Compile Update="Contacts\Dtos\ContactForCreateDto.cs">
+      <Link>Contacts\Dtos\ContactForCreateDto.cs</Link>
+    </Compile>
+    <Compile Update="Contacts\Commands\CreateContactCommand.cs">
+      <Link>Contacts\Commands\CreateContactCommand.cs</Link>
+    </Compile>
+    <Compile Update="Contacts\Commands\Validators\ContactForCreateDtoValidator.cs">
+      <Link>Contacts\Commands\Validators\ContactForCreateDtoValidator.cs</Link>
+    </Compile>
+    <Compile Update="Contacts\Queries\GetAllContactsQuery.cs">
+      <Link>Contacts\Queries\GetAllContactsQuery.cs</Link>
+    </Compile>
+  </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
