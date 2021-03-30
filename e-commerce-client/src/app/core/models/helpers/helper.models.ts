@@ -67,3 +67,16 @@ export interface TableHeaders {
   label: string;
   isImage?: boolean;
 }
+
+export interface ContactModel {
+  name: string;
+  email: string;
+  message: string;
+}
+
+export interface ContactResponse {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+}

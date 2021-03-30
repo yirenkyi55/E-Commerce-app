@@ -1,48 +1,35 @@
 <div class="header">
   <div class="contact-form" [@swing]="swing">
-    <form action="#" class="form form__bg-blue shadow">
+    <form [formGroup]="contactForm" class="form form__bg-blue shadow">
       <h3 class="form__title movesInLeft">Drop Us a line</h3>
       <h3 class="form__title-message">We are here for you! How can we help?</h3>
 
-      <div class="form__group">
-        <input
-          type="text"
-          class="form__input"
-          required
-          id="name"
-          placeholder="Name"
-          autocomplete="off"
-        />
-        <label for="name" class="form__label">Name</label>
-      </div>
+      <app-input
+        formControlName="name"
+        placeholder="Your Name"
+        label="Your name"
+      ></app-input>
 
-      <div class="form__group">
-        <input
-          type="email"
-          class="form__input"
-          required
-          id="email"
-          placeholder="Email"
-          autocomplete="off"
-        />
-        <label for="email" class="form__label">Email</label>
-      </div>
+      <app-input
+        formControlName="email"
+        placeholder="Email Address"
+        label="Email Address"
+        patternMessage="Invalid email Address"
+      ></app-input>
 
-      <div class="form__group">
-        <textarea
-          name="message"
-          id="message"
-          cols="30"
-          rows="10"
-          class="form__input"
-          placeholder="Message"
-        ></textarea>
-        <label for="email" class="form__label">Message</label>
-      </div>
+      <app-text-area
+        formControlName="message"
+        placeholder="Message"
+        label="Message"
+      >
+      </app-text-area>
 
-      <div class="form__group">
-        <button class="button button-primary button-block">Contact Us</button>
-      </div>
+      <app-button
+        btnClass="button button-primary button-block"
+        [disabled]="contactForm.invalid"
+        (btnClick)="onContactUs()"
+        >Contact Us <i nz-icon nzType="mail" nzTheme="outline"></i
+      ></app-button>
     </form>
   </div>
 </div>

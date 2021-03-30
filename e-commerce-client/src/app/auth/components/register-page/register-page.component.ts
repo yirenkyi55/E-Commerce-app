@@ -15,14 +15,30 @@ export class RegisterPageComponent implements OnInit {
   @Output() createAccount = new EventEmitter<CreateAccountRequestModel>();
 
   constructor(private fb: FormBuilder) {
-    this.registerForm = this.fb.group({
-      email: ['', [Validators.required]],
-      firstName: ['', [Validators.required]],
-      otherName: [''],
-      lastName: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]],
-    });
+    this.registerForm = this.fb.group(
+      {
+        email: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$'),
+          ],
+        ],
+        firstName: ['', [Validators.required]],
+        otherName: [''],
+        lastName: ['', [Validators.required]],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.pattern(/((?=.*\d)(?=.*[A-Z]))/),
+          ],
+        ],
+        confirmPassword: ['', [Validators.required]],
+      },
+      { validators: this.checkPasswords }
+    );
   }
 
   ngOnInit(): void {}
@@ -33,5 +49,11 @@ export class RegisterPageComponent implements OnInit {
 
   onLogin(): void {
     this.login.emit(true);
+  }
+
+  checkPasswords(group: FormGroup) {
+    const password = group.get('password').value;
+    const confirmPassword = group.get('confirmPassword').value;
+    return password === confirmPassword ? null : { notEqual: true };
   }
 }

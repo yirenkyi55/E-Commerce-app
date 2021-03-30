@@ -23,6 +23,7 @@
       formControlName="email"
       placeholder="Email Address"
       label="Email Address"
+      [patternMessage]="'Invalid Email Address'"
     ></app-input>
 
     <app-input
@@ -30,6 +31,9 @@
       placeholder="Password"
       label="Password"
       type="password"
+      [patternMessage]="
+        'Password should contain at least 1 uppercase letter and 1 digit'
+      "
     ></app-input>
 
     <app-input
@@ -38,6 +42,15 @@
       type="password"
       label="Confirm Password"
     ></app-input>
+
+    <span
+      class="error"
+      *ngIf="
+        registerForm.get('confirmPassword').touched &&
+        registerForm.errors?.notEqual
+      "
+      >Passwords Mismatch</span
+    >
 
     <span>Already Have An Account? <a (click)="onLogin()">Login</a></span>
 
