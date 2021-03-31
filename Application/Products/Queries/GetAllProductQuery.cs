@@ -32,17 +32,21 @@ namespace Application.Products.Queries
             }
             public async Task<PaginationResult<ProductForReturnDto>> Handle(GetAllProductQuery request, CancellationToken cancellationToken)
             {
-                var queryable = _context.Products.OrderBy(p => p.Id).AsQueryable();
+                var queryable = _context.Products.OrderBy(p => p.Name).AsQueryable();
 
                 if (request.Params.Search != null)
                 {
-                    queryable = queryable.Where(p => p.Name.ToLower().Contains(request.Params.Search) ||
-                    p.Description.ToLower().Contains(request.Params.Search));
+                    
+                    queryable = queryable.Where(p => p.Name.ToLower()
+                                                         .Contains(request.Params.Search) ||
+                    p.Description.ToLower().Contains(request.Params.Search) ||
+                    p.ProductType.Name.ToLower().Contains(request.Params.Search) ||
+                    p.ProductBrand.Name.ToLower().Contains(request.Params.Search));
                 }
 
-                if (request.Params.TypdId != null)
+                if (request.Params.TypeId != null)
                 {
-                    queryable = queryable.Where(p => p.ProductTypeId == request.Params.TypdId);
+                    queryable = queryable.Where(p => p.ProductTypeId == request.Params.TypeId);
                 }
 
                 if (request.Params.BrandId != null)
@@ -53,6 +57,16 @@ namespace Application.Products.Queries
                 if (request.Params.HomePage)
                 {
                     queryable = queryable.Where(p => p.ShowOnHomePage);
+                }
+
+                if (request.Params.PriceSort?.Trim() != null)
+                {
+                    queryable = request.Params.PriceSort switch
+                    {
+                        "price_asc" => queryable.OrderByDescending(p => p.Price),
+                        "price_desc" => queryable.OrderBy(p => p.Price),
+                        _ => queryable.OrderBy(p => p.Name)
+                    };
                 }
 
                 // Perform pagination on the queryable object
