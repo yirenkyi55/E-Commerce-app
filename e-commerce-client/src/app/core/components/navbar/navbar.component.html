@@ -76,20 +76,24 @@
       </li>
     </ul>
 
-    <span
-      class="right"
-      *ngIf="currentUser"
-      nz-dropdown
-      [nzDropdownMenu]="menu"
-      nzPlacement="bottomCenter"
-    >
-      <span class="user-details">{{
-        (currentUser.firstName | titlecase) +
-          " " +
-          (currentUser.lastName | titlecase)
-      }}</span>
-      <nz-avatar nzIcon="user" class="icon-item"></nz-avatar>
-    </span>
+    <ul class="navigation__nav user" *ngIf="currentUser">
+      <li class="navigation__nav--item">
+        <a
+          routerLinkActive="active"
+          class="navigation__nav--item-link right"
+          nz-dropdown
+          [nzDropdownMenu]="menu"
+          nzPlacement="bottomCenter"
+        >
+          <span class="user-details">{{
+            (currentUser.firstName | titlecase) +
+              " " +
+              (currentUser.lastName | titlecase)
+          }}</span>
+          <nz-avatar nzIcon="user" class="icon-item"></nz-avatar>
+        </a>
+      </li>
+    </ul>
   </div>
 </nav>
 

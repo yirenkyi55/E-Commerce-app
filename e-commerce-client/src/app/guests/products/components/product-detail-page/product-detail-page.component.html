@@ -1,1 +1,27 @@
-<p>product-detail-page works!</p>
+<div class="header">
+  <app-cart-card [cartHeaderLeft]="product.name | titlecase">
+    <div id="mainContent">
+      <div class="products">
+        <div class="product__image">
+          <img [src]="product.picture" class="pro__image" />
+        </div>
+        <div class="product__desc">
+          <span class="p-name">{{ product.name | titlecase }}</span>
+          <p class="p-price">PRICE: {{ product.price | currency }}</p>
+          <p [class.red]="!avaiable">
+            ({{ avaiable ? "In Stock" : "Out of Stock" }})
+          </p>
+          <p class="p-desc">{{ product.description }}</p>
+        </div>
+      </div>
+    </div>
+    <ng-container id="footer">
+      <app-button [routerLink]="['/shop']"
+        >Shop<i nz-icon nzType="shopping" nzTheme="outline"></i
+      ></app-button>
+      <app-button [disabled]="!avaiable" (btnClick)="onAddToCart()"
+        >Add To Cart <i nz-icon nzType="dollar-circle" nzTheme="outline"></i
+      ></app-button>
+    </ng-container>
+  </app-cart-card>
+</div>

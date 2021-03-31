@@ -154,6 +154,17 @@ export class AppComponent implements OnInit, OnDestroy {
     this.store.dispatch(fromStore.Logout());
   }
 
+  onActivate(event: any): void {
+    const scrollToTop = window.setInterval(() => {
+      const position = window.pageYOffset;
+      if (position > 0) {
+        window.scrollTo(0, position - 20);
+      } else {
+        window.clearInterval(scrollToTop);
+      }
+    }, 16);
+  }
+
   ngOnDestroy(): void {
     this.currentUserSubscription?.unsubscribe();
     this.notificationSubscription?.unsubscribe();

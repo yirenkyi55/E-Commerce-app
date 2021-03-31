@@ -26,7 +26,8 @@
 </ng-container>
 
 <ng-template #template>
-  <router-outlet #outlet="outlet"> </router-outlet>
+  <router-outlet (activate)="onActivate($event)" #outlet="outlet">
+  </router-outlet>
 </ng-template>
 
 <!-- A login form that is called when the user needs to logs in -->
