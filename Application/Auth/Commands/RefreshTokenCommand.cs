@@ -9,6 +9,7 @@ using Application.Common.Exceptions;
 using Application.Common.Interfaces;
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Auth.Commands
 {
@@ -29,17 +30,18 @@ namespace Application.Auth.Commands
         {
             private readonly ITokenService _tokenService;
             private readonly IIdentityService _identityService;
-            private readonly IFileService _fileService;
-            private readonly IMapper _mapper;
+            private readonly IApplicationDbContext _context;
+       private readonly IMapper _mapper;
 
             public RefreshTokenCommandHandler(ITokenService jwtService,
                 IIdentityService identityService,
+                IApplicationDbContext context,
                 IFileService fileService,
                 IMapper mapper)
             {
                 _tokenService = jwtService;
                 _identityService = identityService;
-                _fileService = fileService;
+                _context = context;
                 _mapper = mapper;
             }
 
@@ -57,7 +59,7 @@ namespace Application.Auth.Commands
                 var email = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
 
                 //Find the user by his name
-                var user = await _identityService.FindUserByEmailAsync(email);
+                var user = await _context.Users.FirstOrDefaultAsync(user=>user.Email == email);
 
                 if (user == null ||
                     user.RefreshToken != request.RefreshToken ||
@@ -79,7 +81,7 @@ namespace Application.Auth.Commands
                 //Generates a new refresh token for the user
                 user.RefreshToken = _tokenService.GenerateRefreshToken();
                 user.RefreshTokenExpiry = DateTime.Now.AddDays(30);
-                await _identityService.UpdateUserAsync(user);
+                await _context.SaveChangesAsync(cancellationToken);
 
 
 

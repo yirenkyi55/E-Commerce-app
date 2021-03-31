@@ -8,6 +8,7 @@ using Application.Common.Interfaces;
 using Application.Common.Models;
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Auth.Queries
 {
@@ -21,21 +22,24 @@ namespace Application.Auth.Queries
         {
             private readonly IIdentityService _identityService;
             private readonly ITokenService _tokenService;
+            private readonly IApplicationDbContext _context;
 
             private readonly IMapper _mapper;
 
             public LoginQueryHandler(
                 IIdentityService identityService,
                 ITokenService tokenService,
+                IApplicationDbContext context,
                 IMapper mapper)
             {
                 _identityService = identityService;
                 _tokenService = tokenService;
+                _context = context;
                 _mapper = mapper;
             }
             public async Task<(AuthUserForReturnDto, string)> Handle(LoginQuery request, CancellationToken cancellationToken)
             {
-                var user = await _identityService.FindUserByEmailAsync(request.Email);
+                var user = await _context.Users.FirstOrDefaultAsync(user=>user.Email == request.Email);
 
                 if (user == null)
                 {
@@ -51,7 +55,7 @@ namespace Application.Auth.Queries
                 user.RefreshToken = _tokenService.GenerateRefreshToken();
                 user.RefreshTokenExpiry = DateTime.Now.AddDays(AppSettings.RefreshTokenLength);
 
-                await _identityService.UpdateUserAsync(user);
+                await _context.SaveChangesAsync(cancellationToken);
 
                 var userToReturn = _mapper.Map<AuthUserForReturnDto>(user);
                 userToReturn.AccessToken = _tokenService.GenerateAccessToken(user);
