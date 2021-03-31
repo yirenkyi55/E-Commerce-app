@@ -4,5 +4,5 @@ export class ProductParams {
   priceSort: string;
   search: string;
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 25;
 }

@@ -20,7 +20,7 @@
           *ngIf="showFilterButton"
           [clearDisabled]="clearDisabled"
           [filterDisabled]="filterDisabled"
-          [hasAppliedFilter]="hasAppliedFilter"
+          [filterActive]="hasAppliedFilter"
           (clearButton)="onClearButton($event)"
           (filterButton)="onFilterButton($event)"
         >

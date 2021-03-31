@@ -1,9 +1,15 @@
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromAppStore from 'src/app/core/store';
-import { ProductToDisplay } from 'src/app/core/models';
+import {
+  Pagination,
+  ProductBrand,
+  ProductParams,
+  ProductToDisplay,
+  ProductType,
+} from 'src/app/core/models';
 import { CurrencyPipe, TitleCasePipe } from '@angular/common';
 @Component({
   selector: 'app-products',
@@ -14,6 +20,11 @@ import { CurrencyPipe, TitleCasePipe } from '@angular/common';
 export class ProductsComponent implements OnInit, OnDestroy {
   products: ProductToDisplay[];
   productsSubscription: Subscription;
+
+  productTypes$: Observable<ProductType[]>;
+  brandsSubscription: Subscription;
+  productBrands: ProductBrand[];
+  pagination$: Observable<Pagination>;
 
   constructor(
     private router: Router,
@@ -44,6 +55,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
           };
         });
       });
+
+    this.productTypes$ = this.store.select(fromAppStore.getTypes);
+    this.pagination$ = this.store.select(fromAppStore.getProductsPagination);
   }
 
   onNewProduct(): void {
@@ -56,7 +70,25 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.router.navigate([product.id, 'inspect'], { relativeTo: this.route });
   }
 
+  onFetchProductBrands(model: { typeId: string }): void {
+    this.brandsSubscription = this.store
+      .select(fromAppStore.getBrandsFromType, { typeId: model.typeId })
+      .subscribe((response) => {
+        this.productBrands = response;
+        if (!response) {
+          this.store.dispatch(
+            fromAppStore.GetAllBrandsForTypeRequest({ typeId: model.typeId })
+          );
+        }
+      });
+  }
+
+  onGetProducts(model: { params: ProductParams }): void {
+    this.store.dispatch(fromAppStore.GetProductsRequest(model));
+  }
+
   ngOnDestroy(): void {
     this.productsSubscription?.unsubscribe();
+    this.brandsSubscription?.unsubscribe();
   }
 }

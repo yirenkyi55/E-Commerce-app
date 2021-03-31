@@ -2,4 +2,9 @@
   (newProduct)="onNewProduct()"
   (recordClick)="onRecordClick($event)"
   [products]="products"
+  [productTypes]="productTypes$ | async"
+  [brands]="productBrands"
+  [pagination]="pagination$ | async"
+  (fetchProductBrands)="onFetchProductBrands($event)"
+  (getProducts)="onGetProducts($event)"
 ></app-product-list-page>

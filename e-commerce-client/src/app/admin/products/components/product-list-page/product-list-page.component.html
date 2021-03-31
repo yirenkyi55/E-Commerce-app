@@ -3,6 +3,71 @@
   [tableHeaders]="headers"
   [tableData]="products"
   (tableRecordClick)="onRecordClick($event)"
+  (searchChange)="onSearchChange($event)"
+  (search)="onSearchProduct($event)"
+  [filterDisabled]="!isValidFilter"
+  [hasAppliedFilter]="hasFilter"
+  (filterButton)="onFilterProduct()"
+  (clearButton)="onRemoveFilter()"
+  [currentPageNumber]="pagination.currentPage"
+  [pageSize]="pagination.pageSize"
+  [totalRecords]="pagination.totalCount"
 >
   <ng-container id="header"><h3>Products</h3></ng-container>
+
+  <ng-container id="filter">
+    <form [formGroup]="filterForm">
+      <div class="form__group">
+        <span>Product type</span>
+        <nz-select
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="Select Product Type"
+          class="form__control"
+          formControlName="typeId"
+          (ngModelChange)="onProductTypeChange($event)"
+        >
+          <nz-option
+            *ngFor="let type of productTypes"
+            [nzLabel]="type.name | titlecase"
+            [nzValue]="type.id"
+          ></nz-option>
+        </nz-select>
+      </div>
+
+      <div class="form__group">
+        <span>Brands</span>
+        <nz-select
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="Select Brand"
+          class="form__control"
+          formControlName="brandId"
+        >
+          <nz-option
+            *ngFor="let type of brands"
+            [nzLabel]="type.name | titlecase"
+            [nzValue]="type.id"
+          ></nz-option>
+        </nz-select>
+      </div>
+
+      <div class="form__group">
+        <span>Price</span>
+        <nz-select
+          nzShowSearch
+          nzAllowClear
+          nzPlaceHolder="Select Price Level"
+          class="form__control"
+          formControlName="price"
+        >
+          <nz-option
+            *ngFor="let type of priceList"
+            [nzLabel]="type.label | titlecase"
+            [nzValue]="type.value"
+          ></nz-option>
+        </nz-select>
+      </div>
+    </form>
+  </ng-container>
 </app-browse-mode>
