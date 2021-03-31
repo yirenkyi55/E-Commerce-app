@@ -7,12 +7,18 @@ import {
   GuestGuard,
   HomePageProductsGuard,
   ProductsGuard,
+  ProductTypesGuard,
 } from '../core/guards';
 
 const routes: Routes = [
   {
     path: '',
-    canActivate: [GuestGuard, ProductsGuard, HomePageProductsGuard],
+    canActivate: [
+      GuestGuard,
+      ProductsGuard,
+      HomePageProductsGuard,
+      ProductTypesGuard,
+    ],
     children: [
       {
         path: 'home',

@@ -22,6 +22,7 @@ export class BrowseHeaderComponent implements OnInit {
 
   @Input() clearDisabled = false;
   @Input() filterDisabled = false;
+  @Input() filterActive = false;
   @Output() clearButton = new EventEmitter<boolean>();
   @Output() filterButton = new EventEmitter<boolean>();
   @Input() hasAppliedFilter: boolean;

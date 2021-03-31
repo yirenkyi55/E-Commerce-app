@@ -9,7 +9,8 @@
   nzPopoverTrigger="click"
   [ngClass]="{ active: hasAppliedFilter }"
 >
-  <i nz-icon nzType="funnel-plot" nzTheme="fill"></i>
+  <i nz-icon nzType="funnel-plot" nzTheme="fill" *ngIf="!filterActive"></i>
+  <i nz-icon nzType="check" nzTheme="outline" *ngIf="filterActive"></i>
 </button>
 
 <ng-template #contentTemplate>
@@ -18,10 +19,10 @@
     <!-- <app-filter-contents></app-filter-contents> -->
   </div>
   <div class="hover-buttons">
-    <app-button (buttonClick)="onClearButton()" [disabled]="clearDisabled">
+    <app-button (btnClick)="onClearButton()" [disabled]="clearDisabled">
       <i nz-icon nzType="close" nzTheme="outline"></i>
     </app-button>
-    <app-button (buttonClick)="onFilterButton()" [disabled]="filterDisabled">
+    <app-button (btnClick)="onFilterButton()" [disabled]="filterDisabled">
       <i nz-icon nzType="check-circle" nzTheme="outline"></i>
     </app-button>
   </div>

@@ -35,6 +35,7 @@ const featureReducer = createReducer(
   ),
 
   on(fromProductAction.GetProductsRequestSuccess, (state, { response }) => {
+    console.log(response.results);
     const entities = response.results.reduce((productEntities, product) => {
       return { ...productEntities, [product.id]: product };
     }, {});

@@ -66,8 +66,8 @@
       <div class="buttons"></div>
       <div class="pagination">
         <app-paginator
-          [pageNumber]="pageNumber"
-          [totalPages]="totalPages"
+          [currentPageNumber]="currentPageNumber"
+          [totalRecords]="totalRecords"
           [pageSize]="pageSize"
           (pageNumberChange)="onPageNumberChange($event)"
         ></app-paginator>

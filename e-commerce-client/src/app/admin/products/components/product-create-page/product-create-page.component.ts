@@ -145,7 +145,6 @@ export class ProductCreatePageComponent
   }
 
   onCreateProduct(): void {
-    console.log(this.productForm.value);
     if (!this.productToUpdate) {
       this.formData.append('name', this.productForm.value.name);
       this.formData.append('description', this.productForm.value.description);
@@ -166,7 +165,6 @@ export class ProductCreatePageComponent
 
       this.createProduct.emit(this.formData);
     } else {
-      console.log(this.productForm.value);
       const formData = this.formData ? this.formData : new FormData();
       formData.append('name', this.productForm.value.name);
       formData.append('description', this.productForm.value.description);

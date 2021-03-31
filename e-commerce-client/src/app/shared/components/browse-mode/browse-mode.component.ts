@@ -61,8 +61,8 @@ export class BrowseModeComponent implements OnInit {
   @Output() listActionClick = new EventEmitter<ActionButtonData>();
 
   // Properties for Pagination
-  @Input() pageNumber = 1;
-  @Input() totalPages = 0;
+  @Input() currentPageNumber = 1;
+  @Input() totalRecords = 0;
   @Input() pageSize = 10;
   @Output() pageNumberChange = new EventEmitter<number>();
 

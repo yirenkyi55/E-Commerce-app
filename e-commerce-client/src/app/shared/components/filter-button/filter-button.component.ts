@@ -11,6 +11,7 @@ export class FilterButtonComponent implements OnInit {
   @Input() clearDisabled = false;
   @Input() filterDisabled = false;
   @Input() hasAppliedFilter = false;
+  @Input() filterActive = false;
 
   @Output() clearButton = new EventEmitter<boolean>();
   @Output() filterButton = new EventEmitter<boolean>();

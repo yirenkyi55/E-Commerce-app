@@ -124,6 +124,7 @@ const modules = [
     CartCardComponent,
     CreditCardDirective,
     SecurityCodeDirective,
+    PaginatorComponent,
   ],
 })
 export class SharedModule {}

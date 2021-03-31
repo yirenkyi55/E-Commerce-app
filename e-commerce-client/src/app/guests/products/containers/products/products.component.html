@@ -1,4 +1,9 @@
 <app-products-page
   [products]="products$ | async"
+  [productTypes]="productTypes$ | async"
+  [brands]="productBrands"
+  [pagination]="pagination$ | async"
   (addToCart)="onAddToCart($event)"
+  (fetchProductBrands)="onFetchProductBrands($event)"
+  (getProducts)="onGetProducts($event)"
 ></app-products-page>

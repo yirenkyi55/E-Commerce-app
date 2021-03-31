@@ -28,6 +28,7 @@ export class ProductsService {
     homePage = false
   ): Observable<PaginationResult<Product>> {
     let params = new HttpParams();
+    console.log(productParams);
 
     if (productParams.brandId) {
       params = params.append('brandId', productParams.brandId);
@@ -39,6 +40,10 @@ export class ProductsService {
 
     if (productParams.search) {
       params = params.append('search', productParams.search);
+    }
+
+    if (productParams.priceSort) {
+      params = params.append('priceSort', productParams.priceSort);
     }
 
     params = params.append('pageSize', productParams.pageSize.toString());
