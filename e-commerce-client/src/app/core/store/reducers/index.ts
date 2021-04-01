@@ -4,6 +4,7 @@ import * as fromBrands from './product-brands.reducers';
 import * as fromTypes from './product-types.reducers';
 import * as fromHelpers from './helpers.reducers';
 import * as fromPurchases from './purchase.reducers';
+import * as fromAdmins from './admins.reducers';
 
 export interface ApplicationManagementState {
   products: fromProducts.ProductsState;
@@ -11,6 +12,7 @@ export interface ApplicationManagementState {
   productTypes: fromTypes.ProductTypesState;
   helpers: fromHelpers.HelpersState;
   purchases: fromPurchases.PurchaseState;
+  admins: fromAdmins.AdminState;
 }
 
 export const reducers: ActionReducerMap<ApplicationManagementState> = {
@@ -19,6 +21,7 @@ export const reducers: ActionReducerMap<ApplicationManagementState> = {
   productTypes: fromTypes.reducer,
   helpers: fromHelpers.reducer,
   purchases: fromPurchases.reducer,
+  admins: fromAdmins.reducer,
 };
 
 export const getApplicationState = createFeatureSelector<ApplicationManagementState>(

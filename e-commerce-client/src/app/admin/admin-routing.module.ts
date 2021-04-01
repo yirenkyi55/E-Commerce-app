@@ -2,15 +2,26 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
   AdminGuard,
+  ContactsGuard,
   ProductsGuard,
   ProductTypesGuard,
   PurchasesGuard,
+  SystemAdminGuard,
+  AboutGuard,
 } from '../core/guards';
 
 const routes: Routes = [
   {
     path: 'admin',
-    canActivate: [AdminGuard, ProductTypesGuard, ProductsGuard, PurchasesGuard],
+    canActivate: [
+      AdminGuard,
+      ProductTypesGuard,
+      ProductsGuard,
+      PurchasesGuard,
+      SystemAdminGuard,
+      ContactsGuard,
+      AboutGuard,
+    ],
     children: [
       {
         path: '',
@@ -34,9 +45,14 @@ const routes: Routes = [
           import('./purchases/purchases.module').then((m) => m.PurchasesModule),
       },
       {
-        path: 'info',
+        path: 'users',
         loadChildren: () =>
           import('./info/info.module').then((m) => m.InfoModule),
+      },
+      {
+        path: 'settings',
+        loadChildren: () =>
+          import('./settings/settings.module').then((m) => m.SettingsModule),
       },
     ],
   },

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
@@ -52,6 +52,14 @@ export class AuthService {
   getToken(): string {
     return JSON.parse(localStorage.getItem('authState'))?.auth?.currentUser
       ?.accessToken;
+  }
+
+  checkEmailExistence(email: string): Observable<boolean> {
+    let params = new HttpParams();
+    params = params.append('email', email);
+    return this.http.get<boolean>(`${this.baseUrl}/emailExists`, {
+      params,
+    });
   }
 
   logOut(): void {

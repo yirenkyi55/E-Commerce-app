@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { AboutModel } from '../../models';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -7,8 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
   currentYear = new Date().getFullYear();
-
-  constructor() {}
-
+  @Input() about: AboutModel;
   ngOnInit(): void {}
 }

@@ -1,6 +1,8 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CreateAccountRequestModel } from 'src/app/core/models';
+import { AuthValidator } from 'src/app/core/validators';
+import { AuthService } from '../../services';
 
 @Component({
   selector: 'app-register-page',
@@ -14,7 +16,7 @@ export class RegisterPageComponent implements OnInit {
   @Output() login = new EventEmitter<boolean>();
   @Output() createAccount = new EventEmitter<CreateAccountRequestModel>();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.registerForm = this.fb.group(
       {
         email: [
@@ -23,6 +25,7 @@ export class RegisterPageComponent implements OnInit {
             Validators.required,
             Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$'),
           ],
+          [AuthValidator.validateEmail(this.authService)],
         ],
         firstName: ['', [Validators.required]],
         otherName: [''],

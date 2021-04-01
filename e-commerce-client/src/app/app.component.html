@@ -20,9 +20,10 @@
     (logout)="onLogOut()"
     [totalCart]="totalCart"
     [currentUser]="currentUser"
+    [about]="about$ | async"
   ></app-navbar>
   <ng-container *ngTemplateOutlet="template"></ng-container>
-  <app-footer></app-footer>
+  <app-footer [about]="about$ | async"></app-footer>
 </ng-container>
 
 <ng-template #template>

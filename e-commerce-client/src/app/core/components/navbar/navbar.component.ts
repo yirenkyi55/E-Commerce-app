@@ -7,7 +7,7 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import { AuthUserRequestResponse } from '../../models';
+import { AboutModel, AuthUserRequestResponse } from '../../models';
 
 @Component({
   selector: 'app-navbar',
@@ -41,6 +41,7 @@ export class NavbarComponent implements OnInit {
   @Output() logout = new EventEmitter();
   @Input() totalCart = 0;
   @Input() currentUser: AuthUserRequestResponse;
+  @Input() about: AboutModel;
 
   constructor() {}
 

@@ -3,7 +3,13 @@
     <div class="col-1-of-3">
       <div class="item">
         <h3 class="item__header">
-          <img src="assets/img/logo.png" alt="" class="footer__image" />
+          <span *ngIf="about.nameOfCompany">{{ about.nameOfCompany }}</span>
+          <img
+            src="assets/img/logo.png"
+            alt=""
+            class="footer__image"
+            *ngIf="!about.nameOfCompany"
+          />
         </h3>
 
         <div class="item__content">
@@ -36,8 +42,7 @@
             <li class="item__link-item">
               <a routerLink="/contact">Contact</a>
             </li>
-            <li class="item__link-item"><a routerLink="/team">Team</a></li>
-            <li class="item__link-item"><a routerLink="/login">App</a></li>
+            <li class="item__link-item"><a routerLink="/shop">Shop</a></li>
           </ul>
         </div>
       </div>
@@ -51,9 +56,11 @@
           </ul>
 
           <div class="item__address">
-            Exalio is a software developing company at the Netherlands that
-            wants to make people excel and take organizations to a higher level.
-            As per the meaning of the name Exalio: To lift up high.'
+            {{
+              about.aboutMessage ||
+                "Our ecommerce web site is the best online selling and buying
+            platform you can rely on any time any day!!"
+            }}
           </div>
         </div>
       </div>
@@ -65,7 +72,8 @@
       <use xlink:href="assets/img/media.svg#icon-radio-checked"></use>
     </svg>
     <div class="bar">
-      <span class="copyright"> Copyright &copy; {{ currentYear }} Exalio </span>
+      <span class="copyright"> Copyright &copy; {{ currentYear }} </span>
+      <span>&nbsp; {{ about.nameOfCompany || "Kurawa" }}</span>
     </div>
   </div>
 </footer>

@@ -96,6 +96,8 @@
   .bar {
     border-top: 3px solid var(--color-primary);
     flex: 1;
+    display: flex;
+    align-items: flex-end;
   }
 
   .footer__bar {

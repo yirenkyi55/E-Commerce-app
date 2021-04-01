@@ -16,6 +16,8 @@ export class EditModeComponent implements OnInit {
   @Input() saveButtonDisabled = false;
   @Input() saveButtonLoading = false;
 
+  @Input() backButtonVisible = true;
+
   @Output() resetClick = new EventEmitter<boolean>();
   @Output() saveClick = new EventEmitter<boolean>();
 

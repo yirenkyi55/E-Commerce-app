@@ -1,0 +1,33 @@
+<app-edit-mode
+  [resetButtonVisible]="false"
+  [backButtonVisible]="false"
+  [saveButtonDisabled]="aboutForm.invalid"
+  (saveClick)="onSaveAbout()"
+>
+  <ng-container id="header">
+    <h3>About E-Commerce App</h3>
+  </ng-container>
+
+  <ng-container id="content">
+    <form [formGroup]="aboutForm" class="form__container">
+      <app-input
+        formControlName="nameOfCompany"
+        placeholder="Name of Company"
+        label="Name of Company"
+      ></app-input>
+
+      <app-input
+        formControlName="aboutTitle"
+        placeholder="Title of Services"
+        label="Title of Service"
+      ></app-input>
+
+      <app-text-area
+        formControlName="aboutMessage"
+        placeholder="About Company Services"
+        label="Company Services"
+      >
+      </app-text-area>
+    </form>
+  </ng-container>
+</app-edit-mode>

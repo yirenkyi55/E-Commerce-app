@@ -1,0 +1,8 @@
+<app-browse-mode
+  [showFilterButton]="false"
+  [tableHeaders]="headers"
+  [tableData]="admins"
+  (buttonClick)="onCreateAdmin()"
+>
+  <ng-container id="header"><h3>all System Admins</h3></ng-container>
+</app-browse-mode>

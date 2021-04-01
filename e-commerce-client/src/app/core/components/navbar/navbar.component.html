@@ -6,7 +6,13 @@
   [@topBottom]="isTop ? 'top' : 'bottom'"
 >
   <a class="navigation__brand" routerLink="/home">
-    <img src="/assets/img/logo.png" alt="" class="navigation__brand-image" />
+    <img
+      src="/assets/img/logo.png"
+      alt=""
+      class="navigation__brand-image"
+      *ngIf="!about"
+    />
+    <span>{{ about?.nameOfCompany }}</span>
   </a>
 
   <ul class="navigation__nav">

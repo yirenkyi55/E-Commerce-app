@@ -1,0 +1,64 @@
+<app-edit-mode
+  (resetClick)="reset()"
+  [saveButtonDisabled]="registerForm.invalid"
+  [saveButtonLoading]="loading"
+  (saveClick)="onCreateAdmin()"
+>
+  <ng-container id="headerText">
+    <h3>Create New Admin</h3>
+  </ng-container>
+  <ng-container id="content">
+    <form [formGroup]="registerForm" class="form__container">
+      <app-input
+        formControlName="firstName"
+        placeholder="First Name"
+        label="First Name"
+      ></app-input>
+
+      <app-input
+        formControlName="otherName"
+        placeholder="Other Name"
+        label="Other Name"
+      ></app-input>
+
+      <app-input
+        formControlName="lastName"
+        placeholder="Last Name"
+        label="Last Name"
+      ></app-input>
+
+      <app-input
+        formControlName="email"
+        placeholder="Email Address"
+        label="Email Address"
+        [patternMessage]="'Invalid Email Address'"
+      ></app-input>
+
+      <app-input
+        formControlName="password"
+        placeholder="Password"
+        label="Password"
+        type="password"
+        [patternMessage]="
+          'Password should contain at least 1 uppercase letter and 1 digit'
+        "
+      ></app-input>
+
+      <app-input
+        formControlName="confirmPassword"
+        placeholder="Confirm Password"
+        type="password"
+        label="Confirm Password"
+      ></app-input>
+
+      <span
+        class="error"
+        *ngIf="
+          registerForm.get('confirmPassword').touched &&
+          registerForm.errors?.notEqual
+        "
+        >Passwords Mismatch</span
+      >
+    </form>
+  </ng-container>
+</app-edit-mode>

@@ -3,3 +3,4 @@ export * from './product-types.service';
 export * from './product-brands.service';
 export * from './spinner.service';
 export * from './contact.service';
+export * from './admin.service';

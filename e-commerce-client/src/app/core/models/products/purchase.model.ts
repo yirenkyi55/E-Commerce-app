@@ -51,4 +51,5 @@ export interface User {
   firstName: string;
   otherName: string;
   lastName: string;
+  bio?: string;
 }

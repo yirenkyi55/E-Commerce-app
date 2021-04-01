@@ -8,6 +8,7 @@ import {
   HomePageProductsGuard,
   ProductsGuard,
   ProductTypesGuard,
+  AboutGuard,
 } from '../core/guards';
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
       ProductsGuard,
       HomePageProductsGuard,
       ProductTypesGuard,
+      AboutGuard,
     ],
     children: [
       {

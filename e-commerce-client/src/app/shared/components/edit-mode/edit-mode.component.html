@@ -19,7 +19,9 @@
     </ng-scrollbar> -->
 
   <div class="mode__footer">
-    <app-button (btnClick)="onNavigateBackwards($event)"
+    <app-button
+      (btnClick)="onNavigateBackwards($event)"
+      *ngIf="backButtonVisible"
       ><i nz-icon nzType="arrow-left" nzTheme="outline"></i>
     </app-button>
 

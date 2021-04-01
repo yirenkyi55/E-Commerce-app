@@ -5,3 +5,6 @@ export * from './product-types.guard';
 export * from './products.guard';
 export * from './home-page-products.guard';
 export * from './purchases.guard';
+export * from './system-admin.guard';
+export * from './contacts.guard';
+export * from './about.guard';

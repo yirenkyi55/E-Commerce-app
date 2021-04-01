@@ -7,7 +7,11 @@ import * as fromStore from 'src/app/auth/store';
 import * as fromAppStore from 'src/app/core/store';
 import * as fromGuestStore from 'src/app/guests/store';
 import { DashboardTypes } from './core/enums';
-import { AuthUserRequestResponse, DashboardMenu } from './core/models';
+import {
+  AboutModel,
+  AuthUserRequestResponse,
+  DashboardMenu,
+} from './core/models';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
   checkoutSubscription: Subscription;
   totalCart = 0;
   checkoutState: boolean;
+  about$: Observable<AboutModel>;
 
   currentUserSubscription: Subscription;
   currentUser: AuthUserRequestResponse;
@@ -50,23 +55,32 @@ export class AppComponent implements OnInit, OnDestroy {
       route: 'admin/purchases',
     },
     {
-      title: 'Users & Admins',
+      title: 'Admins',
       icon: 'usergroup-add',
       children: [
         {
-          title: 'Admins',
-          route: 'admin/users/admin',
-        },
-        {
-          title: 'Users',
+          title: 'Admin Users',
           route: 'admin/users',
         },
+        // {
+        //   title: 'Users',
+        //   route: 'admin/users',
+        // },
       ],
     },
     {
       title: 'Settings',
       icon: 'info-circle',
-      route: 'admin/settings',
+      children: [
+        {
+          title: 'Contacts',
+          route: 'admin/settings',
+        },
+        {
+          title: 'About',
+          route: 'admin/settings/about',
+        },
+      ],
     },
   ];
 
@@ -130,6 +144,8 @@ export class AppComponent implements OnInit, OnDestroy {
           this.onCancelled();
         }
       });
+
+    this.about$ = this.appStore.select(fromAppStore.getAbout);
   }
 
   createNotification(type: string, title: string, message: string): void {

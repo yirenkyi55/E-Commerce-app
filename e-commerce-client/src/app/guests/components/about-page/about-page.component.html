@@ -1,11 +1,15 @@
 <div class="header">
   <div class="contact-form" [@bounceInDown]="bounceInDown">
     <div action="#" class="form form__bg-blue shadow">
-      <h3 class="form__title movesInLeft">Our Services</h3>
-      <div class="section__about--notes" *ngFor="let note of contentNotes">
-        <h2 class="section__about--notes-heading">{{ note.header }}</h2>
+      <h3 class="form__title movesInLeft">
+        {{ (about$ | async).nameOfCompany || "Our Services" }}
+      </h3>
+      <div class="section__about--notes">
+        <h2 class="section__about--notes-heading">
+          {{ (about$ | async).aboutTitle || note.header }}
+        </h2>
         <div class="section__about--notes-content">
-          {{ note.content }}
+          {{ (about$ | async).aboutMessage || note.content }}
         </div>
       </div>
     </div>
