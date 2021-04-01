@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Application.Admins.Dtos
 {
     public class AdminUserForReturnDto
@@ -15,5 +17,7 @@ namespace Application.Admins.Dtos
         public string LastName { get; set; }
 
         public string Bio { get; set; }
+
+        public List<string> Role { get; set; }
     }
 }

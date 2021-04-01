@@ -5,6 +5,7 @@ using Application.Common.Interfaces;
 using AutoMapper;
 using Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Abouts.Commands
 {
@@ -27,7 +28,7 @@ namespace Application.Abouts.Commands
             {
               
 
-                var aboutEntity = await _context.Abouts.FindAsync();
+                var aboutEntity = await _context.Abouts.FirstOrDefaultAsync();
 
                 if (aboutEntity != null)
                 {

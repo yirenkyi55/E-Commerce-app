@@ -8,7 +8,6 @@ using Application.Products.Dtos;
 using AutoMapper;
 using Domain;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Products.Queries
 {

@@ -57,7 +57,7 @@ namespace Infrastructure.Services
                 }
             }
 
-            return users;
+            return usersInRole;
 
         }
 
