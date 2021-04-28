@@ -17,6 +17,8 @@ namespace Application.Products.Dtos
 
         public IFormFile Photo { get; set; }
 
+        public string PhotoUrl { get; set; }
+
         public Guid ProductTypeId { get; set; }
 
         public Guid ProductBrandId { get; set; }

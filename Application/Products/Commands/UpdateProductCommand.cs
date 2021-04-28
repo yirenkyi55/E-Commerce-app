@@ -38,7 +38,7 @@ namespace Application.Products.Commands
                 }
 
                 var productImage = product.Picture;
-                
+
                 //_mapper.Map(request.ProductForUpdate, product);
 
                 if (request.ProductForUpdate.Photo != null)
@@ -48,13 +48,17 @@ namespace Application.Products.Commands
                     _fileService.DeleteFile(product.Picture, AppSettings.MediaFolder);
                     product.Picture = picture;
                 }
+                else if (!string.IsNullOrEmpty(request.ProductForUpdate.PhotoUrl))
+                {
+                    product.Picture = request.ProductForUpdate.PhotoUrl;
+                }
                 else
                 {
                     product.Picture = productImage;
                 }
 
-                product.Name = request.ProductForUpdate.Name ;
-                product.Description = request.ProductForUpdate.Description ;
+                product.Name = request.ProductForUpdate.Name;
+                product.Description = request.ProductForUpdate.Description;
                 product.Price = request.ProductForUpdate.Price;
                 product.ProductBrandId = request.ProductForUpdate.ProductBrandId;
                 product.ProductTypeId = request.ProductForUpdate.ProductTypeId;

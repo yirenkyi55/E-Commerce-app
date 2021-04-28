@@ -75,6 +75,7 @@ export class ProductCreatePageComponent
       productTypeId: ['', [Validators.required]],
       productBrandId: ['', [Validators.required]],
       showOnHomePage: [false, [Validators.required]],
+      photoUrl: '',
     });
   }
 
@@ -103,6 +104,9 @@ export class ProductCreatePageComponent
         productTypeId: this.productToUpdate.productType.id,
         productBrandId: this.productToUpdate.productBrand.id,
         showOnHomePage: this.productToUpdate.showOnHomePage,
+        photoUrl: this.productToUpdate.picture.includes('Media')
+          ? ''
+          : this.productToUpdate.picture,
       });
     }
   }
@@ -141,15 +145,23 @@ export class ProductCreatePageComponent
   get isFormValid(): boolean {
     return this.productToUpdate
       ? this.productForm.valid
-      : this.hasFile && this.productForm.valid;
+      : (this.hasFile || this.productForm.get('photoUrl').value) &&
+          this.productForm.valid;
+
+    // return this.productForm.valid;
   }
 
   onCreateProduct(): void {
+    console.log('creating prodduct');
     if (!this.productToUpdate) {
+      if (!this.formData) {
+        this.formData = new FormData();
+      }
       this.formData.append('name', this.productForm.value.name);
       this.formData.append('description', this.productForm.value.description);
       this.formData.append('price', this.productForm.value.price);
       this.formData.append('quantity', this.productForm.value.quantity);
+      this.formData.append('photoUrl', this.productForm.value.photoUrl);
       this.formData.append(
         'productTypeId',
         this.productForm.value.productTypeId
@@ -173,6 +185,7 @@ export class ProductCreatePageComponent
       formData.append('productTypeId', this.productForm.value.productTypeId);
       formData.append('productBrandId', this.productForm.value.productBrandId);
       formData.append('showOnHomePage', this.productForm.value.showOnHomePage);
+      formData.append('photoUrl', this.productForm.value.photoUrl);
 
       this.updateProduct.emit({
         productId: this.productToUpdate.id,

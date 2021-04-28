@@ -6,12 +6,17 @@ namespace Application.Common.Static
     {
         public static string GetFullFilePath(string folderName, string fileName)
         {
+            if (fileName.Contains("http"))
+            {
+                return fileName;
+            }
+
             if (folderName == null || fileName == null) return null;
 
             var currentUrl = DependencyInjection.StaticConfig["AppSettings:ApiUrl"];
             //Generate the access patch
             return Path.Combine(currentUrl, folderName, fileName).Replace("\\", "/");
-            
+
         }
     }
 }

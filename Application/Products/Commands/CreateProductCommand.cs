@@ -48,8 +48,18 @@ namespace Application.Products.Commands
                     throw new RestException(HttpStatusCode.NotFound, "Product type does not exists");
                 }
 
-                // Save the product photo
-                var productPhoto = await _fileService.SaveFileAsync(request.Product.Photo, AppSettings.MediaFolder);
+                string productPhoto = null;
+
+                if (!string.IsNullOrEmpty(request.Product.PhotoUrl))
+                {
+                    productPhoto = request.Product.PhotoUrl;
+                }
+                else
+                {
+                    // Save the product photo
+                    productPhoto = await _fileService.SaveFileAsync(request.Product.Photo, AppSettings.MediaFolder);
+
+                }
 
                 var product = _mapper.Map<Product>(request.Product);
 
@@ -60,8 +70,8 @@ namespace Application.Products.Commands
                 await _context.SaveChangesAsync(cancellationToken);
 
                 product = await _context.Products
-                    .Include(p=>p.ProductBrand)
-                    .Include(p=>p.ProductType).FirstOrDefaultAsync(p=>p.Id==product.Id);
+                    .Include(p => p.ProductBrand)
+                    .Include(p => p.ProductType).FirstOrDefaultAsync(p => p.Id == product.Id);
 
                 return _mapper.Map<ProductForReturnDto>(product);
             }

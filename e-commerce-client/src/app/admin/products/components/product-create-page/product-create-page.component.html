@@ -73,6 +73,11 @@
           >
         </div>
 
+        <app-input
+          formControlName="photoUrl"
+          placeholder="Product Image Url"
+        ></app-input>
+
         <app-upload
           (hasFile)="checkFileStatus($event)"
           (upload)="onUploadPhoto($event)"
